@@ -1,16 +1,43 @@
 #include <iostream>
+#include <SFML/Audio.hpp>
 
-// TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
+#include "models/MakeFolder.h"
+#include "models/data/Library.h"
+#include "UI/ConsoleUI.h"
+
 int main() {
-    // TIP Press <shortcut actionId="RenameElement"/> when your caret is at the <b>lang</b> variable name to see how CLion can help you rename it.
-    auto lang = "C++";
-    std::cout << "Hello and welcome to " << lang << "!\n";
+    /*int option;
+    ConsoleUI consoleUI;
 
-    for (int i = 1; i <= 5; i++) {
-        // TIP Press <shortcut actionId="Debug"/> to start debugging your code. We have set one <icon src="AllIcons.Debugger.Db_set_breakpoint"/> breakpoint for you, but you can always add more by pressing <shortcut actionId="ToggleLineBreakpoint"/>.
-        std::cout << "i = " << i << std::endl;
+    while (consoleUI.isProgramActive()) {
+        consoleUI.showMenu();
+        std::cin >> option;
+
+    }*/
+    MakeFolder mkFolder;
+    mkFolder.checkFolder();
+    Library library;
+    library.scanMusicFolder();
+    std::cout << "Playing music..." << std::endl;
+    sf::Music music;
+    for (int i = 0; i < library.getAllSongs().size(); i++) {
+        std::cout << "Playing -> " << library.getAllSongs().at(i).getTitle() << std::endl;
+        if (!music.openFromFile(library.getAllSongs().at(i).getLocation()))
+            return -1;
+
+        music.play();
+
+        while (music.getStatus() == sf::Music::Status::Playing) {
+            sf::sleep(sf::milliseconds(100));
+        }
     }
+    /*if (!music.openFromFile("music\\Alegend - In Flight (freetouse.com).mp3"))
+        return -1; // error
 
+    music.play();
+    while (music.getStatus() == sf::Music::Status::Playing) {
+        sf::sleep(sf::milliseconds(100));
+    }*/
+    std::cout << "Acabou" << std::endl;
     return 0;
-    // TIP See CLion help at <a href="https://www.jetbrains.com/help/clion/">jetbrains.com/help/clion/</a>. Also, you can try interactive lessons for CLion by selecting 'Help | Learn IDE Features' from the main menu.
 }
