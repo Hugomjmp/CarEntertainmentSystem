@@ -7,6 +7,9 @@
 
 
 class MusicPlayer {
+    private:
+    bool isPlaying = false;
+    public:
 };
 
 
