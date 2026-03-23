@@ -4,12 +4,28 @@
 
 #ifndef CARENTERTAINMENTSYSTEM_MUSICPLAYER_H
 #define CARENTERTAINMENTSYSTEM_MUSICPLAYER_H
+#include "data/Library.h"
+#include "SFML/Audio/Music.hpp"
 
-
+/**
+ * Class responsible to play the music.
+ */
 class MusicPlayer {
-    private:
-    bool isPlaying = false;
-    public:
+private:
+    Library library;
+    sf::Music music;
+public:
+
+    MusicPlayer();
+    ~MusicPlayer() = default;
+
+    bool playSong(int songNumber);
+    bool stopSong();
+    void pauseSong();
+    bool setVolume(float volume);
+    void setMute(bool mute);
+    void setLoop();
+    sf::Time getCurrentSongTime();
 };
 
 

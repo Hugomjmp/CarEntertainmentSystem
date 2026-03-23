@@ -12,9 +12,7 @@ private:
 public:
     ConsoleUI();
     ~ConsoleUI() = default;
-    void showMenu();
-    void toggleProgram();
-    bool isProgramActive();
+    void showMainMenu();
 };
 
 
