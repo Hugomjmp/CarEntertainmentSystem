@@ -12,6 +12,11 @@
 Library::Library() {
 }
 
+/* TODO */
+Library::~Library() {
+
+}
+
 void Library::scanMusicFolder() {
     for (const auto& file: std::filesystem::directory_iterator(Folder::musicFolder)) {
         //std::cout << file.path().string() << std::endl;
@@ -22,4 +27,34 @@ void Library::scanMusicFolder() {
 
 std::vector<Song>& Library::getAllSongs() {
     return allSongs;
+}
+
+bool Library::createPlaylist(std::string playerListName) {
+    for (int i = 0; i < playList.size(); i++) {
+        if (playList.at(i)->getPlaylistName() == playerListName) {
+            return false;
+        }
+    }
+    playList.push_back(new Playlist(playerListName));
+    return true;
+}
+
+void Library::editPlaylist(std::string playerListName) {
+}
+
+void Library::deletePlaylist(std::string playerListName) {
+}
+
+Playlist & Library::getPlaylist(std::string playerListName) const {
+}
+
+const std::vector<Playlist*> & Library::getAllPlaylists() const {
+    return playList;
+}
+
+std::ostream & operator<<(std::ostream &os, const std::vector<Playlist*> &list) {
+    for (int i = 0; i < list.size(); i++) {
+        os << list.at(i)->getPlaylistName() << std::endl;
+    }
+    return os;
 }

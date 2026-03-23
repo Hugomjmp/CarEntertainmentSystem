@@ -23,9 +23,10 @@ public:
     bool stopSong();
     void pauseSong();
     bool setVolume(float volume);
+    float getVolume() const;
     void setMute(bool mute);
     void setLoop();
-    sf::Time getCurrentSongTime();
+    sf::Time getCurrentSongTime() const;
 };
 
 

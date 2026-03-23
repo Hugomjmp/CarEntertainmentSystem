@@ -12,7 +12,8 @@ private:
 public:
     ConsoleUI();
     ~ConsoleUI() = default;
-    void showMainMenu();
+    void showMainMenu() const;
+    void showLibraryMenu() const;
 };
 
 

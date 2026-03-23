@@ -14,10 +14,11 @@ private:
     std::string PlaylistName;
     std::vector<Song> Songs;
 public:
-    Playlist(const std::string& PlaylistName) : PlaylistName(PlaylistName) {}
+    Playlist(const std::string& name) : PlaylistName(name) {}
     ~Playlist() = default;
     bool addSong(Song song);
     bool removeSong(int index);
+    std::string getPlaylistName() const;
     const std::vector<Song>& getPlaylist();
 };
 

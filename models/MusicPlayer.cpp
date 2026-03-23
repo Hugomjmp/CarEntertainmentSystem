@@ -61,6 +61,14 @@ bool MusicPlayer::setVolume(float volume) {
     return false;
 }
 
+/**
+ *
+ * @return returns the volume of the sound.
+ */
+float MusicPlayer::getVolume() const {
+    return music.getVolume();
+}
+
 void MusicPlayer::setMute(bool mute) {
     float initialVolume = music.getVolume();
     if (mute == true) {
@@ -81,6 +89,6 @@ void MusicPlayer::setLoop() {
     }
 }
 
-sf::Time MusicPlayer::getCurrentSongTime() {
+sf::Time MusicPlayer::getCurrentSongTime() const{
     return music.getPlayingOffset();
 }

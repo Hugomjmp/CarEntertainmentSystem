@@ -9,17 +9,33 @@
 ConsoleUI::ConsoleUI() {
 }
 
-void ConsoleUI::showMainMenu() {
-    std::cout << "+-------------------+" << std::endl;
-    std::cout << "|         MENU      |" << std::endl;
-    std::cout << "+-------------------+" << std::endl;
-    std::cout << "| 1 - show music    |" << std::endl;
-    std::cout << "| 2 - play song     |" << std::endl;
-    std::cout << "| 3 - set volume    |" << std::endl;
-    std::cout << "| 4 - pause music   |" << std::endl;
-    std::cout << "| 5 - stop music    |" << std::endl;
-    std::cout << "| 6 - Get Song Time |" << std::endl;
-    std::cout << "| 7 - exit program  |" << std::endl;
-    std::cout << "+-------------------+" << std::endl;
+void ConsoleUI::showMainMenu() const{
+    std::cout << "+----------------------+" << std::endl;
+    std::cout << "|          MENU        |" << std::endl;
+    std::cout << "+----------------------+" << std::endl;
+    std::cout << "| 1 - show music       |" << std::endl;
+    std::cout << "| 2 - play song        |" << std::endl;
+    std::cout << "| 3 - set volume       |" << std::endl;
+    std::cout << "| 4 - pause music      |" << std::endl;
+    std::cout << "| 5 - stop music       |" << std::endl;
+    std::cout << "| 6 - Get Song Time    |" << std::endl;
+    std::cout << "| 7 - library Settings |" << std::endl;
+    std::cout << "| 8 - exit program     |" << std::endl;
+    std::cout << "+----------------------+" << std::endl;
+    std::cout << "#> ";
+}
+
+void ConsoleUI::showLibraryMenu() const {
+    std::cout << "+-------------------------+" << std::endl;
+    std::cout << "|         LIBRARY         |" << std::endl;
+    std::cout << "+-------------------------+" << std::endl;
+    std::cout << "| 1 - Show all music      |" << std::endl;
+    std::cout << "| 2 - Create new Playlist |" << std::endl;
+    std::cout << "| 3 - Edit playlist       |" << std::endl;
+    std::cout << "| 4 - Delete Playlist     |" << std::endl;
+    std::cout << "| 5 - Show all playlist's |" << std::endl;
+    std::cout << "| 6 - Show playlist info  |" << std::endl;
+    std::cout << "| 7 - Back                |" << std::endl;
+    std::cout << "+-------------------------+" << std::endl;
     std::cout << "#> ";
 }
