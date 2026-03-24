@@ -6,19 +6,24 @@
 
 /* TODO */
 /* falta verificações */
-bool Playlist::addSong(Song song) {
+bool Playlist::addSong(const Song &song) {
     /*for (int i = 0; i < Songs.size(); i++) {
         if ()
     }*/
-    Songs.push_back(song);
+    Songs.push_back(new Song(song));
     return true;
 }
 
 bool Playlist::removeSong(int index) {
+    Songs.erase(Songs.begin() + index);
     return false;
 }
 
-const std::vector<Song> & Playlist::getPlaylist() {
+void Playlist::setPlaylistName(const std::string &name) {
+    PlaylistName = name;
+}
+
+const std::vector<Song*> & Playlist::getPlaySongs() const{
     return Songs;
 }
 

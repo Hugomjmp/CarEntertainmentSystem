@@ -9,6 +9,7 @@
 class Folder {
 public:
     inline static const std::string musicFolder = "music";
+    inline static const std::string configFolder = "config";
 };
 
 #endif //CARENTERTAINMENTSYSTEM_FOLDERS_H

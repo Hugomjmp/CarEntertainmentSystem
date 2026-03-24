@@ -7,6 +7,7 @@
 #include "UI/ConsoleUI.h"
 
 
+/* METODOS APENAS PARA TESTE DE IMPLEMENTAÇÃO */
 void libraryMenu(const ConsoleUI& consoleUI, Library& library) {
     int option = 0;
     std::string playlistName;
@@ -47,12 +48,59 @@ void libraryMenu(const ConsoleUI& consoleUI, Library& library) {
         }
     }
 }
+void playlistMenu(const ConsoleUI& consoleUI, Library& library, const std::string playlistName) {
+    int option = 0;
 
+    int songNumber = 0;
+    Playlist * p = nullptr;
+
+    /* TODO
+     * fazer verificação para o caso que não exista essa playlist...
+     */
+
+    while (option != 6) {
+        for (int i = 0; i < library.getAllPlaylists().size(); i++) {
+            if (library.getPlaylist(playlistName).getPlaylistName() == playlistName) {
+                consoleUI.showPlayListMenu(playlistName);
+                p = &library.getPlaylist(playlistName);
+                break;
+            }
+        }
+
+        std::cin.ignore();
+        std::cin >> option;
+        switch (option) {
+            case 1:
+                for (int i = 0; i < library.getAllSongs().size(); i++) {
+                    std::cout << i << " - " << library.getAllSongs().at(i).getTitle() << std::endl;
+                }
+                std::cin.ignore();
+                std::cin >> songNumber;
+                p->addSong(library.getSong(songNumber));
+                break;
+            case 2:
+                for (int i = 0; i < p->getPlaySongs().size(); i++) {
+                    std::cout << i << " - " << p->getPlaySongs().at(i)->getTitle() << std::endl;
+                }
+                std::cin.ignore();
+                std::cin >> songNumber;
+                p->removeSong(songNumber);
+                break;
+            case 3:
+                for (int i = 0; i < p->getPlaySongs().size(); i++) {
+                    std::cout << i << " " << p->getPlaySongs().at(i)->getTitle() << std::endl;
+                }
+                break;
+
+        }
+    }
+
+}
 int main() {
     int option = 0;
     int songNumber = 0;
     float volume = 100;
-
+    std::string playlistName;
     /* First create folders if there aren't any */
     MakeFolder mkFolder;
     mkFolder.checkFolder();
@@ -64,7 +112,7 @@ int main() {
 
     MusicPlayer music_player;
 
-    while (option != 8) {
+    while (option != 10) {
         consoleUI.showMainMenu();
         std::cin >> option;
         switch (option) {
@@ -72,11 +120,10 @@ int main() {
                 for (int i = 0; i < library.getAllSongs().size(); i++) {
                     std::cout << i << " - " << library.getAllSongs().at(i).getTitle() << std::endl;
                 }
-
                 break;
             case 2:
                 std::cin >> songNumber;
-                music_player.playSong(songNumber);
+                music_player.playSong(library.getSong(songNumber));
                 break;
             case 3:
                 std::cin >> volume;
@@ -93,6 +140,14 @@ int main() {
                 break;
             case 7:
                 libraryMenu(consoleUI, library);
+                break;
+            case 8:
+                music_player.setLoop();
+                break;
+            case 9:
+                std::cin.ignore();
+                std::cin >> playlistName;
+                playlistMenu(consoleUI, library, playlistName);
                 break;
         }
     }

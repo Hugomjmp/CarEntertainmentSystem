@@ -11,14 +11,17 @@ MusicPlayer::MusicPlayer() {
 
 /**
  *
- * @param songNumber Song number to be played
+ * @param song Object that represents the song.
  * @return false if it can't find the song, true if it can.
  */
-bool MusicPlayer::playSong(int songNumber) {
+bool MusicPlayer::playSong(const Song &song) {
     if (music.getStatus() == sf::Music::Status::Playing)
         music.stop();
 
-    if (!music.openFromFile(library.getAllSongs().at(songNumber).getLocation())) {
+    /*if (!music.openFromFile(library.getAllSongs().at(songNumber).getLocation())) {
+        return false;
+    }*/
+    if (!music.openFromFile(song.getLocation())) {
         return false;
     }
 
@@ -79,7 +82,7 @@ void MusicPlayer::setMute(bool mute) {
 }
 
 /**
- *
+ * Set's the current song in a loop.
  */
 void MusicPlayer::setLoop() {
     if (music.isLooping() == false) {
@@ -89,6 +92,16 @@ void MusicPlayer::setLoop() {
     }
 }
 
+/**
+ *
+ * @return The current play time.
+ */
 sf::Time MusicPlayer::getCurrentSongTime() const{
     return music.getPlayingOffset();
+}
+
+void MusicPlayer::playPlaylist(const Playlist &playlist) {
+    for (int i = 0; i < playlist.getPlaySongs().size(); i++) {
+
+    }
 }

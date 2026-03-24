@@ -19,7 +19,7 @@ public:
     MusicPlayer();
     ~MusicPlayer() = default;
 
-    bool playSong(int songNumber);
+    bool playSong(const Song &song);
     bool stopSong();
     void pauseSong();
     bool setVolume(float volume);
@@ -27,6 +27,7 @@ public:
     void setMute(bool mute);
     void setLoop();
     sf::Time getCurrentSongTime() const;
+    void playPlaylist(const Playlist &playlist);
 };
 
 

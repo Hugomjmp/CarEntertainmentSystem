@@ -13,10 +13,12 @@
 
 MakeFolder::MakeFolder() {
     std::cout << "Creating first time Folders..." << std::endl;
-    folders[0] = Folder::musicFolder;
-    for (int i = 1; i < 10; i++) {
+    for (int i = 0; i < 10; i++) {
         folders[i] = "";
     }
+    folders[0] = Folder::musicFolder;
+    folders[1] = Folder::configFolder;
+
 }
 
 bool MakeFolder::makeFolder(std::string folderName) {

@@ -12,14 +12,15 @@
 class Playlist {
 private:
     std::string PlaylistName;
-    std::vector<Song> Songs;
+    std::vector<Song*> Songs;
 public:
     Playlist(const std::string& name) : PlaylistName(name) {}
     ~Playlist() = default;
-    bool addSong(Song song);
+    bool addSong(const Song &song);
     bool removeSong(int index);
     std::string getPlaylistName() const;
-    const std::vector<Song>& getPlaylist();
+    void setPlaylistName(const std::string& name);
+    const std::vector<Song*>& getPlaySongs() const;
 };
 
 

@@ -17,12 +17,13 @@ public:
     void scanMusicFolder();
     std::vector<Song>& getAllSongs();
     bool createPlaylist(std::string playerListName);
-    void editPlaylist(std::string playerListName);
-    void deletePlaylist(std::string playerListName);
+    bool editPlaylist(std::string playerListName);
+    bool deletePlaylist(std::string playerListName);
+    const Song& getSong(int songNumber) const;
     Playlist& getPlaylist(std::string playerListName) const;
     const std::vector<Playlist*> & getAllPlaylists() const;
 };
-
+    std::ostream& operator<<(std::ostream & os, const std::vector<Song*> & songs);
     std::ostream& operator<<(std::ostream &os, const std::vector<Playlist*> &playlist);
 
 #endif //CARENTERTAINMENTSYSTEM_LIBRARY_H

@@ -4,6 +4,7 @@
 
 #ifndef CARENTERTAINMENTSYSTEM_CONSOLEUI_H
 #define CARENTERTAINMENTSYSTEM_CONSOLEUI_H
+#include <string>
 
 
 class ConsoleUI {
@@ -14,6 +15,7 @@ public:
     ~ConsoleUI() = default;
     void showMainMenu() const;
     void showLibraryMenu() const;
+    void showPlayListMenu(const std::string & playListName) const;
 };
 
 

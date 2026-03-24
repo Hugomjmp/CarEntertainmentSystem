@@ -10,18 +10,20 @@ ConsoleUI::ConsoleUI() {
 }
 
 void ConsoleUI::showMainMenu() const{
-    std::cout << "+----------------------+" << std::endl;
-    std::cout << "|          MENU        |" << std::endl;
-    std::cout << "+----------------------+" << std::endl;
-    std::cout << "| 1 - show music       |" << std::endl;
-    std::cout << "| 2 - play song        |" << std::endl;
-    std::cout << "| 3 - set volume       |" << std::endl;
-    std::cout << "| 4 - pause music      |" << std::endl;
-    std::cout << "| 5 - stop music       |" << std::endl;
-    std::cout << "| 6 - Get Song Time    |" << std::endl;
-    std::cout << "| 7 - library Settings |" << std::endl;
-    std::cout << "| 8 - exit program     |" << std::endl;
-    std::cout << "+----------------------+" << std::endl;
+    std::cout << "+-----------------------+" << std::endl;
+    std::cout << "|          MENU         |" << std::endl;
+    std::cout << "+-----------------------+" << std::endl;
+    std::cout << "| 1 - show music        |" << std::endl;
+    std::cout << "| 2 - play song         |" << std::endl;
+    std::cout << "| 3 - set volume        |" << std::endl;
+    std::cout << "| 4 - pause music       |" << std::endl;
+    std::cout << "| 5 - stop music        |" << std::endl;
+    std::cout << "| 6 - Get Song Time     |" << std::endl;
+    std::cout << "| 7 - library Settings  |" << std::endl;
+    std::cout << "| 8 - Loop Current Song |" << std::endl;
+    std::cout << "| 9 - Playlist Settings |" << std::endl;
+    std::cout << "| 10 - exit program     |" << std::endl;
+    std::cout << "+-----------------------+" << std::endl;
     std::cout << "#> ";
 }
 
@@ -37,5 +39,18 @@ void ConsoleUI::showLibraryMenu() const {
     std::cout << "| 6 - Show playlist info  |" << std::endl;
     std::cout << "| 7 - Back                |" << std::endl;
     std::cout << "+-------------------------+" << std::endl;
+    std::cout << "#> ";
+}
+void ConsoleUI::showPlayListMenu(const std::string & playListName) const {
+
+    std::cout <<  playListName  << std::endl;
+    std::cout << "+------------------------+" << std::endl;
+    std::cout << "| 1 - Add Song           |" << std::endl;
+    std::cout << "| 2 - Remove Song        |" << std::endl;
+    std::cout << "| 3 - List Songs         |" << std::endl;
+    std::cout << "| 4 -                    |" << std::endl;
+    std::cout << "| 5 -                    |" << std::endl;
+    std::cout << "| 6 - back               |" << std::endl;
+    std::cout << "+------------------------+" << std::endl;
     std::cout << "#> ";
 }

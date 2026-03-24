@@ -26,9 +26,9 @@ public:
     int getDuration() const;
     std::string getLocation() const;
 
-    friend std::ostream& operator<<(std::ostream& os, const Song& song);
-};
 
+};
+    std::ostream& operator<<(std::ostream& os, const Song& song);
 
 
 #endif //CARENTERTAINMENTSYSTEM_MUSIC_H
