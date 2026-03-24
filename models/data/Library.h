@@ -11,10 +11,10 @@ class Library {
 private:
     std::vector<Song> allSongs;
     std::vector<Playlist*> playList;
+    void scanMusicFolder();
 public:
     Library();
     ~Library();
-    void scanMusicFolder();
     std::vector<Song>& getAllSongs();
     bool createPlaylist(std::string playerListName);
     bool editPlaylist(std::string playerListName);

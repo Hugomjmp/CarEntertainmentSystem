@@ -12,11 +12,11 @@
  */
 class MusicPlayer {
 private:
-    Library library;
+    Library &library;
     sf::Music music;
 public:
 
-    MusicPlayer();
+    MusicPlayer(Library &lib) : library(lib) {}
     ~MusicPlayer() = default;
 
     bool playSong(const Song &song);

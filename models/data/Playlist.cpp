@@ -7,16 +7,14 @@
 /* TODO */
 /* falta verificações */
 bool Playlist::addSong(const Song &song) {
-    /*for (int i = 0; i < Songs.size(); i++) {
-        if ()
-    }*/
     Songs.push_back(new Song(song));
     return true;
 }
 
 bool Playlist::removeSong(int index) {
     Songs.erase(Songs.begin() + index);
-    return false;
+    delete Songs.at(index);
+    return true;
 }
 
 void Playlist::setPlaylistName(const std::string &name) {

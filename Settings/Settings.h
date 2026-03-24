@@ -4,6 +4,12 @@
 #include <string>
 
 class Settings {
+    private:
+
+    public:
+    Settings();
+    ~Settings() = default;
+
 
 };
 

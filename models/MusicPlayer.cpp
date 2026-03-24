@@ -4,11 +4,6 @@
 
 #include "MusicPlayer.h"
 
-
-MusicPlayer::MusicPlayer() {
-    library.scanMusicFolder();
-}
-
 /**
  *
  * @param song Object that represents the song.

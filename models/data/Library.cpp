@@ -10,6 +10,7 @@
 #include "../../Settings/Folders.h"
 
 Library::Library() {
+    scanMusicFolder();
 }
 
 

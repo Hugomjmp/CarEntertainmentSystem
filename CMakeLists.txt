@@ -26,6 +26,7 @@ add_executable(CarEntertainmentSystem main.cpp
         models/data/Library.cpp
         models/data/Library.h
         models/MusicPlayer.cpp
-        models/MusicPlayer.h)
+        models/MusicPlayer.h
+        Settings/Settings.cpp)
 
 target_link_libraries(CarEntertainmentSystem SFML::Audio)

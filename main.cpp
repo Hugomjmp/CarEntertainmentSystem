@@ -4,6 +4,7 @@
 #include "models/MusicPlayer.h"
 #include "models/data/Library.h"
 #include "models/data/Playlist.h"
+#include "Settings/Settings.h"
 #include "UI/ConsoleUI.h"
 
 
@@ -91,7 +92,6 @@ void playlistMenu(const ConsoleUI& consoleUI, Library& library, const std::strin
                     std::cout << i << " " << p->getPlaySongs().at(i)->getTitle() << std::endl;
                 }
                 break;
-
         }
     }
 
@@ -104,13 +104,13 @@ int main() {
     /* First create folders if there aren't any */
     MakeFolder mkFolder;
     mkFolder.checkFolder();
+    Settings setting;
 
     ConsoleUI consoleUI;
 
     Library library;
-    library.scanMusicFolder();
 
-    MusicPlayer music_player;
+    MusicPlayer music_player(library);
 
     while (option != 10) {
         consoleUI.showMainMenu();
