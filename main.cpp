@@ -6,8 +6,14 @@
 #include "models/data/Playlist.h"
 #include "Settings/Settings.h"
 #include "UI/ConsoleUI.h"
-
-
+#include <pigpio.h>
+bool waitForLevel(int pin, int level, uint32_t timeout_us = 1000) {
+    uint32_t start = gpioTick();
+    while (gpioRead(pin) != level) {
+        if ((gpioTick() - start) > timeout_us) return false;
+    }
+    return true;
+}
 /* METODOS APENAS PARA TESTE DE IMPLEMENTAÇÃO */
 void libraryMenu(const ConsoleUI& consoleUI, Library& library) {
     int option = 0;
@@ -97,14 +103,14 @@ void playlistMenu(const ConsoleUI& consoleUI, Library& library, const std::strin
 
 }
 int main() {
-    int option = 0;
+    /*int option = 0;
     int songNumber = 0;
     float volume = 100;
     std::string playlistName;
-    /* First create folders if there aren't any */
+    /* First create folders if there aren't any #1#
     MakeFolder mkFolder;
     mkFolder.checkFolder();
-    Settings setting;
+    //Settings setting;
 
     ConsoleUI consoleUI;
 
@@ -150,6 +156,17 @@ int main() {
                 playlistMenu(consoleUI, library, playlistName);
                 break;
         }
+    }*/
+
+
+    if (gpioInitialise() < 0) {
+        std::cout << "Erro ao inicializar pigpio\n";
+        return 1;
     }
+
+    gpioTerminate();
+
+
+
     return 0;
 }

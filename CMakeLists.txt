@@ -1,4 +1,5 @@
-cmake_minimum_required(VERSION 4.0)
+#[[cmake_minimum_required(VERSION 4.0)]]
+cmake_minimum_required(VERSION 3.16) #[[para o raspberry pi]]
 project(CarEntertainmentSystem)
 
 set(CMAKE_CXX_STANDARD 20)
@@ -27,6 +28,13 @@ add_executable(CarEntertainmentSystem main.cpp
         models/data/Library.h
         models/MusicPlayer.cpp
         models/MusicPlayer.h
-        Settings/Settings.cpp)
+        Settings/Settings.cpp
+        models/data/DHT11.cpp
+        models/data/DHT11.h)
 
-target_link_libraries(CarEntertainmentSystem SFML::Audio)
+
+target_link_libraries(CarEntertainmentSystem
+        SFML::Audio
+        pigpio
+        pthread
+)
