@@ -6,19 +6,12 @@
 #include "models/data/Playlist.h"
 #include "Settings/Settings.h"
 #include "UI/ConsoleUI.h"
-#include <pigpio.h>
-bool waitForLevel(int pin, int level, uint32_t timeout_us = 1000) {
-    uint32_t start = gpioTick();
-    while (gpioRead(pin) != level) {
-        if ((gpioTick() - start) > timeout_us) return false;
-    }
-    return true;
-}
+/*#include <pigpio.h>*/
 /* METODOS APENAS PARA TESTE DE IMPLEMENTAÇÃO */
 void libraryMenu(const ConsoleUI& consoleUI, Library& library) {
     int option = 0;
     std::string playlistName;
-    while (option != 7) {
+    while (option != 9) {
         consoleUI.showLibraryMenu();
         std::cin >> option;
         switch (option) {
@@ -49,9 +42,19 @@ void libraryMenu(const ConsoleUI& consoleUI, Library& library) {
             case 6: {
                 std::cin.ignore();
                 std::getline(std::cin, playlistName);
-                library.getPlaylist(playlistName);
+                for (int i = 0; i < library.getPlaylist(playlistName)->getPlaySongs().size(); i++) {
+                    std::cout << library.getPlaylist(playlistName) << std::endl;
+                }
             }
             break;
+            case 7: {
+                library.savePlaylists();
+            }
+                break;
+            case 8: {
+                library.loadPlaylists();
+            }
+                break;
         }
     }
 }
@@ -67,9 +70,9 @@ void playlistMenu(const ConsoleUI& consoleUI, Library& library, const std::strin
 
     while (option != 6) {
         for (int i = 0; i < library.getAllPlaylists().size(); i++) {
-            if (library.getPlaylist(playlistName).getPlaylistName() == playlistName) {
+            if (library.getPlaylist(playlistName)->getPlaylistName() == playlistName) {
                 consoleUI.showPlayListMenu(playlistName);
-                p = &library.getPlaylist(playlistName);
+                p = library.getPlaylist(playlistName);
                 break;
             }
         }
@@ -103,11 +106,11 @@ void playlistMenu(const ConsoleUI& consoleUI, Library& library, const std::strin
 
 }
 int main() {
-    /*int option = 0;
+    int option = 0;
     int songNumber = 0;
     float volume = 100;
     std::string playlistName;
-    /* First create folders if there aren't any #1#
+    /* First create folders if there aren't any #1*/
     MakeFolder mkFolder;
     mkFolder.checkFolder();
     //Settings setting;
@@ -156,15 +159,15 @@ int main() {
                 playlistMenu(consoleUI, library, playlistName);
                 break;
         }
-    }*/
+    }
 
 
-    if (gpioInitialise() < 0) {
+    /*if (gpioInitialise() < 0) {
         std::cout << "Erro ao inicializar pigpio\n";
         return 1;
     }
 
-    gpioTerminate();
+    gpioTerminate();*/
 
 
 

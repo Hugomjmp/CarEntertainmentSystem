@@ -5,7 +5,7 @@
 
 #include "Playlist.h"
 #include "Song.h"
-
+//#include "taglib/fileref.h"
 
 class Library {
 private:
@@ -20,8 +20,10 @@ public:
     bool editPlaylist(std::string playerListName);
     bool deletePlaylist(std::string playerListName);
     const Song& getSong(int songNumber) const;
-    Playlist& getPlaylist(std::string playerListName) const;
+    Playlist* getPlaylist(std::string playerListName) const;
     const std::vector<Playlist*> & getAllPlaylists() const;
+    void savePlaylists();
+    void loadPlaylists();
 };
     std::ostream& operator<<(std::ostream & os, const std::vector<Song*> & songs);
     std::ostream& operator<<(std::ostream &os, const std::vector<Playlist*> &playlist);

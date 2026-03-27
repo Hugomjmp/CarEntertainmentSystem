@@ -5,6 +5,7 @@
 #include "Library.h"
 
 #include <filesystem>
+#include <fstream>
 #include <iostream>
 
 #include "../../Settings/Folders.h"
@@ -22,7 +23,6 @@ Library::~Library() {
 
 void Library::scanMusicFolder() {
     for (const auto& file: std::filesystem::directory_iterator(Folder::musicFolder)) {
-        //std::cout << file.path().string() << std::endl;
         Song song(file.path().string().erase(0,6),"",0,0,"",0,file.path().string());
         allSongs.push_back(song);
     }
@@ -68,16 +68,45 @@ const Song & Library::getSong(int songNumber) const {
     return allSongs.at(songNumber);
 }
 
-Playlist & Library::getPlaylist(std::string playerListName) const {
+Playlist * Library::getPlaylist(std::string playerListName) const {
     for (int i = 0; i < playList.size(); i++) {
         if (playList.at(i)->getPlaylistName() == playerListName) {
-            return *playList.at(i);
+            return playList.at(i);
         }
     }
+    return nullptr;
 }
 
 const std::vector<Playlist*> & Library::getAllPlaylists() const {
     return playList;
+}
+
+void Library::savePlaylists() {
+    std::ofstream os("playlists.bin");
+    if (!os.is_open()) {
+        std::cerr << "Unable to save playlist's " << std::endl;
+        return;
+    }
+    for (auto& p : playList) {
+        os << p;
+    }
+    os.close();
+}
+
+void Library::loadPlaylists() {
+    std::ifstream ifs("playlists.bin");
+    if (!ifs.is_open()) {
+        std::cerr << "Unable to load playlist " << std::endl;
+        return;
+    }
+    for (auto& p : playList) {
+        delete p;
+    }
+    for (int i = 0; i < playList.size(); i++) {
+
+    }
+
+    ifs.close();
 }
 
 std::ostream& operator<<(std::ostream &os, const std::vector<Song*> &songs) {

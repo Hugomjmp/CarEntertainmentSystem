@@ -4,6 +4,8 @@
 
 #include "Playlist.h"
 
+#include <ostream>
+
 /* TODO */
 /* falta verificações */
 bool Playlist::addSong(const Song &song) {

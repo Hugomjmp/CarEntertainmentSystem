@@ -37,7 +37,9 @@ void ConsoleUI::showLibraryMenu() const {
     std::cout << "| 4 - Delete Playlist     |" << std::endl;
     std::cout << "| 5 - Show all playlist's |" << std::endl;
     std::cout << "| 6 - Show playlist info  |" << std::endl;
-    std::cout << "| 7 - Back                |" << std::endl;
+    std::cout << "| 7 - Save Playlists      |" << std::endl;
+    std::cout << "| 8 - Load playlists      |" << std::endl;
+    std::cout << "| 9 - Back                |" << std::endl;
     std::cout << "+-------------------------+" << std::endl;
     std::cout << "#> ";
 }

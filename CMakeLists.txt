@@ -32,9 +32,11 @@ add_executable(CarEntertainmentSystem main.cpp
         models/data/DHT11.cpp
         models/data/DHT11.h)
 
+#[[find_package(TagLib 2.0.0 REQUIRED)]]
 
 target_link_libraries(CarEntertainmentSystem
         SFML::Audio
-        pigpio
+#[[        TagLib::tag
+        pigpio]]
         pthread
 )
