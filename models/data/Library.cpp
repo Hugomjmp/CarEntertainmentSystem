@@ -22,8 +22,11 @@ Library::~Library() {
 }
 
 void Library::scanMusicFolder() {
+    std::string title;
     for (const auto& file: std::filesystem::directory_iterator(Folder::musicFolder)) {
-        Song song(file.path().string().erase(0,6),"",0,0,"",0,file.path().string());
+        title = file.path().string().erase(0,6);
+        title.erase(title.size() - 4);
+        Song song(title,"",0,0,"",0,file.path().string());
         allSongs.push_back(song);
     }
 }

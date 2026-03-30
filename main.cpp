@@ -25,14 +25,17 @@ void libraryMenu(const ConsoleUI& consoleUI, Library& library) {
                 std::cin.ignore();
                 std:getline(std::cin, playlistName);
                 library.createPlaylist(playlistName);
+                library.savePlaylists();
             }
             break;
             case 3: {
                 library.editPlaylist(playlistName);
+                library.savePlaylists();
             }
             break;
             case 4: {
                 library.deletePlaylist(playlistName);
+                library.savePlaylists();
             }
             break;
             case 5: {
@@ -85,6 +88,7 @@ void playlistMenu(const ConsoleUI& consoleUI, Library& library, const std::strin
                 std::cin.ignore();
                 std::cin >> songNumber;
                 p->addSong(library.getSong(songNumber));
+                library.savePlaylists();
                 break;
             case 2:
                 for (int i = 0; i < p->getPlaySongs().size(); i++) {
@@ -93,6 +97,7 @@ void playlistMenu(const ConsoleUI& consoleUI, Library& library, const std::strin
                 std::cin.ignore();
                 std::cin >> songNumber;
                 p->removeSong(songNumber);
+                library.savePlaylists();
                 break;
             case 3:
                 for (int i = 0; i < p->getPlaySongs().size(); i++) {
@@ -119,7 +124,7 @@ int main() {
 
     MusicPlayer music_player(library);
 
-    while (option != 10) {
+    while (option != 11) {
         consoleUI.showMainMenu();
         std::cin >> option;
         switch (option) {
@@ -156,8 +161,14 @@ int main() {
                 std::cin >> playlistName;
                 playlistMenu(consoleUI, library, playlistName);
                 break;
+            case 10:
+                std::cin.ignore();
+                std::cin >> playlistName;
+
         }
     }
+
+    library.savePlaylists();
 
 
     /*if (gpioInitialise() < 0) {
