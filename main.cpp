@@ -42,9 +42,7 @@ void libraryMenu(const ConsoleUI& consoleUI, Library& library) {
             case 6: {
                 std::cin.ignore();
                 std::getline(std::cin, playlistName);
-                for (int i = 0; i < library.getPlaylist(playlistName)->getPlaySongs().size(); i++) {
-                    std::cout << library.getPlaylist(playlistName) << std::endl;
-                }
+                std::cout << library.getPlaylist(playlistName)->getPlaySongs() << std::endl;
             }
             break;
             case 7: {

@@ -35,12 +35,12 @@ std::string Song::getLocation() const {
 }
 
 std::ostream & operator<<(std::ostream &os, const Song &song) {
-    os << song.getTitle() << " "
-        << song.getAlbum() << " "
-        << song.getYear() << " "
-        << song.getNumber() << " "
-        << song.getGenre() << " "
-        << song.getDuration() << " "
+    os << song.getTitle() << ";"
+        << song.getAlbum() << ";"
+        << song.getYear() << ";"
+        << song.getNumber() << ";"
+        << song.getGenre() << ";"
+        << song.getDuration() << ";"
         << song.getLocation() <<
         std::endl;
     return os;

@@ -12,8 +12,8 @@
 
 Library::Library() {
     scanMusicFolder();
+    loadPlaylists();
 }
-
 
 Library::~Library() {
     for (int i = 0; i < playList.size(); i++) {
@@ -81,20 +81,30 @@ const std::vector<Playlist*> & Library::getAllPlaylists() const {
     return playList;
 }
 
-void Library::savePlaylists() {
-    std::ofstream os("playlists.bin");
-    if (!os.is_open()) {
-        std::cerr << "Unable to save playlist's " << std::endl;
+void Library::savePlaylists() const{
+    std::ofstream ofs("playlist.bin", std::ios::binary);
+    if (!ofs.is_open()) {
+        std::cerr << "Unable to save playlist " << std::endl;
         return;
     }
+
+    ofs << playList.size() << std::endl;
     for (auto& p : playList) {
-        os << p;
+        ofs << p->getPlaylistName() << std::endl;
+        ofs << p->getPlaySongs().size() << std::endl;
+        for (auto& s : p->getPlaySongs()) {
+            ofs << *s;
+        }
     }
-    os.close();
 }
 
 void Library::loadPlaylists() {
-    std::ifstream ifs("playlists.bin");
+    std::cout << "Loading playlists..." << std::endl;
+    std::string name, songLine, title, album, yearStr, songNumberStr, genre, durationStr, location;
+    std::stringstream ss;
+    int nSongs = 0, nPlaylists = 0, songNumber = 0, year = 0, duration = 0;
+
+    std::ifstream ifs("playlist.bin");
     if (!ifs.is_open()) {
         std::cerr << "Unable to load playlist " << std::endl;
         return;
@@ -102,9 +112,37 @@ void Library::loadPlaylists() {
     for (auto& p : playList) {
         delete p;
     }
-    for (int i = 0; i < playList.size(); i++) {
 
+    playList.clear();
+
+    ifs >> nPlaylists;
+    ifs.ignore();
+    for (int i = 0; i < nPlaylists; i++) {
+        std::getline(ifs, name);
+        Playlist *p = new Playlist(name);
+        ifs >> nSongs;
+        ifs.ignore();
+        for (int j = 0; j < nSongs; j++) {
+            std::getline(ifs, songLine);
+            ss << songLine << std::endl;
+
+            std::getline(ss, title, ';');
+            std::getline(ss, album, ';');
+            std::getline(ss, yearStr, ';');
+            std::getline(ss, songNumberStr, ';');
+            std::getline(ss, genre, ';');
+            std::getline(ss, durationStr, ';');
+            std::getline(ss, location, '\n');
+
+            year = std::stoi(yearStr);
+            songNumber = std::stoi(songNumberStr);
+            duration = std::stoi(durationStr);
+            Song song(title, album, songNumber, year, genre, duration, location);
+            p->addSong(song);
+        }
+        playList.push_back(p);
     }
+
 
     ifs.close();
 }

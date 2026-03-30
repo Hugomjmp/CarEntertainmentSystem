@@ -3,8 +3,9 @@
 //
 
 #include "Playlist.h"
+#include <fstream>
+#include <iostream>
 
-#include <ostream>
 
 /* TODO */
 /* falta verificações */
@@ -14,8 +15,8 @@ bool Playlist::addSong(const Song &song) {
 }
 
 bool Playlist::removeSong(int index) {
-    Songs.erase(Songs.begin() + index);
     delete Songs.at(index);
+    Songs.erase(Songs.begin() + index);
     return true;
 }
 
