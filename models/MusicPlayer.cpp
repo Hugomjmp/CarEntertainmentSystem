@@ -4,6 +4,10 @@
 
 #include "MusicPlayer.h"
 
+#include <iostream>
+
+#include "SFML/System/Sleep.hpp"
+
 /**
  *
  * @param song Object that represents the song.
@@ -95,8 +99,13 @@ sf::Time MusicPlayer::getCurrentSongTime() const{
     return music.getPlayingOffset();
 }
 
-void MusicPlayer::playPlaylist(const Playlist &playlist) {
+void MusicPlayer::playPlaylist(const Playlist &playlist){
     for (int i = 0; i < playlist.getPlaySongs().size(); i++) {
 
+        playSong(*playlist.getPlaySongs().at(i));
+
+        while (music.getStatus() == sf::Music::Status::Playing) {
+            sf::sleep(sf::milliseconds(100));
+        }
     }
 }

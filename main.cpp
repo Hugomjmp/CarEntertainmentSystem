@@ -1,4 +1,5 @@
 #include <iostream>
+#include <thread>
 
 #include "models/MakeFolder.h"
 #include "models/MusicPlayer.h"
@@ -124,7 +125,8 @@ int main() {
 
     MusicPlayer music_player(library);
 
-    while (option != 11) {
+
+    while (option != 12) {
         consoleUI.showMainMenu();
         std::cin >> option;
         switch (option) {
@@ -137,31 +139,40 @@ int main() {
                 std::cin >> songNumber;
                 music_player.playSong(library.getSong(songNumber));
                 break;
-            case 3:
+            case 3: {
+                std::cin.ignore();
+                std::cin >> playlistName;
+                Playlist * p = library.getPlaylist(playlistName);
+                std::thread t(&MusicPlayer::playPlaylist, &music_player, std::cref(*p));
+                t.detach();
+                //music_player.playPlaylist(*p);
+            }
+                break;
+            case 4:
                 std::cin >> volume;
                 music_player.setVolume(volume);
                 break;
-            case 4:
+            case 5:
                 music_player.pauseSong();
                 break;
-            case 5:
+            case 6:
                 music_player.stopSong();
                 break;
-            case 6:
+            case 7:
                 std::cout << music_player.getCurrentSongTime().asSeconds() << std::endl;
                 break;
-            case 7:
+            case 8:
                 libraryMenu(consoleUI, library);
                 break;
-            case 8:
+            case 9:
                 music_player.setLoop();
                 break;
-            case 9:
+            case 10:
                 std::cin.ignore();
                 std::cin >> playlistName;
                 playlistMenu(consoleUI, library, playlistName);
                 break;
-            case 10:
+            case 11:
                 std::cin.ignore();
                 std::cin >> playlistName;
 
@@ -169,6 +180,7 @@ int main() {
     }
 
     library.savePlaylists();
+
 
 
     /*if (gpioInitialise() < 0) {
