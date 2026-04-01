@@ -31,8 +31,8 @@ public:
     sf::Time getCurrentSongTime() const;
     void playPlaylist(const Playlist &playlist);
     void setPlaylistLoop();
-    void nextSong() const;
-    void previousSong() const;
+    void nextSong(const Playlist &playlist);
+    void previousSong(const Playlist &playlist);
 };
 
 

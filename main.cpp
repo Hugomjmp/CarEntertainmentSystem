@@ -125,8 +125,10 @@ int main() {
 
     MusicPlayer music_player(library);
 
+    Playlist * p = nullptr;
 
-    while (option != 13) {
+
+    while (option != 15) {
         consoleUI.showMainMenu();
         std::cin >> option;
         switch (option) {
@@ -142,7 +144,7 @@ int main() {
             case 3: {
                 std::cin.ignore();
                 std::cin >> playlistName;
-                Playlist * p = library.getPlaylist(playlistName);
+                p = library.getPlaylist(playlistName);
                 std::thread t(&MusicPlayer::playPlaylist, &music_player, std::cref(*p));
                 t.detach();
                 //music_player.playPlaylist(*p);
@@ -179,7 +181,12 @@ int main() {
             case 12:
                 music_player.setPlaylistLoop();
                 break;
-
+            case 13:
+                music_player.nextSong(*p);
+                break;
+            case 14:
+                music_player.previousSong(*p);
+                break;
         }
     }
 
