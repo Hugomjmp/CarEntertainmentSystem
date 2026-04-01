@@ -14,6 +14,8 @@ class MusicPlayer {
 private:
     Library &library;
     sf::Music music;
+    int currentSong = 0;
+    bool playlistLoop = false;
 public:
 
     MusicPlayer(Library &lib) : library(lib) {}
@@ -28,6 +30,9 @@ public:
     void setLoop();
     sf::Time getCurrentSongTime() const;
     void playPlaylist(const Playlist &playlist);
+    void setPlaylistLoop();
+    void nextSong() const;
+    void previousSong() const;
 };
 
 

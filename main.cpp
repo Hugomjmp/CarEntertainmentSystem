@@ -126,7 +126,7 @@ int main() {
     MusicPlayer music_player(library);
 
 
-    while (option != 12) {
+    while (option != 13) {
         consoleUI.showMainMenu();
         std::cin >> option;
         switch (option) {
@@ -175,6 +175,10 @@ int main() {
             case 11:
                 std::cin.ignore();
                 std::cin >> playlistName;
+                break;
+            case 12:
+                music_player.setPlaylistLoop();
+                break;
 
         }
     }

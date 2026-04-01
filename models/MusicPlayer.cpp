@@ -100,12 +100,26 @@ sf::Time MusicPlayer::getCurrentSongTime() const{
 }
 
 void MusicPlayer::playPlaylist(const Playlist &playlist){
-    for (int i = 0; i < playlist.getPlaySongs().size(); i++) {
+    do {
+        for (int i = 0; i < playlist.getPlaySongs().size(); i++) {
 
-        playSong(*playlist.getPlaySongs().at(i));
-
-        while (music.getStatus() == sf::Music::Status::Playing) {
-            sf::sleep(sf::milliseconds(100));
+            playSong(*playlist.getPlaySongs().at(i));
+            while (music.getStatus() == sf::Music::Status::Playing) {
+                sf::sleep(sf::milliseconds(100));
+            }
         }
-    }
+    } while (playlistLoop);
+}
+
+void MusicPlayer::setPlaylistLoop() {
+    if (playlistLoop == true) {
+        playlistLoop = false;
+    } else
+        playlistLoop = true;
+}
+
+void MusicPlayer::nextSong() const {
+}
+
+void MusicPlayer::previousSong() const {
 }

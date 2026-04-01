@@ -24,7 +24,8 @@ void ConsoleUI::showMainMenu() const{
     std::cout << "| 9 - Loop Current Song  |" << std::endl;
     std::cout << "| 10 - Playlist Settings |" << std::endl;
     std::cout << "| 11 - Play Playlist     |" << std::endl;
-    std::cout << "| 12 - exit program      |" << std::endl;
+    std::cout << "| 12 - Set Loop Playlist |" << std::endl;
+    std::cout << "| 13 - exit program      |" << std::endl;
     std::cout << "+------------------------+" << std::endl;
     std::cout << "#> ";
 }
