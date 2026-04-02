@@ -1,0 +1,16 @@
+//
+// Created by Hugo on 02/04/2026.
+//
+
+#ifndef CARENTERTAINMENTSYSTEM_MAINWINDOW_H
+#define CARENTERTAINMENTSYSTEM_MAINWINDOW_H
+
+
+
+class MainWindow {
+
+};
+
+
+
+#endif //CARENTERTAINMENTSYSTEM_MAINWINDOW_H

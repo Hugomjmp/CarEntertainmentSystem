@@ -4,6 +4,8 @@ project(CarEntertainmentSystem)
 
 set(CMAKE_CXX_STANDARD 20)
 
+
+
 include(FetchContent)
 FetchContent_Declare(SFML
         GIT_REPOSITORY https://github.com/SFML/SFML.git
@@ -30,13 +32,27 @@ add_executable(CarEntertainmentSystem main.cpp
         models/MusicPlayer.h
         Settings/Settings.cpp
         models/data/DHT11.cpp
-        models/data/DHT11.h)
+        models/data/DHT11.h
+        mainWindow.cpp
+        mainWindow.h)
 
 #[[find_package(TagLib 2.0.0 REQUIRED)]]
+find_package(Qt6 REQUIRED COMPONENTS Widgets)
 
+set_target_properties(CarEntertainmentSystem PROPERTIES
+        AUTOMOC ON
+        AUTOUIC ON
+        AUTORCC ON
+)
 target_link_libraries(CarEntertainmentSystem
         SFML::Audio
+        Qt6::Widgets
 #[[        TagLib::tag
         pigpio]]
         pthread
+)
+
+add_custom_command(TARGET CarEntertainmentSystem POST_BUILD
+        COMMAND "C:/Qt/6.11.0/mingw_64/bin/windeployqt.exe"
+        $<TARGET_FILE:CarEntertainmentSystem>
 )

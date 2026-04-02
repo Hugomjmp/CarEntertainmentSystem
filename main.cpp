@@ -7,6 +7,9 @@
 #include "models/data/Playlist.h"
 #include "Settings/Settings.h"
 #include "UI/ConsoleUI.h"
+#include <QApplication>
+#include <QPushButton>
+#include <QLabel>
 /*#include <pigpio.h>*/
 /* METODOS APENAS PARA TESTE DE IMPLEMENTAÇÃO */
 void libraryMenu(const ConsoleUI& consoleUI, Library& library) {
@@ -109,7 +112,7 @@ void playlistMenu(const ConsoleUI& consoleUI, Library& library, const std::strin
     }
 
 }
-int main() {
+int main(int argc, char *argv[]) {
     int option = 0;
     int songNumber = 0;
     float volume = 100;
@@ -127,7 +130,10 @@ int main() {
 
     Playlist * p = nullptr;
 
+    QApplication app(argc, argv);
 
+    return app.exec();
+    
     while (option != 15) {
         consoleUI.showMainMenu();
         std::cin >> option;

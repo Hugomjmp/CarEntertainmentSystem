@@ -99,15 +99,24 @@ sf::Time MusicPlayer::getCurrentSongTime() const{
     return music.getPlayingOffset();
 }
 
+/*TODO*/
+//fix bug when it pauses or stops the music
+/**
+ *
+ * @param playlist Playlist to be played.
+ */
 void MusicPlayer::playPlaylist(const Playlist &playlist){
     do {
         for (; currentSong < playlist.getPlaySongs().size(); currentSong++) {
+
             playSong(*playlist.getPlaySongs().at(currentSong));
+
             while (music.getStatus() == sf::Music::Status::Playing) {
                 sf::sleep(sf::milliseconds(100));
             }
         }
     } while (playlistLoop);
+    currentSong = 0;
 }
 
 void MusicPlayer::setPlaylistLoop() {
