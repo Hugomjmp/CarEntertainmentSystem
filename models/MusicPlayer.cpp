@@ -101,7 +101,7 @@ sf::Time MusicPlayer::getCurrentSongTime() const{
 
 void MusicPlayer::playPlaylist(const Playlist &playlist){
     do {
-        for (int i = currentSong; i < playlist.getPlaySongs().size(); i++) {
+        for (; currentSong < playlist.getPlaySongs().size(); currentSong++) {
             playSong(*playlist.getPlaySongs().at(currentSong));
             while (music.getStatus() == sf::Music::Status::Playing) {
                 sf::sleep(sf::milliseconds(100));
@@ -126,7 +126,6 @@ void MusicPlayer::nextSong(const Playlist &playlist) {
         stopSong();
         currentSong = 0;
     }
-    std::cout << currentSong << std::endl;
 }
 
 void MusicPlayer::previousSong(const Playlist &playlist) {
@@ -137,5 +136,4 @@ void MusicPlayer::previousSong(const Playlist &playlist) {
         stopSong();
         currentSong = playlist.getPlaySongs().size() - 1;
     }
-    std::cout << currentSong << std::endl;
 }
