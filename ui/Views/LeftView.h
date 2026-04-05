@@ -10,7 +10,8 @@
 
 class LeftView : public QWidget {
 private:
-    QLabel *label = nullptr;
+    QPixmap source, navigation, fan;
+    QLabel *sourceIcon = nullptr, *navigationIcon = nullptr, *fanIcon = nullptr;
     QGridLayout *layout = nullptr;
     void createViews();
     void update();
@@ -18,7 +19,7 @@ private:
 public:
     LeftView(QWidget *parent = nullptr);
     ~LeftView();
-
+    void loadImages();
 };
 
 

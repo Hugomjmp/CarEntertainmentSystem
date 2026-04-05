@@ -10,12 +10,14 @@
 
 class RightView : public QWidget {
 private:
-    QLabel *label = nullptr;
+    QPixmap phone, apps, car;
+    QLabel *phoneImg = nullptr, *appsImg = nullptr, *carImg = nullptr;
     QGridLayout *layout = nullptr;
 
     void createViews();
     void update();
     void registerHandlers();
+    void loadImages();
 public:
     RightView(QWidget *parent = nullptr);
     ~RightView();

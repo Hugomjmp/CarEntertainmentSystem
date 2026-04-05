@@ -11,11 +11,20 @@
 class TopView : public QWidget {
 private:
     QGridLayout *layout = nullptr;
-    QLabel *label = nullptr;
+    QPixmap fan, bluetooth, wifi, cellService, gps, gearSettingsImg;
+    QLabel *temperature = nullptr, *fanStatus = nullptr, *time = nullptr;
+    QLabel *fanSpeedIcon = nullptr, *bluetoothIcon = nullptr, *wifiIcon = nullptr,
+            *cellServiceIcon = nullptr, *gpsIcon = nullptr, *gearSettingsIcon = nullptr;
+    QWidget *firstCell = nullptr, *secondCell = nullptr;
+    QHBoxLayout *firstCellLayout = nullptr;
+    QHBoxLayout *secondCellLayout = nullptr;
 
     void createViews();
     void update();
     void registerHandlers();
+    void loadImages();
+    void firstCellConfig();
+    void secondCellConfig();
 public:
     TopView(QWidget *parent = nullptr);
     ~TopView();
