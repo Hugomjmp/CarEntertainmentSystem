@@ -6,7 +6,7 @@
 #include "models/data/Library.h"
 #include "models/data/Playlist.h"
 #include "Settings/Settings.h"
-#include "UI/ConsoleUI.h"
+#include "ui/ConsoleUI.h"
 #include <QApplication>
 #include <QPushButton>
 #include <QLabel>
