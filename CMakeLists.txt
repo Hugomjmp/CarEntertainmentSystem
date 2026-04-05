@@ -34,7 +34,17 @@ add_executable(CarEntertainmentSystem main.cpp
         models/data/DHT11.cpp
         models/data/DHT11.h
         mainWindow.cpp
-        mainWindow.h)
+        mainWindow.h
+        UI/Views/TopView.cpp
+        UI/Views/TopView.h
+        UI/Views/BottomView.cpp
+        UI/Views/BottomView.h
+        UI/Views/CenterView.cpp
+        UI/Views/CenterView.h
+        UI/Views/LeftView.cpp
+        UI/Views/LeftView.h
+        UI/Views/RightView.cpp
+        UI/Views/RightView.h)
 
 #[[find_package(TagLib 2.0.0 REQUIRED)]]
 find_package(Qt6 REQUIRED COMPONENTS Widgets)

@@ -10,8 +10,13 @@
 #include <QApplication>
 #include <QPushButton>
 #include <QLabel>
+
+#include "MainWindow.h"
 /*#include <pigpio.h>*/
-/* METODOS APENAS PARA TESTE DE IMPLEMENTAÇÃO */
+
+/* TODO
+ * REMOVE THIS FUNCTION LATER
+ */
 void libraryMenu(const ConsoleUI& consoleUI, Library& library) {
     int option = 0;
     std::string playlistName;
@@ -63,6 +68,9 @@ void libraryMenu(const ConsoleUI& consoleUI, Library& library) {
         }
     }
 }
+/* TODO
+ * REMOVE THIS FUNCTION LATER
+ */
 void playlistMenu(const ConsoleUI& consoleUI, Library& library, const std::string playlistName) {
     int option = 0;
 
@@ -131,10 +139,18 @@ int main(int argc, char *argv[]) {
     Playlist * p = nullptr;
 
     QApplication app(argc, argv);
+    MainWindow w;
+    w.setFixedSize(1024,600);
+    w.setWindowTitle("Car Media");
+
+    //w.showFullScreen();
+    w.show();
 
     return app.exec();
-    
-    while (option != 15) {
+
+    /*TO REMOVE LATER*/
+
+    /*while (option != 15) {
         consoleUI.showMainMenu();
         std::cin >> option;
         switch (option) {
@@ -205,9 +221,9 @@ int main(int argc, char *argv[]) {
         return 1;
     }
 
-    gpioTerminate();*/
+    gpioTerminate();#1#
 
 
 
-    return 0;
+    return 0;*/
 }
