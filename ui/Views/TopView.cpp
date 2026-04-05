@@ -44,9 +44,12 @@ void TopView::createViews() {
     secondCellConfig();
 
 
-    layout->addWidget(temperature);
-    layout->addWidget(firstCell,0,1);
-    layout->addWidget(secondCell,0,2);
+    layout->addWidget(temperature,0,1);
+    layout->addWidget(firstCell,0,2);
+    layout->addWidget(secondCell,0,3);
+    temperature->setStyleSheet("background-color: blue;");
+    firstCell->setStyleSheet("background-color: red");
+    secondCell->setStyleSheet("background-color: green");
 
 }
 
@@ -87,8 +90,6 @@ void TopView::firstCellConfig() {
     //this will change later, just for testing
     fanStatus = new QLabel("OFF", firstCell);
     fanStatus->setStyleSheet("color: white; font-weight: bold; font-family: Arial;font-size: 15px;");
-
-
 
     firstCellLayout->addWidget(fanSpeedIcon);
     firstCellLayout->addWidget(fanStatus);

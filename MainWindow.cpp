@@ -32,28 +32,12 @@ void MainWindow::createViews() {
     this->setStyleSheet("background-color: #121212");
     setupLayout();
 
-
-    /*QLabel *label = new QLabel("Text",this);
-    QLabel *label1 = new QLabel("Text1",this);
-    QLabel *label2 = new QLabel("Text2",this);
-    QLabel *label3 = new QLabel("Text3",this);
-    QLabel *label4 = new QLabel("Text4",this);
-    label->setStyleSheet("background-color: red");
-    label1->setStyleSheet("background-color: green");
-    label2->setStyleSheet("background-color: blue");
-    label3->setStyleSheet("background-color: gray");
-    label4->setStyleSheet("background-color: purple");*/
-
-    /*gridLayout->addWidget(label,0,0,5,1);
-    gridLayout->addWidget(label1,0,1,1,3);
-    gridLayout->addWidget(label2,4,1,1,3);
-    gridLayout->addWidget(label3,1,1,3,3);
-    gridLayout->addWidget(label4,0,4,5,1);*/
     gridLayout->addWidget(topView,0,1,1,3);
     gridLayout->addWidget(leftView,0,0,5,1);
     gridLayout->addWidget(rightView,0,4,5,1);
     gridLayout->addWidget(centerView,1,1,3,3);
     gridLayout->addWidget(bottomView,4,1,1,3);
+    gridLayout->setAlignment(bottomView,Qt::AlignVCenter);
     gridLayout->setContentsMargins(0,0,0,0);
     gridLayout->setSpacing(0);
 
