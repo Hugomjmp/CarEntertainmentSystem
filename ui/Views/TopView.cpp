@@ -38,7 +38,8 @@ void TopView::createViews() {
     layout->setContentsMargins(0,0,0,0);
     layout->setSpacing(0);
     temperature = new QLabel("24ºC",this);
-    temperature->setStyleSheet("color: white; font-weight: bold; font-family: Arial;font-size: 15px;");
+    temperature->setStyleSheet("color: white; font-weight: bold; font-family: Arial;font-size: 18px;");
+    temperature->setMaximumWidth(100);
     loadImages();
     firstCellConfig();
     secondCellConfig();
@@ -47,9 +48,6 @@ void TopView::createViews() {
     layout->addWidget(temperature,0,1);
     layout->addWidget(firstCell,0,2);
     layout->addWidget(secondCell,0,3);
-    temperature->setStyleSheet("background-color: blue;");
-    firstCell->setStyleSheet("background-color: red");
-    secondCell->setStyleSheet("background-color: green");
 
 }
 
@@ -73,7 +71,7 @@ void TopView::firstCellConfig() {
     firstCell = new QWidget(this);
     firstCellLayout = new QHBoxLayout(firstCell);
     firstCellLayout->setContentsMargins(0,0,0,0);
-    firstCellLayout->setSpacing(0);
+    firstCellLayout->setSpacing(10);
 
     fanSpeedIcon = new QLabel(firstCell);
     fanSpeedIcon->setFixedSize(25,25);
@@ -101,10 +99,9 @@ void TopView::secondCellConfig() {
     secondCell = new QWidget(this);
     secondCellLayout = new QHBoxLayout(secondCell);
     secondCellLayout->setContentsMargins(0,0,0,0);
-    secondCellLayout->setSpacing(0);
 
     bluetoothIcon = new QLabel(secondCell);
-    bluetoothIcon->setFixedSize(25,25);
+    bluetoothIcon->setFixedSize(15,25);
 
     bluetoothIcon->setPixmap(
         bluetooth.scaled(
@@ -116,6 +113,7 @@ void TopView::secondCellConfig() {
 
     wifiIcon = new QLabel(secondCell);
     wifiIcon->setFixedSize(25,25);
+
     wifiIcon->setPixmap(
         wifi.scaled(
             wifiIcon->size(),
@@ -155,9 +153,20 @@ void TopView::secondCellConfig() {
         )
     );
 
+    time = new QLabel("12:30",secondCell);
+    time->setStyleSheet(
+     "color: white;"
+        "font-weight: bold;"
+        "font-family: Arial;"
+        "font-size: 24px;"
+    );
+
     secondCellLayout->addWidget(bluetoothIcon);
     secondCellLayout->addWidget(wifiIcon);
     secondCellLayout->addWidget(cellServiceIcon);
     secondCellLayout->addWidget(gpsIcon);
     secondCellLayout->addWidget(gearSettingsIcon);
+    secondCellLayout->addWidget(time);
+    secondCellLayout->setSpacing(5);
+    secondCellLayout->setAlignment(Qt::AlignRight);
 }

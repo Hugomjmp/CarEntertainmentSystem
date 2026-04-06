@@ -72,7 +72,6 @@ void BottomView::createViews() {
     stack->setCurrentWidget(volumeHighIcon);
 
 
-
     /*layout->addWidget(volumeLowIcon);
     layout->addWidget(volumeMedIcon);
     layout->addWidget(volumeNoneIcon);
