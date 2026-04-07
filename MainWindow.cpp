@@ -32,7 +32,6 @@ void MainWindow::createViews() {
     this->setStyleSheet("background-color: #121212");
     setupLayout();
 
-    leftView->setStyleSheet("background-color: yellow;");
     gridLayout->addWidget(topView,0,1,1,3);
     gridLayout->addWidget(leftView,0,0,5,1);
     gridLayout->addWidget(rightView,0,4,5,1);

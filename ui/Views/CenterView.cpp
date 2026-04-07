@@ -13,7 +13,7 @@ CenterView::CenterView(QWidget *parent) {
 }
 
 CenterView::~CenterView() {
-    delete musicPicture;
+    delete musicImage;
     delete previousIcon;
     delete pauseIcon;
     delete nextIcon;
@@ -21,7 +21,7 @@ CenterView::~CenterView() {
     delete HBoxButtons;
     delete leftVBox;
     delete rightVBox;
-    delete layout;
+    delete centerContainer;
     delete progressBar;
     delete HBoxButtonsWidget;
     delete leftBoxWidget;
@@ -30,27 +30,29 @@ CenterView::~CenterView() {
     delete stack;
     delete stackContainer;
     delete centerLayout;
+    delete HBoxSongTime;
+    delete HBoxSongTimeWidget;
 }
 
 void CenterView::createViews() {
-    layout = new QGridLayout(this);
-    layout->setContentsMargins(0,0,0,0);
+    centerContainer = new QHBoxLayout(this);
+    centerContainer->setContentsMargins(0,0,0,0);
+    centerContainer->setSpacing(0);
 
-
-    
     leftVBoxConfig();
 
-    rightBoxWidget = new QWidget(this); // to remove later
+    rightBoxWidget = new QWidget; // to remove later
     rightBoxWidget->setContentsMargins(0,0,0,0);
 
-    rightBoxWidget->setStyleSheet("background-color: blue;");
-
-    layout->addWidget(leftBoxWidget,0,1);
-    layout->addWidget(rightBoxWidget,0,2);
 
 
 
-    //layout->addWidget();
+    centerContainer->addWidget(leftBoxWidget);
+    centerContainer->addWidget(rightBoxWidget);
+
+
+    this->setLayout(centerContainer);
+
 }
 
 void CenterView::update() {
@@ -60,31 +62,34 @@ void CenterView::registerHandlers() {
 }
 
 void CenterView::loadImages() {
-    musicImage.load("resources/img/defaultMusic.png");
+    /*musicImage.load("resources/img/defaultMusic.png");
     previousSong.load("resources/img/backward-step-solid_W.png");
     playSong.load("resources/img/play-solid_W.png");
     pauseSong.load("resources/img/pause-solid_W.png");
     nextSong.load("resources/img/forward-step-solid_W.png");
-    repeat.load("resources/img/repeat-solid_W.png");
+    repeat.load("resources/img/repeat-solid_W.png");*/
 }
 
 void CenterView::hboxSongButtons() {
-    HBoxButtonsWidget = new QWidget(this);
+    HBoxButtonsWidget = new QWidget(leftBoxWidget);
     HBoxButtons = new QHBoxLayout(HBoxButtonsWidget);
-    HBoxButtons->setContentsMargins(0,0,0,0);
+    HBoxButtons->setContentsMargins(0,30,0,0);
     HBoxButtons->setSpacing(50);
     HBoxButtons->setAlignment(Qt::AlignCenter);
 
-    stackContainer = new QWidget(this);
+    stackContainer = new QWidget(HBoxButtonsWidget);
     stackContainer->setContentsMargins(0,0,0,0);
     stackContainer->setFixedSize(25,25);
     stack = new QStackedLayout(stackContainer);
     stack->setContentsMargins(0,0,0,0);
     stack->setSpacing(0);
+    stack->setAlignment(Qt::AlignCenter);
+
 
     previousIcon = new QLabel(HBoxButtonsWidget);
+    previousIcon->setFixedSize(25,25);
     previousIcon->setPixmap(
-        previousSong.scaled(
+        QPixmap("resources/img/backward-step-solid_W.png").scaled(
             previousIcon->size(),
             Qt::KeepAspectRatio,
             Qt::SmoothTransformation
@@ -92,52 +97,55 @@ void CenterView::hboxSongButtons() {
     );
 
     nextIcon = new QLabel(HBoxButtonsWidget);
+    nextIcon->setFixedSize(25,25);
     nextIcon->setPixmap(
-        nextSong.scaled(
+        QPixmap("resources/img/forward-step-solid_W.png").scaled(
             nextIcon->size(),
             Qt::KeepAspectRatio,
             Qt::SmoothTransformation
         )
     );
     repeatIcon = new QLabel(HBoxButtonsWidget);
+    repeatIcon->setFixedSize(25,25);
     repeatIcon->setPixmap(
-        repeat.scaled(
+        QPixmap("resources/img/repeat-solid_W.png").scaled(
             repeatIcon->size(),
             Qt::KeepAspectRatio,
             Qt::SmoothTransformation
         )
     );
     playIcon = new QLabel(HBoxButtonsWidget);
+    playIcon->setFixedSize(25,25);
     playIcon->setPixmap(
-        playSong.scaled(
+        QPixmap("resources/img/play-solid_W.png").scaled(
             playIcon->size(),
             Qt::KeepAspectRatio,
             Qt::SmoothTransformation
         )
     );
     pauseIcon = new QLabel(HBoxButtonsWidget);
+    pauseIcon->setFixedSize(25,25);
     pauseIcon->setPixmap(
-        pauseSong.scaled(
+        QPixmap("resources/img/pause-solid_W.png").scaled(
             pauseIcon->size(),
             Qt::KeepAspectRatio,
             Qt::SmoothTransformation
         )
     );
 
-    previousIcon->setFixedSize(25,25);
-    nextIcon->setFixedSize(25,25);
-    repeatIcon->setFixedSize(25,25);
-    playIcon->setFixedSize(25,25);
-    pauseIcon->setFixedSize(25,25);
+
 
     HBoxButtons->addWidget(previousIcon);
+    /*HBoxButtons->addWidget(playIcon);
+    HBoxButtons->addWidget(pauseIcon);*/
     stack->addWidget(playIcon);
     stack->addWidget(pauseIcon);
-    stack->setCurrentIndex(0);
+    stack->setCurrentIndex(1);
     HBoxButtons->addWidget(stackContainer);
     HBoxButtons->addWidget(nextIcon);
     HBoxButtons->addWidget(repeatIcon);
-    HBoxButtonsWidget->setStyleSheet("background-color: orange;");
+
+    HBoxButtonsWidget->setLayout(HBoxButtons);
 }
 
 void CenterView::leftVBoxConfig() {
@@ -147,28 +155,90 @@ void CenterView::leftVBoxConfig() {
     leftVBox = new QVBoxLayout(leftBoxWidget);
     leftVBox->setContentsMargins(0,0,0,0);
     leftVBox->setSpacing(0);
-    leftVBox->setAlignment(Qt::AlignHCenter);
+    leftVBox->setAlignment(Qt::AlignCenter);
 
     songName = new QLabel("Song Name", leftBoxWidget);
-    songName->setStyleSheet("color: white; font-weight: bold; font-family: Arial; font-size: 18px;");
+    songName->setStyleSheet("color: white; "
+                            "font-weight: bold; "
+                            "font-family: Arial; "
+                            "font-size: 18px;"
+                            "margin: 0 0 50px 0 0"
+                            );
 
-    musicPicture = new QLabel(leftBoxWidget);
-    musicPicture->setPixmap(
-        musicImage.scaled(
-            musicPicture->size(),
+    musicImage = new QLabel(leftBoxWidget);
+    musicImage->setFixedSize(200,200);
+    musicImage->setPixmap(
+        QPixmap("resources/img/defaultMusic.png").scaled(
+            musicImage->size(),
             Qt::KeepAspectRatio,
             Qt::SmoothTransformation
         )
     );
 
-    musicPicture->setFixedSize(200,200);
-    //ADD PROGRESS BAR HERE LATER
+
+    hboxSongTime();
+    timeLapseBar();
     hboxSongButtons();
 
+    leftVBox->addWidget(songName,0,Qt::AlignCenter);
+    leftVBox->addWidget(musicImage,0,Qt::AlignCenter);
+    leftVBox->addWidget(HBoxSongTimeWidget,0,Qt::AlignCenter);
+    leftVBox->addWidget(progressBar,0,Qt::AlignCenter);
+    leftVBox->addWidget(HBoxButtonsWidget,0,Qt::AlignCenter);
 
-    leftBoxWidget->setStyleSheet("background-color: green;");
-    leftVBox->addWidget(songName);
-    leftVBox->addWidget(musicPicture);
-    leftVBox->addWidget(HBoxButtonsWidget);
+    leftBoxWidget->setLayout(leftVBox);
+
+}
+
+void CenterView::hboxSongTime() {
+    HBoxSongTimeWidget = new QWidget(leftBoxWidget);
+    HBoxSongTimeWidget->setContentsMargins(0,30,0,10);
+
+    HBoxSongTime = new QHBoxLayout(HBoxSongTimeWidget);
+    HBoxSongTime->setContentsMargins(0,0,0,0);
+    HBoxSongTime->setSpacing(180);
+    HBoxSongTime->setAlignment(Qt::AlignCenter);
+
+    currentSongTime = new QLabel("1:00");
+    currentSongTime->setStyleSheet("color: white; "
+                        "font-weight: bold; "
+                        "font-family: Arial; "
+                        "font-size: 14px;"
+                        );
+
+    finalSongTime = new QLabel("4:20");
+    finalSongTime->setStyleSheet("color: white; "
+                        "font-weight: bold; "
+                        "font-family: Arial; "
+                        "font-size: 14px; "
+                        );
+
+    HBoxSongTime->addWidget(currentSongTime);
+    HBoxSongTime->addWidget(finalSongTime);
+
+    HBoxSongTimeWidget->setLayout(HBoxSongTime);
+
+}
+
+void CenterView::timeLapseBar() {
+    progressBar = new QProgressBar(leftBoxWidget);
+    progressBar->setMinimumWidth(300);
+    progressBar->setTextVisible(false);
+    progressBar->setFixedHeight(8);
+
+    progressBar->setStyleSheet(
+        "QProgressBar {"
+        "  border: none;"
+        "  border-radius: 4px;"
+        "  background-color: #333;"
+        "}"
+        "QProgressBar::chunk {"
+        "  background-color: white;"
+        "  border-radius: 4px;"
+        "}"
+    );
+    progressBar->setValue(20);  //for testing
+
+
 
 }

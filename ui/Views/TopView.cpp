@@ -153,6 +153,7 @@ void TopView::secondCellConfig() {
         )
     );
 
+    //to remove later, just for testing
     time = new QLabel("12:30",secondCell);
     time->setStyleSheet(
      "color: white;"
