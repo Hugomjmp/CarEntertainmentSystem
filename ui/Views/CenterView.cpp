@@ -4,34 +4,18 @@
 
 #include "CenterView.h"
 
-CenterView::CenterView(QWidget *parent) {
+#include <iostream>
+#include <QPushButton>
+
+#include "BottomView.h"
+#include "../../models/Facade.h"
+
+CenterView::CenterView(Facade &facade, QWidget *parent) : facade(facade) {
 
     loadImages();
     createViews();
     registerHandlers();
     update();
-}
-
-CenterView::~CenterView() {
-    delete musicImage;
-    delete previousIcon;
-    delete pauseIcon;
-    delete nextIcon;
-    delete repeatIcon;
-    delete HBoxButtons;
-    delete leftVBox;
-    delete rightVBox;
-    delete centerContainer;
-    delete progressBar;
-    delete HBoxButtonsWidget;
-    delete leftBoxWidget;
-    delete rightBoxWidget;
-    delete playIcon;
-    delete stack;
-    delete stackContainer;
-    delete centerLayout;
-    delete HBoxSongTime;
-    delete HBoxSongTimeWidget;
 }
 
 void CenterView::createViews() {
@@ -59,6 +43,13 @@ void CenterView::update() {
 }
 
 void CenterView::registerHandlers() {
+    QObject::connect(playButton, &QPushButton::clicked, this, &CenterView::handleMouseClicked);
+
+}
+
+void CenterView::handleMouseClicked() {
+    facade.play();
+
 }
 
 void CenterView::loadImages() {
@@ -138,9 +129,16 @@ void CenterView::hboxSongButtons() {
     HBoxButtons->addWidget(previousIcon);
     /*HBoxButtons->addWidget(playIcon);
     HBoxButtons->addWidget(pauseIcon);*/
+    //stack->addWidget(new QPushButton("play"));
+    playButton = new QPushButton("play", this);
+
+    stack->addWidget(playButton);
     stack->addWidget(playIcon);
     stack->addWidget(pauseIcon);
-    stack->setCurrentIndex(1);
+    stack->setCurrentIndex(0);
+
+
+
     HBoxButtons->addWidget(stackContainer);
     HBoxButtons->addWidget(nextIcon);
     HBoxButtons->addWidget(repeatIcon);

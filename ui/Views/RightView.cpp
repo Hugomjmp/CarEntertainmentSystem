@@ -59,12 +59,6 @@ RightView::RightView(QWidget *parent) {
     update();
 }
 
-RightView::~RightView() {
-    delete phoneImg;
-    delete appsImg;
-    delete carImg;
-    delete layout;
-}
 
 void RightView::loadImages() {
     phone.load("resources/img/phone-solid_W.png");

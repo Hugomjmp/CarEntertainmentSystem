@@ -7,9 +7,13 @@
 
 
 class DHT11 {
-    private:
+private:
     float temperature;
     float humidity;
+public:
+    DHT11();
+    ~DHT11() = default;
+    
 };
 
 

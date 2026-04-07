@@ -27,7 +27,7 @@ private:
     void secondCellConfig();
 public:
     TopView(QWidget *parent = nullptr);
-    ~TopView();
+    ~TopView() = default;
 
 
 };

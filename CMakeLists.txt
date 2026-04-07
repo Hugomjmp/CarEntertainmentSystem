@@ -44,7 +44,12 @@ add_executable(CarEntertainmentSystem main.cpp
         UI/Views/LeftView.cpp
         UI/Views/LeftView.h
         UI/Views/RightView.cpp
-        UI/Views/RightView.h)
+        UI/Views/RightView.h
+        models/Facade.cpp
+        models/Facade.h
+        models/data/MetaData.cpp
+        models/data/MetaData.h
+)
 
 #[[find_package(TagLib 2.0.0 REQUIRED)]]
 find_package(Qt6 REQUIRED COMPONENTS Widgets)

@@ -12,6 +12,7 @@
 #include <QLabel>
 
 #include "MainWindow.h"
+#include "models/Facade.h"
 /*#include <pigpio.h>*/
 
 /* TODO
@@ -121,28 +122,12 @@ void playlistMenu(const ConsoleUI& consoleUI, Library& library, const std::strin
 
 }
 int main(int argc, char *argv[]) {
-    int option = 0;
-    int songNumber = 0;
-    float volume = 100;
-    std::string playlistName;
-    /* First create folders if there aren't any #1*/
-    MakeFolder mkFolder;
-    mkFolder.checkFolder();
-    //Settings setting;
-
-    ConsoleUI consoleUI;
-
-    Library library;
-
-    MusicPlayer music_player(library);
-
-    Playlist * p = nullptr;
-
+    Facade facade;
     QApplication app(argc, argv);
-    MainWindow w;
+    MainWindow w(facade);
     w.setFixedSize(1024,600);
     w.setWindowTitle("Car Media");
-
+    w.setWindowFlags(Qt::WindowStaysOnTopHint);
     //w.showFullScreen();
     w.show();
 

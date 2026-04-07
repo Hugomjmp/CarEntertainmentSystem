@@ -2,6 +2,7 @@
 #include <QGridLayout>
 #include <QLabel>
 
+#include "models/Facade.h"
 #include "ui/Views/BottomView.h"
 #include "ui/Views/CenterView.h"
 #include "ui/Views/LeftView.h"
@@ -15,6 +16,7 @@
 
 class MainWindow : public QMainWindow{
 private:
+    Facade &facade;
     QWidget *centralWidget;
     QGridLayout *gridLayout;
     TopView *topView;
@@ -29,8 +31,8 @@ private:
 
     void setupLayout();
 public:
-    MainWindow(QWidget *parent = nullptr);
-    ~MainWindow();
+    MainWindow(Facade &facade, QWidget *parent = nullptr);
+    ~MainWindow() = default;
 
 };
 

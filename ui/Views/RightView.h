@@ -20,7 +20,7 @@ private:
     void loadImages();
 public:
     RightView(QWidget *parent = nullptr);
-    ~RightView();
+    ~RightView() = default;
 
 };
 

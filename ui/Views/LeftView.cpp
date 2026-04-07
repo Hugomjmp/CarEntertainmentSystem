@@ -12,13 +12,6 @@ LeftView::LeftView(QWidget *parent) {
 
 }
 
-LeftView::~LeftView() {
-    delete layout;
-    delete sourceIcon;
-    delete navigationIcon;
-    delete fanIcon;
-}
-
 void LeftView::createViews() {
     layout = new QGridLayout(this);
     layout->setContentsMargins(0,0,0,0);

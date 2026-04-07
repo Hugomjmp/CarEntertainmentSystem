@@ -1,7 +1,9 @@
 #include "MainWindow.h"
 
+#include "models/Facade.h"
 
-MainWindow::MainWindow(QWidget *parent)  : QMainWindow(parent) {
+
+MainWindow::MainWindow(Facade &facade,QWidget *parent) : facade(facade),QMainWindow(parent) {
     centralWidget = new QWidget(this);
     setCentralWidget(centralWidget);
 
@@ -11,21 +13,10 @@ MainWindow::MainWindow(QWidget *parent)  : QMainWindow(parent) {
     bottomView = new BottomView();
     leftView = new LeftView();
     rightView = new RightView();
-    centerView = new CenterView();
-
+    centerView = new CenterView(facade);
     createViews();
     update();
     registerHandlers();
-}
-
-MainWindow::~MainWindow() {
-    delete centralWidget;
-    delete gridLayout;
-    delete topView;
-    delete bottomView;
-    delete leftView;
-    delete rightView;
-    delete centerView;
 }
 
 void MainWindow::createViews() {

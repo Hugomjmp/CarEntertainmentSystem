@@ -18,7 +18,7 @@ private:
     void registerHandlers();
 public:
     LeftView(QWidget *parent = nullptr);
-    ~LeftView();
+    ~LeftView() = default;
     void loadImages();
 };
 

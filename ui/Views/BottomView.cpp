@@ -91,16 +91,6 @@ BottomView::BottomView(QWidget *parent) {
     update();
 }
 
-BottomView::~BottomView() {
-    delete volumeHighIcon;
-    delete volumeLowIcon;
-    delete volumeMedIcon;
-    delete volumeNoneIcon;
-    delete volumeMuteIcon;
-    delete layout;
-    delete volumeSlider;
-    delete stack;
-}
 
 void BottomView::loadImages() {
     volumeHigh.load("resources/img/volume-high-solid_W.png");

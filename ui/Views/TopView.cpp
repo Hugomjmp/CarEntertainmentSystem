@@ -13,26 +13,6 @@ TopView::TopView(QWidget *parent) : QWidget(parent) {
     update();
 }
 
-TopView::~TopView() {
-    delete layout;
-    delete firstCell;
-    delete secondCell;
-    delete temperature;
-    delete fanStatus;
-    delete time;
-    delete fanSpeedIcon;
-    delete bluetoothIcon;
-    delete wifiIcon;
-    delete cellServiceIcon;
-    delete gpsIcon;
-    delete cellServiceIcon;
-    delete firstCell;
-    delete secondCell;
-    delete firstCellLayout;
-    delete secondCellLayout;
-
-
-}
 void TopView::createViews() {
     layout = new QGridLayout(this);
     layout->setContentsMargins(0,0,0,0);

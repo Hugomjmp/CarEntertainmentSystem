@@ -7,7 +7,9 @@
 #include <filesystem>
 #include <fstream>
 #include <iostream>
+#include <ranges>
 
+#include "MetaData.h"
 #include "../../Settings/Folders.h"
 
 Library::Library() {
@@ -24,11 +26,35 @@ Library::~Library() {
 void Library::scanMusicFolder() {
     std::string title;
     for (const auto& file: std::filesystem::directory_iterator(Folder::musicFolder)) {
+
         title = file.path().string().erase(0,6);
         title.erase(title.size() - 4);
         Song song(title,"",0,0,"",0,file.path().string());
         allSongs.push_back(song);
     }
+    /*std::cout << allSongs.at(9) << std::endl;
+    std::ifstream ifs(allSongs.at(9).getLocation(), std::ios::binary);
+    ifs.seekg(0, std::ios::beg);
+    char header[10];
+    ifs.read(header, 10);
+    int versionMajor, versionMinor;
+    versionMajor = header[3];
+    versionMinor = header[4];
+    std::cout << header[0]<<header[1]<<header[2] <<"v2." << versionMajor << "." << versionMinor << std::endl;
+    int tagSize =
+    ((header[6] & 0x7F) << 21) |
+    ((header[7] & 0x7F) << 14) |
+    ((header[8] & 0x7F) << 7)  |
+    (header[9] & 0x7F);
+
+    std::cout << "Tag size: " << tagSize << " bytes" << std::endl;*/
+    MetaData::searchFile(allSongs.at(9).getLocation());
+    //std::cout << "songTitle: " << MetaData::getTitle() << std::endl;
+    /*char all[22269];
+    ifs.read(all, 22269);
+    std::cout.write(all, 22269);*/
+    //std::cout << all << std::endl;
+
 }
 
 std::vector<Song>& Library::getAllSongs() {

@@ -23,7 +23,7 @@ private:
     void loadImages();
 public:
     BottomView(QWidget *parent = nullptr);
-    ~BottomView();
+    ~BottomView() = default;
 
 };
 
