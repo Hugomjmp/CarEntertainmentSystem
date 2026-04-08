@@ -6,21 +6,28 @@
 #define CARENTERTAINMENTSYSTEM_METADATA_H
 #include <string>
 
-
+/**
+ * Class to read metadata from the mp3 files.
+ * Compatible with ID3v2.3.0 and ID3v2.4.0 .
+ */
 class MetaData {
 private:
     std::string static file;
-    std::string title;
-    std::string album;
-    int year;
-    int number;
-    std::string genre;
-    int duration;
+    std::string static title;
+    std::string static artist;
+    std::string static album;
+    int static year;
+    int static number;
+    std::string static genre;
+    int static duration;
+    void static ID3v2_30(std::ifstream& ifs, const int& metaDataSize);
+    void static ID3v2_40(std::ifstream& ifs, const int& metaDataSize);
 public:
     MetaData();
     ~MetaData() = default;
     void static searchFile(std::string newFileSearch);
     std::string static getTitle();
+    std::string static getArtist();
     std::string static getAlbum();
     int static getYear();
     int static getNumber();
