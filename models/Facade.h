@@ -18,6 +18,12 @@ public:
     Facade();
     ~Facade();
     void play();
+    void pause();
+    void nextSong();
+    void previousSong();
+    void savePlaylist();
+    const Song & getSong() const;
+
 };
 
 

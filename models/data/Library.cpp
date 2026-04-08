@@ -31,6 +31,7 @@ void Library::scanMusicFolder() {
         Song song(
             MetaData::getTitle(),
             MetaData::getAlbum(),
+            MetaData::getArtist(),
             MetaData::getYear(),
             MetaData::getNumber(),
             MetaData::getGenre(),
@@ -114,7 +115,7 @@ void Library::savePlaylists() const{
 
 void Library::loadPlaylists() {
     std::cout << "Loading playlists..." << std::endl;
-    std::string name, songLine, title, album, yearStr, songNumberStr, genre, durationStr, location;
+    std::string name, songLine, title, album, artist, yearStr, songNumberStr, genre, durationStr, location;
     std::stringstream ss;
     int nSongs = 0, nPlaylists = 0, songNumber = 0, year = 0, duration = 0;
 
@@ -142,6 +143,7 @@ void Library::loadPlaylists() {
 
             std::getline(ss, title, ';');
             std::getline(ss, album, ';');
+            std::getline(ss, artist, ';');
             std::getline(ss, yearStr, ';');
             std::getline(ss, songNumberStr, ';');
             std::getline(ss, genre, ';');
@@ -151,7 +153,7 @@ void Library::loadPlaylists() {
             year = std::stoi(yearStr);
             songNumber = std::stoi(songNumberStr);
             duration = std::stoi(durationStr);
-            Song song(title, album, songNumber, year, genre, duration, location);
+            Song song(title, album, artist, songNumber, year, genre, duration, location);
             p->addSong(song);
         }
         playList.push_back(p);
@@ -165,6 +167,7 @@ std::ostream& operator<<(std::ostream &os, const std::vector<Song*> &songs) {
     for (int i = 0; i < songs.size(); i++) {
         os << songs.at(i)->getTitle() << " "
             << songs.at(i)->getAlbum() << " "
+            << songs.at(i)->getArtist() << " "
             << songs.at(i)->getYear() << " "
             << songs.at(i)->getNumber() << " "
             << songs.at(i)->getGenre() << " "

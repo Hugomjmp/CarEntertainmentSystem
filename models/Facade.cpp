@@ -22,7 +22,22 @@ Facade::~Facade() {
 }
 
 void Facade::play() {
-    std::cout << "Facade play" << std::endl;
-    std::cout << library->getSong(5);
-    music_Player->playSong(library->getSong(5));
+    music_Player->playSong(library->getSong(0));
+}
+
+void Facade::savePlaylist() {
+    library->savePlaylists();
+}
+
+void Facade::pause() {
+}
+
+void Facade::nextSong() {
+}
+
+void Facade::previousSong() {
+}
+
+const Song & Facade::getSong() const {
+    return library->getSong(0);
 }

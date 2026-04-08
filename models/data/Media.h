@@ -1,0 +1,16 @@
+//
+// Created by Hugo on 08/04/2026.
+//
+
+#ifndef CARENTERTAINMENTSYSTEM_MEDIA_H
+#define CARENTERTAINMENTSYSTEM_MEDIA_H
+
+
+
+class Media {
+
+};
+
+
+
+#endif //CARENTERTAINMENTSYSTEM_MEDIA_H

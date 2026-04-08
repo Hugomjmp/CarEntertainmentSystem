@@ -14,6 +14,10 @@ std::string Song::getAlbum() const {
     return album;
 }
 
+std::string Song::getArtist() const {
+    return artist;
+}
+
 int Song::getYear() const {
     return year;
 }
@@ -37,6 +41,7 @@ std::string Song::getLocation() const {
 std::ostream & operator<<(std::ostream &os, const Song &song) {
     os << song.getTitle() << ";"
         << song.getAlbum() << ";"
+        << song.getArtist() << ";"
         << song.getYear() << ";"
         << song.getNumber() << ";"
         << song.getGenre() << ";"

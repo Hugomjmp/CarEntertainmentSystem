@@ -20,8 +20,8 @@ add_executable(CarEntertainmentSystem main.cpp
         models/data/Song.h
         models/data/Playlist.cpp
         models/data/Playlist.h
-        UI/ConsoleUI.cpp
-        UI/ConsoleUI.h
+        ui/ConsoleUI.cpp
+        ui/ConsoleUI.h
         models/MakeFolder.cpp
         models/MakeFolder.h
         Settings/Settings.h
@@ -31,24 +31,26 @@ add_executable(CarEntertainmentSystem main.cpp
         models/MusicPlayer.cpp
         models/MusicPlayer.h
         Settings/Settings.cpp
-        models/data/DHT11.cpp
-        models/data/DHT11.h
-        mainWindow.cpp
-        mainWindow.h
-        UI/Views/TopView.cpp
-        UI/Views/TopView.h
-        UI/Views/BottomView.cpp
-        UI/Views/BottomView.h
-        UI/Views/CenterView.cpp
-        UI/Views/CenterView.h
-        UI/Views/LeftView.cpp
-        UI/Views/LeftView.h
-        UI/Views/RightView.cpp
-        UI/Views/RightView.h
+        models/data/TemperatureSensor.cpp
+        models/data/TemperatureSensor.h
+        MainWindow.cpp
+        MainWindow.h
+        ui/Views/TopView.cpp
+        ui/Views/TopView.h
+        ui/Views/BottomView.cpp
+        ui/Views/BottomView.h
+        ui/Views/CenterView.cpp
+        ui/Views/CenterView.h
+        ui/Views/LeftView.cpp
+        ui/Views/LeftView.h
+        ui/Views/RightView.cpp
+        ui/Views/RightView.h
         models/Facade.cpp
         models/Facade.h
         models/data/MetaData.cpp
         models/data/MetaData.h
+        models/data/Media.cpp
+        models/data/Media.h
 )
 
 #[[find_package(TagLib 2.0.0 REQUIRED)]]
@@ -66,8 +68,9 @@ target_link_libraries(CarEntertainmentSystem
         pigpio]]
         pthread
 )
-
-add_custom_command(TARGET CarEntertainmentSystem POST_BUILD
-        COMMAND "C:/Qt/6.11.0/mingw_64/bin/windeployqt.exe"
-        $<TARGET_FILE:CarEntertainmentSystem>
-)
+if (WIN32)
+    add_custom_command(TARGET CarEntertainmentSystem POST_BUILD
+            COMMAND "C:/Qt/6.11.0/mingw_64/bin/windeployqt.exe"
+            $<TARGET_FILE:CarEntertainmentSystem>
+    )
+endif ()

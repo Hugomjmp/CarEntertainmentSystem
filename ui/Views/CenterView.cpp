@@ -15,7 +15,7 @@ CenterView::CenterView(Facade &facade, QWidget *parent) : facade(facade) {
     loadImages();
     createViews();
     registerHandlers();
-    update();
+    //update();
 }
 
 void CenterView::createViews() {
@@ -40,6 +40,8 @@ void CenterView::createViews() {
 }
 
 void CenterView::update() {
+    std::string title = facade.getSong().getTitle() + " - " + facade.getSong().getArtist();
+    songName->setText(title.c_str());
 }
 
 void CenterView::registerHandlers() {
@@ -49,6 +51,7 @@ void CenterView::registerHandlers() {
 
 void CenterView::handleMouseClicked() {
     facade.play();
+    update();
 
 }
 
@@ -155,7 +158,7 @@ void CenterView::leftVBoxConfig() {
     leftVBox->setSpacing(0);
     leftVBox->setAlignment(Qt::AlignCenter);
 
-    songName = new QLabel("Song Name", leftBoxWidget);
+    songName = new QLabel("", leftBoxWidget);
     songName->setStyleSheet("color: white; "
                             "font-weight: bold; "
                             "font-family: Arial; "

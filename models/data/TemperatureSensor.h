@@ -4,15 +4,18 @@
 
 #ifndef CARENTERTAINMENTSYSTEM_TEMPERATURE_H
 #define CARENTERTAINMENTSYSTEM_TEMPERATURE_H
+#include <cstdint>
 
-
-class DHT11 {
+/**
+ * Class that represents the DHT11, DHT22 temperature and Humidity sensor.
+ */
+class TemperatureSensor {
 private:
     float temperature;
     float humidity;
 public:
-    DHT11();
-    ~DHT11() = default;
+    TemperatureSensor();
+    ~TemperatureSensor() = default;
     
 };
 

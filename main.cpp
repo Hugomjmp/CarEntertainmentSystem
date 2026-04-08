@@ -2,14 +2,10 @@
 #include <thread>
 
 #include "models/MakeFolder.h"
-#include "models/MusicPlayer.h"
 #include "models/data/Library.h"
 #include "models/data/Playlist.h"
-#include "Settings/Settings.h"
 #include "ui/ConsoleUI.h"
 #include <QApplication>
-#include <QPushButton>
-#include <QLabel>
 
 #include "MainWindow.h"
 #include "models/Facade.h"
