@@ -7,6 +7,7 @@
 #include "MakeFolder.h"
 #include "MusicPlayer.h"
 #include "data/Library.h"
+#include "data/Media.h"
 
 
 class Facade {
@@ -14,6 +15,8 @@ private:
     MakeFolder *make_Folder = nullptr;
     Library *library = nullptr;
     MusicPlayer *music_Player = nullptr;
+    Media *media = nullptr;
+    bool isPlaying = false;
 public:
     Facade();
     ~Facade();
@@ -21,9 +24,10 @@ public:
     void pause();
     void nextSong();
     void previousSong();
-    void savePlaylist();
+    double getVolume() const;
+    void setVolume(double volume);
     const Song & getSong() const;
-
+    void setMute();
 };
 
 

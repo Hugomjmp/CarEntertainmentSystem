@@ -17,9 +17,6 @@ bool MusicPlayer::playSong(const Song &song) {
     if (music.getStatus() == sf::Music::Status::Playing)
         music.stop();
 
-    /*if (!music.openFromFile(library.getAllSongs().at(songNumber).getLocation())) {
-        return false;
-    }*/
     if (!music.openFromFile(song.getLocation())) {
         return false;
     }
@@ -71,23 +68,14 @@ float MusicPlayer::getVolume() const {
     return music.getVolume();
 }
 
-void MusicPlayer::setMute(bool mute) {
+void MusicPlayer::setMute() {
     float initialVolume = music.getVolume();
-    if (mute == true) {
+    if (mute == false) {
         music.setVolume(0.0f);
+        mute = true;
     } else {
         music.setVolume(initialVolume);
-    }
-}
-
-/**
- * Set's the current song in a loop.
- */
-void MusicPlayer::setLoop() {
-    if (music.isLooping() == false) {
-        music.setLooping(true);
-    } else {
-        music.setLooping(false);
+        mute = false;
     }
 }
 
@@ -97,52 +85,4 @@ void MusicPlayer::setLoop() {
  */
 sf::Time MusicPlayer::getCurrentSongTime() const{
     return music.getPlayingOffset();
-}
-
-/*TODO*/
-//fix bug when it pauses or stops the music
-/**
- *
- * @param playlist Playlist to be played.
- */
-void MusicPlayer::playPlaylist(const Playlist &playlist){
-    do {
-        for (; currentSong < playlist.getPlaySongs().size(); currentSong++) {
-
-            playSong(*playlist.getPlaySongs().at(currentSong));
-
-            while (music.getStatus() == sf::Music::Status::Playing) {
-                sf::sleep(sf::milliseconds(100));
-            }
-        }
-    } while (playlistLoop);
-    currentSong = 0;
-}
-
-void MusicPlayer::setPlaylistLoop() {
-    if (playlistLoop == true) {
-        playlistLoop = false;
-    } else
-        playlistLoop = true;
-}
-
-void MusicPlayer::nextSong(const Playlist &playlist) {
-
-    if (currentSong >= 0 && currentSong < playlist.getPlaySongs().size() - 1) {
-        stopSong();
-        currentSong++;
-    } else {
-        stopSong();
-        currentSong = 0;
-    }
-}
-
-void MusicPlayer::previousSong(const Playlist &playlist) {
-    if (currentSong > 0 && currentSong <= playlist.getPlaySongs().size() - 1) {
-        stopSong();
-        currentSong--;
-    } else {
-        stopSong();
-        currentSong = playlist.getPlaySongs().size() - 1;
-    }
 }

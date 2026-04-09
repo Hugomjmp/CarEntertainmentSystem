@@ -4,88 +4,130 @@
 
 #include "BottomView.h"
 
+#include <iostream>
+#include <QTimer>
 void BottomView::createViews() {
-    stack = new QStackedLayout(this);
+    layout = new QHBoxLayout(this);
+    layout->setContentsMargins(0,0,0,0);
+    layout->setSpacing(10);
+    layout->setAlignment(Qt::AlignLeft);
+    volumeWidget = new QWidget();
+    volumeWidget->setContentsMargins(0,0,00,0);
+    volumeWidget->setFixedSize(25,25);
+
+    stack = new QStackedLayout(volumeWidget);
     stack->setContentsMargins(0,0,0,0);
     stack->setSpacing(0);
-    /*layout = new QGridLayout(this);
-    layout->setContentsMargins(0,0,0,0);
-    layout->setSpacing(0);*/
+
 
     loadImages();
 
-    volumeHighIcon = new QLabel(this);
-    volumeLowIcon = new QLabel(this);
-    volumeMedIcon = new QLabel(this);
-    volumeNoneIcon = new QLabel(this);
-    volumeMuteIcon = new QLabel(this);
+    volumeHigh = new QPushButton("", this);
+    volumeHigh->setIcon(QIcon("resources/img/volume-high-solid_W.png"));
+    volumeHigh->setIconSize(QSize(25,25));
+    volumeHigh->setStyleSheet("border: none;");
 
-    volumeHighIcon->setFixedSize(25,25);
-    volumeLowIcon->setFixedSize(25,25);
-    volumeMedIcon->setFixedSize(25,25);
-    volumeNoneIcon->setFixedSize(25,25);
-    volumeMuteIcon->setFixedSize(25,25);
+    volumeLow = new QPushButton("", this);
+    volumeLow->setIcon(QIcon("resources/img/volume-low-solid_W.png"));
+    volumeLow->setIconSize(QSize(25,25));
+    volumeLow->setStyleSheet("border: none;");
 
-    volumeHighIcon->setPixmap(
-        volumeHigh.scaled(
-            volumeHighIcon->size(),
-            Qt::KeepAspectRatio,
-            Qt::SmoothTransformation
-        )
-    );
+    volumeMed = new QPushButton("", this);
+    volumeMed->setIcon(QIcon("resources/img/volume-med-solid_W.png"));
+    volumeMed->setIconSize(QSize(25,25));
+    volumeMed->setStyleSheet("border: none;");
 
-    volumeLowIcon->setPixmap(
-        volumeLow.scaled(
-            volumeLowIcon->size(),
-            Qt::KeepAspectRatio,
-            Qt::SmoothTransformation
-        )
-    );
-    volumeMedIcon->setPixmap(
-        volumeMed.scaled(
-            volumeMedIcon->size(),
-            Qt::KeepAspectRatio,
-            Qt::SmoothTransformation
-        )
-    );
-    volumeNoneIcon->setPixmap(
-        volumeNone.scaled(
-            volumeNoneIcon->size(),
-            Qt::KeepAspectRatio,
-            Qt::SmoothTransformation
-        )
-    );
-    volumeMuteIcon->setPixmap(
-        volumeMute.scaled(
-            volumeMuteIcon->size(),
-            Qt::KeepAspectRatio,
-            Qt::SmoothTransformation
-        )
-    );
-    //layout->addWidget(volumeHighIcon);
-    stack->addWidget(volumeHighIcon);
-    stack->addWidget(volumeLowIcon);
-    stack->addWidget(volumeMedIcon);
-    stack->addWidget(volumeNoneIcon);
-    stack->addWidget(volumeMuteIcon);
+    volumeNone = new QPushButton("", this);
+    volumeNone->setIcon(QIcon("resources/img/volume-none-solid_W.png"));
+    volumeNone->setIconSize(QSize(25,25));
+    volumeNone->setStyleSheet("border: none;");
+
+    volumeMute = new QPushButton("", this);
+    volumeMute->setIcon(QIcon("resources/img/volume-xmark-solid_W.png"));
+    volumeMute->setIconSize(QSize(25,25));
+    volumeMute->setStyleSheet("border: none;");
+
+
+    stack->addWidget(volumeHigh);
+    stack->addWidget(volumeMed);
+    stack->addWidget(volumeLow);
+    stack->addWidget(volumeNone);
+    stack->addWidget(volumeMute);
+    stack->setCurrentWidget(volumeHigh);
+
     volumeSlider = new QSlider(Qt::Horizontal);
-    stack->setCurrentWidget(volumeHighIcon);
-
-
-    /*layout->addWidget(volumeLowIcon);
-    layout->addWidget(volumeMedIcon);
-    layout->addWidget(volumeNoneIcon);
-    layout->addWidget(volumeMuteIcon);*/
+    volumeSlider->setValue(facade.getVolume());
+    volumeSlider->setMaximumWidth(120);
+    //volumeSlider->setFixedHeight(8);
+    volumeSlider->setMinimum(0);
+    volumeSlider->setStyleSheet(
+        "QSlider::groove:horizontal {"
+        "  border: none;"
+        "  height: 8px;"
+        "  background: #333;"
+        "  border-radius: 4px;"
+        "}"
+        "QSlider::sub-page:horizontal {"
+        "  background: white;"
+        "  border-radius: 4px;"
+        "}"
+        "QSlider::add-page:horizontal {"
+        "  background: #333;"
+        "  border-radius: 4px;"
+        "}"
+        "QSlider::handle:horizontal {"
+        "  background: transparent;"
+        "  border: none;"
+        "  width: 0px;"
+        "}"
+    );
+    volumeSlider->setVisible(false);
+    layout->addWidget(volumeWidget);
+    layout->addWidget(volumeSlider);
 }
 
 void BottomView::update() {
+    if ((facade.getVolume() / 100) >= 0.66) {
+        stack->setCurrentIndex(0);
+    } else if ((facade.getVolume() / 100) >= 0.33 && (facade.getVolume() / 100) < 0.66) {
+        stack->setCurrentIndex(1);
+    } else if ((facade.getVolume() / 100) > 0 && (facade.getVolume() / 100) < 0.33) {
+        stack->setCurrentIndex(2);
+    } else if ((facade.getVolume() / 100) == 0) {
+        stack->setCurrentIndex(3);
+    }
+
 }
 
 void BottomView::registerHandlers() {
+    QObject::connect(volumeSlider, &QSlider::valueChanged,this, &BottomView::volumeSliderValueChanged);
+    //QObject::connect(volumeHigh, &QPushButton::clicked, this, &BottomView::enableSlider);
+    QObject::connect(volumeMed, &QPushButton::clicked, this, &BottomView::enableSlider);
+    QObject::connect(volumeLow, &QPushButton::clicked, this, &BottomView::enableSlider);
+    QObject::connect(volumeNone, &QPushButton::clicked, this, &BottomView::enableSlider);
+    QObject::connect(volumeMute, &QPushButton::clicked, this, &BottomView::enableSlider);
+
+    QObject::connect(volumeHigh, &QPushButton::pressed, this, [this]() {
+        longPressTriggered = false;
+        pressTimer->start(200);
+    });
+    QObject::connect(volumeHigh, &QPushButton::released, this, [this]() {
+        pressTimer->stop();
+
+        if (!longPressTriggered) {
+
+        }
+    });
+
 }
 
-BottomView::BottomView(QWidget *parent) {
+BottomView::BottomView(Facade & facade ,QWidget *parent) : facade(facade) {
+    pressTimer = new QTimer;
 
+    connect(pressTimer, &QTimer::timeout, this, [this]() {
+    longPressTriggered = true;
+    handleMute();
+});
     createViews();
     registerHandlers();
     update();
@@ -93,9 +135,29 @@ BottomView::BottomView(QWidget *parent) {
 
 
 void BottomView::loadImages() {
-    volumeHigh.load("resources/img/volume-high-solid_W.png");
+    /*volumeHigh.load("resources/img/volume-high-solid_W.png");
     volumeLow.load("resources/img/volume-low-solid_W.png");
     volumeMed.load("resources/img/volume-med-solid_W.png");
     volumeNone.load("resources/img/volume-none-solid_W.png");
-    volumeMute.load("resources/img/volume-xmark-solid_W.png");
+    volumeMute.load("resources/img/volume-xmark-solid_W.png");*/
+}
+
+void BottomView::volumeSliderValueChanged() {
+    facade.setVolume(volumeSlider->value());
+    update();
+}
+
+void BottomView::enableSlider() {
+    if (volumeSlider->isVisible()) {
+        volumeSlider->setVisible(false);
+        update();
+        return;
+    }
+    volumeSlider->setVisible(true);
+}
+
+void BottomView::handleMute() {
+    facade.setMute();
+    stack->setCurrentIndex(4);
+    //update();
 }

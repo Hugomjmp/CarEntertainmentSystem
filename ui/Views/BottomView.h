@@ -8,21 +8,30 @@
 #include <QStackedLayout>
 #include <qwidget.h>
 #include <QLabel>
+#include <QPushButton>
 #include <QSlider>
+
+#include "../../models/Facade.h"
 
 class BottomView : public QWidget {
 private:
-    QPixmap volumeHigh, volumeMed, volumeLow, volumeNone, volumeMute;
-    QLabel *volumeHighIcon = nullptr, *volumeMedIcon = nullptr, *volumeLowIcon = nullptr, *volumeNoneIcon = nullptr, *volumeMuteIcon = nullptr;
+    Facade &facade;
+    QPushButton *volumeHigh = nullptr, *volumeMed = nullptr, *volumeLow = nullptr, *volumeNone = nullptr, *volumeMute = nullptr;
     QSlider *volumeSlider = nullptr;
-    QGridLayout *layout = nullptr;
+    QHBoxLayout *layout = nullptr;
+    QWidget *volumeWidget = nullptr;
     QStackedLayout *stack = nullptr;
+    QTimer *pressTimer = nullptr;
+    bool longPressTriggered = false;
     void createViews();
     void update();
     void registerHandlers();
     void loadImages();
+    void volumeSliderValueChanged();
+    void enableSlider();
+    void handleMute();
 public:
-    BottomView(QWidget *parent = nullptr);
+    BottomView(Facade &facade, QWidget *parent = nullptr);
     ~BottomView() = default;
 
 };

@@ -18,9 +18,9 @@ private:
     Facade &facade;
     //QPixmap musicImage, previousSong, playSong, pauseSong, nextSong, repeat;
     QLabel *songName = nullptr, *currentSongTime = nullptr, *finalSongTime = nullptr,
-            *musicImage = nullptr, *previousIcon = nullptr, *playIcon = nullptr,
-            *pauseIcon = nullptr, *nextIcon = nullptr, *repeatIcon = nullptr;
-    QPushButton *playButton = nullptr;
+            *musicImage = nullptr;
+    QPushButton *playButton = nullptr, *pauseButton = nullptr, *repeatButton = nullptr,
+                *nextButton = nullptr, *previousButton = nullptr;
     QHBoxLayout *centerContainer = nullptr;
     QHBoxLayout *HBoxButtons = nullptr, *centerLayout = nullptr, *HBoxSongTime = nullptr;
     QVBoxLayout *leftVBox = nullptr, *rightVBox = nullptr;
@@ -37,7 +37,11 @@ private:
     void createViews();
     void update();
     void registerHandlers();
-    void handleMouseClicked();
+    void handlePlayClicked();
+    void handlePauseClicked();
+    void handleNextClicked();
+    void handlePreviousClicked();
+    void handleRepeatClicked();
 public:
     CenterView(Facade &facade, QWidget *parent = nullptr);
     ~CenterView() = default;

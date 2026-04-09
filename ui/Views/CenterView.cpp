@@ -40,19 +40,48 @@ void CenterView::createViews() {
 }
 
 void CenterView::update() {
-    std::string title = facade.getSong().getTitle() + " - " + facade.getSong().getArtist();
+    songName->setText("");
+    std::string title = facade.getSong().getTitle()
+                        + " - " +
+                        facade.getSong().getArtist();
+
     songName->setText(title.c_str());
 }
 
 void CenterView::registerHandlers() {
-    QObject::connect(playButton, &QPushButton::clicked, this, &CenterView::handleMouseClicked);
+    QObject::connect(playButton, &QPushButton::clicked, this, &CenterView::handlePlayClicked);
+    QObject::connect(pauseButton, &QPushButton::clicked, this, &CenterView::handlePauseClicked);
+    QObject::connect(nextButton, &QPushButton::clicked, this, &CenterView::handleNextClicked);
+    QObject::connect(previousButton, &QPushButton::clicked, this, &CenterView::handlePreviousClicked);
+    QObject::connect(repeatButton, &QPushButton::clicked, this, &CenterView::handleRepeatClicked);
 
 }
 
-void CenterView::handleMouseClicked() {
+void CenterView::handlePlayClicked() {
     facade.play();
     update();
+    stack->setCurrentIndex(1);
+}
 
+void CenterView::handlePauseClicked() {
+    facade.pause();
+    update();
+    stack->setCurrentIndex(0);
+}
+
+void CenterView::handleNextClicked() {
+    facade.nextSong();
+    update();
+}
+
+void CenterView::handlePreviousClicked() {
+    facade.previousSong();
+    update();
+}
+
+void CenterView::handleRepeatClicked() {
+    std::cout<<"Loop clicked"<<std::endl;
+    update();
 }
 
 void CenterView::loadImages() {
@@ -79,72 +108,40 @@ void CenterView::hboxSongButtons() {
     stack->setSpacing(0);
     stack->setAlignment(Qt::AlignCenter);
 
+    previousButton = new QPushButton("", this);
+    previousButton->setIcon(QIcon("resources/img/backward-step-solid_W"));
+    previousButton->setIconSize(QSize(25,25));
+    previousButton->setStyleSheet("border: none; ");
 
-    previousIcon = new QLabel(HBoxButtonsWidget);
-    previousIcon->setFixedSize(25,25);
-    previousIcon->setPixmap(
-        QPixmap("resources/img/backward-step-solid_W.png").scaled(
-            previousIcon->size(),
-            Qt::KeepAspectRatio,
-            Qt::SmoothTransformation
-        )
-    );
+    nextButton= new QPushButton("", this);
+    nextButton->setIcon(QIcon("resources/img/forward-step-solid_W"));
+    nextButton->setIconSize(QSize(25,25));
+    nextButton->setStyleSheet("border: none; ");
 
-    nextIcon = new QLabel(HBoxButtonsWidget);
-    nextIcon->setFixedSize(25,25);
-    nextIcon->setPixmap(
-        QPixmap("resources/img/forward-step-solid_W.png").scaled(
-            nextIcon->size(),
-            Qt::KeepAspectRatio,
-            Qt::SmoothTransformation
-        )
-    );
-    repeatIcon = new QLabel(HBoxButtonsWidget);
-    repeatIcon->setFixedSize(25,25);
-    repeatIcon->setPixmap(
-        QPixmap("resources/img/repeat-solid_W.png").scaled(
-            repeatIcon->size(),
-            Qt::KeepAspectRatio,
-            Qt::SmoothTransformation
-        )
-    );
-    playIcon = new QLabel(HBoxButtonsWidget);
-    playIcon->setFixedSize(25,25);
-    playIcon->setPixmap(
-        QPixmap("resources/img/play-solid_W.png").scaled(
-            playIcon->size(),
-            Qt::KeepAspectRatio,
-            Qt::SmoothTransformation
-        )
-    );
-    pauseIcon = new QLabel(HBoxButtonsWidget);
-    pauseIcon->setFixedSize(25,25);
-    pauseIcon->setPixmap(
-        QPixmap("resources/img/pause-solid_W.png").scaled(
-            pauseIcon->size(),
-            Qt::KeepAspectRatio,
-            Qt::SmoothTransformation
-        )
-    );
+    repeatButton = new QPushButton("", this);
+    repeatButton->setIcon(QIcon("resources/img/repeat-solid_W"));
+    repeatButton->setIconSize(QSize(25,25));
+    repeatButton->setStyleSheet("border: none; ");
+
+    playButton = new QPushButton("", this);
+    playButton->setIcon(QIcon("resources/img/play-solid_W.png"));
+    playButton->setIconSize(QSize(25,25));
+    playButton->setStyleSheet("border: none; ");
+
+    pauseButton = new QPushButton("", this);
+    pauseButton->setIcon(QIcon("resources/img/pause-solid_W.png"));
+    pauseButton->setIconSize(QSize(25,25));
+    pauseButton->setStyleSheet("border: none; ");
 
 
 
-    HBoxButtons->addWidget(previousIcon);
-    /*HBoxButtons->addWidget(playIcon);
-    HBoxButtons->addWidget(pauseIcon);*/
-    //stack->addWidget(new QPushButton("play"));
-    playButton = new QPushButton("play", this);
-
+    HBoxButtons->addWidget(previousButton);
     stack->addWidget(playButton);
-    stack->addWidget(playIcon);
-    stack->addWidget(pauseIcon);
-    stack->setCurrentIndex(0);
-
-
-
+    stack->addWidget(pauseButton);
+    stack->setCurrentIndex(0);  //for testing
     HBoxButtons->addWidget(stackContainer);
-    HBoxButtons->addWidget(nextIcon);
-    HBoxButtons->addWidget(repeatIcon);
+    HBoxButtons->addWidget(nextButton);
+    HBoxButtons->addWidget(repeatButton);
 
     HBoxButtonsWidget->setLayout(HBoxButtons);
 }

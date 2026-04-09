@@ -11,6 +11,7 @@ Facade::Facade() {
     library = new Library();
     music_Player = new MusicPlayer(*library);
     make_Folder->checkFolder();
+    media = new Media(*library);
 
     //makeFolder.checkFolder();
 }
@@ -22,22 +23,40 @@ Facade::~Facade() {
 }
 
 void Facade::play() {
-    music_Player->playSong(library->getSong(0));
-}
-
-void Facade::savePlaylist() {
-    library->savePlaylists();
+    //music_Player->playSong(library->getSong(0));
+    music_Player->playSong(*media->getSongData());
+    isPlaying = true;
 }
 
 void Facade::pause() {
+    music_Player->pauseSong();
+    isPlaying = false;
 }
 
 void Facade::nextSong() {
+    media->nextSong();
+    isPlaying = true;
+    music_Player->playSong(*media->getSongData());
 }
 
 void Facade::previousSong() {
+    media->previousSong();
+    isPlaying = true;
+    music_Player->playSong(*media->getSongData());
 }
 
 const Song & Facade::getSong() const {
-    return library->getSong(0);
+    return *media->getSongData();
+}
+
+double Facade::getVolume() const {
+    return music_Player->getVolume();
+}
+
+void Facade::setVolume(double volume) {
+    music_Player->setVolume(volume);
+}
+
+void Facade::setMute() {
+    music_Player->setMute();
 }

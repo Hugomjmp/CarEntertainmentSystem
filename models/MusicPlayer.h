@@ -16,6 +16,7 @@ private:
     sf::Music music;
     int currentSong = 0;
     bool playlistLoop = false;
+    bool mute = false;
 public:
 
     MusicPlayer(Library &lib) : library(lib) {}
@@ -26,7 +27,7 @@ public:
     void pauseSong();
     bool setVolume(float volume);
     float getVolume() const;
-    void setMute(bool mute);
+    void setMute();
     void setLoop();
     sf::Time getCurrentSongTime() const;
     void playPlaylist(const Playlist &playlist);
