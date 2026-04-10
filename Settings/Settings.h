@@ -4,11 +4,11 @@
 #include <string>
 
 class Settings {
-    private:
-
-    public:
-    Settings();
-    ~Settings() = default;
+public:
+    class DHT11Settings {
+        public:
+        static const int DHT_PIN = 4;
+    };
 
 
 };

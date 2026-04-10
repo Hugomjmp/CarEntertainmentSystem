@@ -30,9 +30,8 @@ add_executable(CarEntertainmentSystem main.cpp
         models/data/Library.h
         models/MusicPlayer.cpp
         models/MusicPlayer.h
-        Settings/Settings.cpp
-        models/data/TemperatureSensor.cpp
-        models/data/TemperatureSensor.h
+        models/data/DHT11.cpp
+        models/data/DHT11.h
         MainWindow.cpp
         MainWindow.h
         ui/Views/TopView.cpp
@@ -64,8 +63,8 @@ set_target_properties(CarEntertainmentSystem PROPERTIES
 target_link_libraries(CarEntertainmentSystem
         SFML::Audio
         Qt6::Widgets
-#[[        TagLib::tag
-        pigpio]]
+#[[        TagLib::tag]]
+        pigpio
         pthread
 )
 if (WIN32)

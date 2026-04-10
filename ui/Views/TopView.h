@@ -19,6 +19,8 @@ private:
     QHBoxLayout *firstCellLayout = nullptr;
     QHBoxLayout *secondCellLayout = nullptr;
 
+    QTimer *timer = nullptr;
+
     void createViews();
     void update();
     void registerHandlers();

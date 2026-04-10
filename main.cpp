@@ -1,18 +1,13 @@
-#include <iostream>
-#include <thread>
-
-#include "models/MakeFolder.h"
-#include "models/data/Library.h"
-#include "models/data/Playlist.h"
-#include "ui/ConsoleUI.h"
 #include <QApplication>
 
+#include <iostream>
 #include "MainWindow.h"
 #include "models/Facade.h"
-/*#include <pigpio.h>*/
+#include <pigpio.h>
 
 int main(int argc, char *argv[]) {
-    Facade facade;
+    /*Facade facade;
+    gpioInitialise();
     QApplication app(argc, argv);
     MainWindow w(facade);
     w.setFixedSize(1024,600);
@@ -21,6 +16,32 @@ int main(int argc, char *argv[]) {
     //w.showFullScreen();
     w.show();
 
-    return app.exec();
+    int result = app.exec();
+    gpioTerminate();
+    return result;*/
+
+    gpioInitialise();
+
+    int handle = serOpen("/dev/serial0", 9600, 0);
+    if (handle == -1) {
+        std::cerr << "Error opening serial port" << std::endl;
+    }
+    char buffer[256];
+    memset(buffer, 0, sizeof(buffer));
+    while (true) {
+        int count = serRead(handle, buffer, sizeof(buffer) - 1);
+
+        if (count > 0) {
+            buffer[count] = '\0';
+            std::cout << buffer << std::endl;
+        }
+
+        gpioDelay(100000);
+    }
+
+    serClose(handle);
+
+
+    gpioTerminate();
 
 }

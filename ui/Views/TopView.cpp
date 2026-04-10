@@ -5,6 +5,9 @@
 #include "TopView.h"
 
 #include <iostream>
+#include <QTimer>
+
+#include "../../models/data/DHT11.h"
 
 TopView::TopView(QWidget *parent) : QWidget(parent) {
 
@@ -17,7 +20,7 @@ void TopView::createViews() {
     layout = new QGridLayout(this);
     layout->setContentsMargins(0,0,0,0);
     layout->setSpacing(0);
-    temperature = new QLabel("24ºC",this);
+    temperature = new QLabel("19ºC",this);
     temperature->setStyleSheet("color: white; font-weight: bold; font-family: Arial;font-size: 18px;");
     temperature->setMaximumWidth(100);
     loadImages();
@@ -34,7 +37,26 @@ void TopView::createViews() {
 void TopView::update() {
 }
 
+
+/*
+ * REVIEW THIS AFTER....
+ */
 void TopView::registerHandlers() {
+    timer = new QTimer(this);
+
+
+    QObject::connect(timer, &QTimer::timeout, this, [=]() {
+        DHT11 dht11;
+        dht11.readSensorData();
+        temperature->setText(QString::number(dht11.getTemperature()) + "ºC" );
+    });
+    QObject::connect(timer, &QTimer::timeout, this, [=]() {
+        const auto now = std::chrono::zoned_time{std::chrono::current_zone(), std::chrono::system_clock::now()};
+        std::string timeStamp = std::format("{:%H:%M}", now);
+        time->setText(QString::fromStdString(timeStamp));
+    });
+    timer->start(2000);
+
 }
 
 void TopView::loadImages() {
