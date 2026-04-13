@@ -9,11 +9,14 @@
 Facade::Facade() {
     make_Folder = new MakeFolder();
     library = new Library();
-    music_Player = new MusicPlayer(*library);
+    music_Player = new MusicPlayer(/**library*/);
     make_Folder->checkFolder();
     media = new Media(*library);
 
-    //makeFolder.checkFolder();
+    connect(music_Player, &MusicPlayer::positionChanged,
+        this, &Facade::positionChanged);
+    connect(music_Player, &MusicPlayer::durationChanged,
+        this, &Facade::durationChanged);
 }
 
 Facade::~Facade() {
@@ -23,7 +26,6 @@ Facade::~Facade() {
 }
 
 void Facade::play() {
-    //music_Player->playSong(library->getSong(0));
     music_Player->playSong(*media->getSongData());
     isPlaying = true;
 }
@@ -59,4 +61,16 @@ void Facade::setVolume(double volume) {
 
 void Facade::setMute() {
     music_Player->setMute();
+}
+
+std::string Facade::getSongDuration() const {
+    return music_Player->getSongDuration();
+}
+
+std::string Facade::getSongCurrentTime() const {
+    return music_Player->getCurrentSongTime();
+}
+
+MusicPlayer * Facade::getMusicPlayer() const {
+    return music_Player;
 }

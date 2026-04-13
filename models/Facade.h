@@ -10,7 +10,8 @@
 #include "data/Media.h"
 
 
-class Facade {
+class Facade : public QObject {
+    Q_OBJECT
 private:
     MakeFolder *make_Folder = nullptr;
     Library *library = nullptr;
@@ -28,6 +29,12 @@ public:
     void setVolume(double volume);
     const Song & getSong() const;
     void setMute();
+    std::string getSongDuration() const;
+    std::string getSongCurrentTime() const;
+    MusicPlayer * getMusicPlayer() const;
+signals:
+    void positionChanged(qint64  position);
+    void durationChanged(qint64 duration);
 };
 
 

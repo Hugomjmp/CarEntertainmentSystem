@@ -7,7 +7,7 @@
 #include <iostream>
 #include <QTimer>
 
-#include "../../models/data/DHT11.h"
+#include "../../models/data/sensor/DHT11.h"
 
 TopView::TopView(QWidget *parent) : QWidget(parent) {
 

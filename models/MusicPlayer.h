@@ -5,35 +5,39 @@
 #ifndef CARENTERTAINMENTSYSTEM_MUSICPLAYER_H
 #define CARENTERTAINMENTSYSTEM_MUSICPLAYER_H
 #include "data/Library.h"
-#include "SFML/Audio/Music.hpp"
+#include <QtMultimedia/QMediaPlayer>
+#include <QtMultimedia/QAudioOutput>
+#include <qobject.h>
+//#include "SFML/Audio/Music.hpp"
 
 /**
  * Class responsible to play the music.
  */
-class MusicPlayer {
+class MusicPlayer : public QObject {
+    Q_OBJECT
 private:
-    Library &library;
-    sf::Music music;
+    QMediaPlayer* player = nullptr;
+    QAudioOutput* audio = nullptr;
+    //sf::Music music;
     int currentSong = 0;
     bool playlistLoop = false;
     bool mute = false;
 public:
-
-    MusicPlayer(Library &lib) : library(lib) {}
-    ~MusicPlayer() = default;
+    MusicPlayer();
+    ~MusicPlayer();
 
     bool playSong(const Song &song);
     bool stopSong();
     void pauseSong();
     bool setVolume(float volume);
-    float getVolume() const;
+    float getVolume();
     void setMute();
-    void setLoop();
-    sf::Time getCurrentSongTime() const;
-    void playPlaylist(const Playlist &playlist);
-    void setPlaylistLoop();
-    void nextSong(const Playlist &playlist);
-    void previousSong(const Playlist &playlist);
+    std::string getCurrentSongTime() const;
+    std::string getSongDuration() const;
+signals:
+    void positionChanged(qint64 position);
+    void durationChanged(qint64 duration);
+
 };
 
 

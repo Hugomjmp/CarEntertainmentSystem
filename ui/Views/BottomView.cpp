@@ -101,7 +101,6 @@ void BottomView::update() {
 
 void BottomView::registerHandlers() {
     QObject::connect(volumeSlider, &QSlider::valueChanged,this, &BottomView::volumeSliderValueChanged);
-    //QObject::connect(volumeHigh, &QPushButton::clicked, this, &BottomView::enableSlider);
     QObject::connect(volumeMed, &QPushButton::clicked, this, &BottomView::enableSlider);
     QObject::connect(volumeLow, &QPushButton::clicked, this, &BottomView::enableSlider);
     QObject::connect(volumeNone, &QPushButton::clicked, this, &BottomView::enableSlider);
@@ -122,7 +121,7 @@ void BottomView::registerHandlers() {
 }
 
 BottomView::BottomView(Facade & facade ,QWidget *parent) : facade(facade) {
-    pressTimer = new QTimer;
+    /*pressTimer = new QTimer;
 
     connect(pressTimer, &QTimer::timeout, this, [this]() {
     longPressTriggered = true;
@@ -130,16 +129,12 @@ BottomView::BottomView(Facade & facade ,QWidget *parent) : facade(facade) {
 });
     createViews();
     registerHandlers();
-    update();
+    update();*/
 }
 
 
 void BottomView::loadImages() {
-    /*volumeHigh.load("resources/img/volume-high-solid_W.png");
-    volumeLow.load("resources/img/volume-low-solid_W.png");
-    volumeMed.load("resources/img/volume-med-solid_W.png");
-    volumeNone.load("resources/img/volume-none-solid_W.png");
-    volumeMute.load("resources/img/volume-xmark-solid_W.png");*/
+
 }
 
 void BottomView::volumeSliderValueChanged() {

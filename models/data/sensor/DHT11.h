@@ -5,8 +5,8 @@
 #ifndef CARENTERTAINMENTSYSTEM_TEMPERATURE_H
 #define CARENTERTAINMENTSYSTEM_TEMPERATURE_H
 #include <array>
-#include <pigpio.h>
-#include "../../Settings/Settings.h"
+//#include <pigpio.h>
+#include "../../../Settings/Settings.h"
 /**
  * Class that represents the DHT11, DHT22 temperature and Humidity sensor.
  */

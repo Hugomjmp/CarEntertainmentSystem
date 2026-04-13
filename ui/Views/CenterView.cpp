@@ -46,6 +46,8 @@ void CenterView::update() {
                         facade.getSong().getArtist();
 
     songName->setText(title.c_str());
+
+    progressBar->setHidden(false);
 }
 
 void CenterView::registerHandlers() {
@@ -54,12 +56,34 @@ void CenterView::registerHandlers() {
     QObject::connect(nextButton, &QPushButton::clicked, this, &CenterView::handleNextClicked);
     QObject::connect(previousButton, &QPushButton::clicked, this, &CenterView::handlePreviousClicked);
     QObject::connect(repeatButton, &QPushButton::clicked, this, &CenterView::handleRepeatClicked);
+    QObject::connect(&facade, &Facade::positionChanged, this, &CenterView::handleUpdatePosition);
+    QObject::connect(&facade, &Facade::durationChanged, this, &CenterView::handleUpdateDuration);
+}
 
+QString CenterView::msToString(qint64 ms) {
+    int totalSeconds = ms / 1000;
+    int minutes = totalSeconds / 60;
+    int seconds = totalSeconds % 60;
+
+    return QString("%1:%2")
+            .arg(minutes, 2, 10, QChar('0'))
+            .arg(seconds, 2, 10, QChar('0'));
+}
+
+void CenterView::handleUpdatePosition(qint64 position) {
+    currentSongTime->setText(msToString(position));
+    progressBar->setValue(position);
+}
+
+void CenterView::handleUpdateDuration(qint64 duration) {
+    progressBar->setMaximum(duration);
+    finalSongTime->setText(msToString(duration));
 }
 
 void CenterView::handlePlayClicked() {
     facade.play();
     update();
+    //facade.getSongDuration();
     stack->setCurrentIndex(1);
 }
 
@@ -197,14 +221,14 @@ void CenterView::hboxSongTime() {
     HBoxSongTime->setSpacing(180);
     HBoxSongTime->setAlignment(Qt::AlignCenter);
 
-    currentSongTime = new QLabel("1:00");
+    currentSongTime = new QLabel("");
     currentSongTime->setStyleSheet("color: white; "
                         "font-weight: bold; "
                         "font-family: Arial; "
                         "font-size: 14px;"
                         );
 
-    finalSongTime = new QLabel("4:20");
+    finalSongTime = new QLabel("");
     finalSongTime->setStyleSheet("color: white; "
                         "font-weight: bold; "
                         "font-family: Arial; "
@@ -223,7 +247,7 @@ void CenterView::timeLapseBar() {
     progressBar->setMinimumWidth(300);
     progressBar->setTextVisible(false);
     progressBar->setFixedHeight(8);
-
+    progressBar->setMaximum(100);
     progressBar->setStyleSheet(
         "QProgressBar {"
         "  border: none;"
@@ -235,7 +259,8 @@ void CenterView::timeLapseBar() {
         "  border-radius: 4px;"
         "}"
     );
-    progressBar->setValue(20);  //for testing
+    progressBar->setValue(0);  //for testing
+    progressBar->hide();
 
 
 

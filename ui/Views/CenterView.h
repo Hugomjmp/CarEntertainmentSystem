@@ -11,6 +11,7 @@
 #include <QPushButton>
 #include <QStackedLayout>
 
+class MusicPlayer;
 class Facade;
 
 class CenterView : public QWidget {
@@ -42,6 +43,9 @@ private:
     void handleNextClicked();
     void handlePreviousClicked();
     void handleRepeatClicked();
+    void handleUpdatePosition(qint64 position);
+    void handleUpdateDuration(qint64 duration);
+    QString msToString(qint64 ms);
 public:
     CenterView(Facade &facade, QWidget *parent = nullptr);
     ~CenterView() = default;

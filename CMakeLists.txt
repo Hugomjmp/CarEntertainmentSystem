@@ -6,14 +6,14 @@ set(CMAKE_CXX_STANDARD 20)
 
 
 
-include(FetchContent)
+#[[include(FetchContent)
 FetchContent_Declare(SFML
         GIT_REPOSITORY https://github.com/SFML/SFML.git
         GIT_TAG 3.0.2
         GIT_SHALLOW ON
         EXCLUDE_FROM_ALL
         SYSTEM)
-FetchContent_MakeAvailable(SFML)
+FetchContent_MakeAvailable(SFML)]]
 
 add_executable(CarEntertainmentSystem main.cpp
         models/data/Song.cpp
@@ -30,8 +30,8 @@ add_executable(CarEntertainmentSystem main.cpp
         models/data/Library.h
         models/MusicPlayer.cpp
         models/MusicPlayer.h
-        models/data/DHT11.cpp
-        models/data/DHT11.h
+        models/data/sensor/DHT11.cpp
+        models/data/sensor/DHT11.h
         MainWindow.cpp
         MainWindow.h
         ui/Views/TopView.cpp
@@ -50,10 +50,14 @@ add_executable(CarEntertainmentSystem main.cpp
         models/data/MetaData.h
         models/data/Media.cpp
         models/data/Media.h
+        models/data/sensor/GPS.cpp
+        models/data/sensor/GPS.h
+        models/data/interfaces/ISensor.cpp
+        models/data/interfaces/ISensor.h
 )
 
 #[[find_package(TagLib 2.0.0 REQUIRED)]]
-find_package(Qt6 REQUIRED COMPONENTS Widgets)
+find_package(Qt6 REQUIRED COMPONENTS Widgets Multimedia)
 
 set_target_properties(CarEntertainmentSystem PROPERTIES
         AUTOMOC ON
@@ -61,12 +65,15 @@ set_target_properties(CarEntertainmentSystem PROPERTIES
         AUTORCC ON
 )
 target_link_libraries(CarEntertainmentSystem
-        SFML::Audio
+        #[[SFML::Audio]]
         Qt6::Widgets
+        Qt6::Multimedia
+        Qt6::Core
 #[[        TagLib::tag]]
-        pigpio
+        #[[pigpio]]
         pthread
 )
+
 if (WIN32)
     add_custom_command(TARGET CarEntertainmentSystem POST_BUILD
             COMMAND "C:/Qt/6.11.0/mingw_64/bin/windeployqt.exe"
