@@ -7,6 +7,7 @@
 #include <iostream>
 
 Facade::Facade() {
+    gpio = new GPIO();
     make_Folder = new MakeFolder();
     library = new Library();
     music_Player = new MusicPlayer(/**library*/);
@@ -20,9 +21,14 @@ Facade::Facade() {
 }
 
 Facade::~Facade() {
+    delete gpio;
     delete make_Folder;
     delete library;
     delete music_Player;
+}
+
+GPIO * Facade::getGPIO() const {
+    return gpio;
 }
 
 void Facade::play() {

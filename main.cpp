@@ -1,10 +1,11 @@
+#include <iostream>
 #include <QApplication>
 
-#include <iostream>
 #include "MainWindow.h"
 #include "models/Facade.h"
 #include <QLoggingCategory>
-//#include <pigpio.h>
+#include <pigpio.h>
+
 
 int main(int argc, char *argv[]) {
 
@@ -16,7 +17,10 @@ int main(int argc, char *argv[]) {
 );
     QApplication app(argc, argv);
     Facade facade;
-    //gpioInitialise();
+    gpioCfgPermissions(0);
+    if (gpioInitialise() < 0) {
+        std::cerr << "Erro pigpio" << std::endl;
+    }
 
     MainWindow w(facade);
     w.setFixedSize(1024,600);
@@ -26,6 +30,6 @@ int main(int argc, char *argv[]) {
     w.show();
 
     int result = app.exec();
-    //gpioTerminate();
+    gpioTerminate();
     return result;
 }

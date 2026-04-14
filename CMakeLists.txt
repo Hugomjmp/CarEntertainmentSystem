@@ -54,6 +54,8 @@ add_executable(CarEntertainmentSystem main.cpp
         models/data/sensor/GPS.h
         models/data/interfaces/ISensor.cpp
         models/data/interfaces/ISensor.h
+        models/data/sensor/GPIO.cpp
+        models/data/sensor/GPIO.h
 )
 
 #[[find_package(TagLib 2.0.0 REQUIRED)]]
@@ -64,13 +66,14 @@ set_target_properties(CarEntertainmentSystem PROPERTIES
         AUTOUIC ON
         AUTORCC ON
 )
+
 target_link_libraries(CarEntertainmentSystem
         #[[SFML::Audio]]
         Qt6::Widgets
         Qt6::Multimedia
         Qt6::Core
-#[[        TagLib::tag]]
-        #[[pigpio]]
+        pigpio
+        #[[pigpiod_if2]]
         pthread
 )
 

@@ -8,8 +8,12 @@
 #include <qwidget.h>
 #include <QLabel>
 
+class DHT11;
+class Facade;
+
 class TopView : public QWidget {
 private:
+    Facade &facade;
     QGridLayout *layout = nullptr;
     QPixmap fan, bluetooth, wifi, cellService, gps, gearSettingsImg;
     QLabel *temperature = nullptr, *fanStatus = nullptr, *time = nullptr;
@@ -28,7 +32,7 @@ private:
     void firstCellConfig();
     void secondCellConfig();
 public:
-    TopView(QWidget *parent = nullptr);
+    TopView(Facade &facade, QWidget *parent = nullptr);
     ~TopView() = default;
 
 

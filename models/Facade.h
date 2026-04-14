@@ -8,11 +8,13 @@
 #include "MusicPlayer.h"
 #include "data/Library.h"
 #include "data/Media.h"
+#include "data/sensor/GPIO.h"
 
 
 class Facade : public QObject {
     Q_OBJECT
 private:
+    GPIO * gpio = nullptr;
     MakeFolder *make_Folder = nullptr;
     Library *library = nullptr;
     MusicPlayer *music_Player = nullptr;
@@ -32,6 +34,7 @@ public:
     std::string getSongDuration() const;
     std::string getSongCurrentTime() const;
     MusicPlayer * getMusicPlayer() const;
+    GPIO * getGPIO() const;
 signals:
     void positionChanged(qint64  position);
     void durationChanged(qint64 duration);

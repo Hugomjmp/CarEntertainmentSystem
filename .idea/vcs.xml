@@ -8,6 +8,5 @@
     <mapping directory="$PROJECT_DIR$/cmake-build-debug/_deps/ogg-src" vcs="Git" />
     <mapping directory="$PROJECT_DIR$/cmake-build-debug/_deps/sfml-src" vcs="Git" />
     <mapping directory="$PROJECT_DIR$/cmake-build-debug/_deps/vorbis-src" vcs="Git" />
-    <mapping directory="$PROJECT_DIR$/cmake-build-raspberry/_deps/sfml-src" vcs="Git" />
   </component>
 </project>

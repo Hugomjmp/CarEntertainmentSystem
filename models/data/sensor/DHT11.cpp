@@ -4,28 +4,26 @@
 
 #include "../sensor/DHT11.h"
 
-#include <iostream>
-
-#include "../../../Settings/Settings.h"
+DHT11::DHT11() {
+}
 
 void DHT11::startSignal() {
 
-    /*gpioSetMode(DHT_PIN, PI_OUTPUT);
+    gpioSetMode(DHT_PIN, PI_OUTPUT);
     gpioWrite(DHT_PIN, PI_LOW);
     gpioDelay(18000); //18ms
 
     gpioWrite(DHT_PIN, PI_HIGH);
     gpioDelay(40); //40us
 
-    gpioSetMode(DHT_PIN, PI_INPUT);*/
-}
-
-DHT11::DHT11() {
+    gpioSetMode(DHT_PIN, PI_INPUT);
 }
 
 void DHT11::readSensorData() {
-    /*uint8_t data[5] = {0,0,0,0,0};
+    uint8_t data[5] = {0,0,0,0,0};
 
+    temperature = 0;
+    humidity = 0;
     gpioSleep(PI_TIME_RELATIVE, 2,0);
     startSignal();
 
@@ -53,12 +51,12 @@ void DHT11::readSensorData() {
     }
 
     if ((data[0] + data[1] + data[2] + data[3]) != data[4]) {
-        /*std::cerr << "Checksum error!" << std::endl;#1#
+        /*std::cerr << "Checksum error!" << std::endl;*/
         return;
     }
 
     temperature = data[0];
-    humidity = data[2];*/
+    humidity = data[2];
 
 
 
@@ -66,13 +64,13 @@ void DHT11::readSensorData() {
 
 bool DHT11::waitForData(int pin, int level, int timeout) {
 
-        /*uint32_t t = gpioTick();
-        while (gpioRead(pin) == (level)) {
-            if (gpioTick() - t > static_cast<uint32_t>(timeout)) {
-                /*std::cerr << "Timeout!" << std::endl;#1#
-                return false;
-            }
-        }*/
+    uint32_t t = gpioTick();
+    while (gpioRead(pin) == (level)) {
+        if (gpioTick() - t > static_cast<uint32_t>(timeout)) {
+            /*std::cerr << "Timeout!" << std::endl;*/
+            return false;
+        }
+    }
     return true;
 }
 

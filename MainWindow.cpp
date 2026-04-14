@@ -9,7 +9,7 @@ MainWindow::MainWindow(Facade &facade,QWidget *parent) : facade(facade),QMainWin
 
     gridLayout = new QGridLayout(centralWidget);
 
-    topView = new TopView();
+    topView = new TopView(facade);
     bottomView = new BottomView(facade);
     leftView = new LeftView();
     rightView = new RightView();

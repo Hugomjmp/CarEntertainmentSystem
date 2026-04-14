@@ -7,9 +7,10 @@
 #include <iostream>
 #include <QTimer>
 
+#include "../../models/Facade.h"
 #include "../../models/data/sensor/DHT11.h"
 
-TopView::TopView(QWidget *parent) : QWidget(parent) {
+TopView::TopView(Facade &facade,QWidget *parent) : QWidget(parent), facade(facade) {
 
     createViews();
     registerHandlers();
@@ -46,9 +47,9 @@ void TopView::registerHandlers() {
 
 
     QObject::connect(timer, &QTimer::timeout, this, [=]() {
-        DHT11 dht11;
+        /*DHT11 dht11;
         dht11.readSensorData();
-        temperature->setText(QString::number(dht11.getTemperature()) + "ºC" );
+        temperature->setText(QString::number(dht11.getTemperature()) + "ºC" );*/
     });
     QObject::connect(timer, &QTimer::timeout, this, [=]() {
         const auto now = std::chrono::zoned_time{std::chrono::current_zone(), std::chrono::system_clock::now()};
