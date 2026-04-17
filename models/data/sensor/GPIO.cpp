@@ -39,6 +39,6 @@ void GPIO::delayMicroseconds(int microseconds) {
     //time_sleep(microseconds/ 1000000.0);
 }
 
-uint32_t GPIO::getCurrentTick() {
-    //return get_current_tick(pi);
-}
+/*uint32_t GPIO::getCurrentTick() {
+    return get_current_tick(pi);
+}*/

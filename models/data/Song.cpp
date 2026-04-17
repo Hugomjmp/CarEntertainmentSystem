@@ -38,6 +38,10 @@ std::string Song::getLocation() const {
     return location;
 }
 
+const std::vector<unsigned char>& Song::getImage() const{
+    return image;
+}
+
 std::ostream & operator<<(std::ostream &os, const Song &song) {
     os << song.getTitle() << ";"
         << song.getAlbum() << ";"

@@ -48,6 +48,26 @@ void CenterView::update() {
     songName->setText(title.c_str());
 
     progressBar->setHidden(false);
+    auto &data = facade.getSong().getImage();
+    if (data.size() == 0) {
+        musicImage->setPixmap(
+            QPixmap("resources/img/defaultMusic.png").scaled(
+                musicImage->size(),
+                Qt::KeepAspectRatio,
+                Qt::SmoothTransformation
+            )
+        );
+    } else {
+        image.loadFromData(data.data(), data.size());
+        image.loadFromData(facade.getSong().getImage());
+        musicImage->setPixmap(
+        QPixmap::fromImage(image).scaled(
+                musicImage->size(),
+                Qt::KeepAspectRatio,
+                Qt::SmoothTransformation
+            )
+        );
+    }
 }
 
 void CenterView::registerHandlers() {
@@ -196,6 +216,7 @@ void CenterView::leftVBoxConfig() {
             Qt::SmoothTransformation
         )
     );
+
 
 
     hboxSongTime();

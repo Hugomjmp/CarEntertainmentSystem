@@ -5,6 +5,7 @@
 #ifndef CARENTERTAINMENTSYSTEM_METADATA_H
 #define CARENTERTAINMENTSYSTEM_METADATA_H
 #include <string>
+#include <vector>
 
 /**
  * Class to read metadata from the mp3 files.
@@ -20,6 +21,7 @@ private:
     int static number;
     std::string static genre;
     int static duration;
+    std::vector<unsigned char> static image;
     void static ID3v2_30(std::ifstream& ifs, const int& metaDataSize);
     void static ID3v2_40(std::ifstream& ifs, const int& metaDataSize);
 public:
@@ -33,6 +35,7 @@ public:
     int static getNumber();
     std::string static getGenre();
     int static getDuration();
+    std::vector<unsigned char> static getImage();
 };
 
 

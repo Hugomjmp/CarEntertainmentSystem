@@ -5,7 +5,7 @@
 #ifndef CARENTERTAINMENTSYSTEM_GPIO_H
 #define CARENTERTAINMENTSYSTEM_GPIO_H
 
-#include <pigpiod_if2.h>
+//#include <pigpiod_if2.h>
 
 class GPIO {
 private:
@@ -19,7 +19,7 @@ public:
     void write(int pin, int value);
     int read(int pin);
     void delayMicroseconds(int microseconds);
-    uint32_t getCurrentTick();
+    //uint32_t getCurrentTick();
 };
 
 

@@ -15,6 +15,7 @@ int MetaData::year;
 int MetaData::number;
 std::string MetaData::genre;
 int MetaData::duration;
+std::vector<unsigned char> MetaData::image;
 
 MetaData::MetaData() {
 }
@@ -112,6 +113,14 @@ std::string MetaData::getArtist() {
 }
 
 /**
+ *
+ * @return Returns the current song image.
+ */
+std::vector<unsigned char> MetaData::getImage() {
+    return image;
+}
+
+/**
  * Used for the ID3v2.3.0 version.
  * @param ifs The file to search from.
  * @param metaDataSize The size of the metadata.
@@ -144,6 +153,7 @@ void MetaData::ID3v2_30(std::ifstream &ifs, const int& metaDataSize) {
     genre = "";
     year = 0;
     number = 0;
+    image.clear();
     while (ifs.tellg() < tagEnd) {
 
         ifs.read(frameHeader, 10);
@@ -180,7 +190,25 @@ void MetaData::ID3v2_30(std::ifstream &ifs, const int& metaDataSize) {
             genreCode = atoi(data.substr(1, genre.size() - 2).c_str());
             genre = genreList[genreCode];
         } else if (frameID == "APIC") {
-            /*TODO*/
+            int pos = 0;
+
+            pos++;
+
+            while (frameData[pos] != '\0') pos++;
+            pos++;
+
+            pos++;
+
+            while (frameData[pos] != '\0') pos++;
+            pos++;
+
+            std::vector<unsigned char> imageData(
+                frameData + pos,
+                frameData + frameSize
+            );
+
+            image = imageData;
+
         }
         delete [] frameData;
     }
@@ -219,6 +247,7 @@ void MetaData::ID3v2_40(std::ifstream &ifs, const int& metaDataSize) {
     genre = "";
     year = 0;
     number = 0;
+    image.clear();
     while (ifs.tellg() < tagEnd) {
 
         ifs.read(frameHeader, 10);
@@ -255,7 +284,26 @@ void MetaData::ID3v2_40(std::ifstream &ifs, const int& metaDataSize) {
             genreCode = atoi(data.substr(1, genre.size() - 2).c_str());
             genre = genreList[genreCode];
         } else if (frameID == "APIC") {
-            /* TODO */
+
+            int pos = 0;
+
+            pos++;
+
+            while (frameData[pos] != '\0') pos++;
+            pos++;
+
+            pos++;
+
+            while (frameData[pos] != '\0') pos++;
+            pos++;
+
+            std::vector<unsigned char> imageData(
+                frameData + pos,
+                frameData + frameSize
+            );
+
+            image = imageData;
+
         }
         delete [] frameData;
     }

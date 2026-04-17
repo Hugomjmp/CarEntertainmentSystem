@@ -4,7 +4,7 @@
 
 #ifndef CARENTERTAINMENTSYSTEM_TEMPERATURE_H
 #define CARENTERTAINMENTSYSTEM_TEMPERATURE_H
-#include <pigpio.h>
+//#include <pigpio.h>
 //#include <pigpiod_if2.h>
 
 

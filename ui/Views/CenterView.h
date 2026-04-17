@@ -30,6 +30,7 @@ private:
     QWidget *HBoxButtonsWidget = nullptr, *leftBoxWidget = nullptr,
             *rightBoxWidget = nullptr, *stackContainer = nullptr,
             *HBoxSongTimeWidget = nullptr;
+    QImage image;
     void loadImages();
     void hboxSongButtons();
     void hboxSongTime();

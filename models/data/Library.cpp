@@ -36,7 +36,8 @@ void Library::scanMusicFolder() {
             MetaData::getNumber(),
             MetaData::getGenre(),
             0,
-            file.path().string()
+            file.path().string(),
+            MetaData::getImage()
         );
         allSongs.push_back(song);
     }
@@ -153,8 +154,9 @@ void Library::loadPlaylists() {
             year = std::stoi(yearStr);
             songNumber = std::stoi(songNumberStr);
             duration = std::stoi(durationStr);
-            Song song(title, album, artist, songNumber, year, genre, duration, location);
-            p->addSong(song);
+            /*REVIEW THIS LATER*/
+            //Song song(title, album, artist, songNumber, year, genre, duration, location);
+            //p->addSong(song);
         }
         playList.push_back(p);
     }
