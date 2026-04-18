@@ -10,9 +10,9 @@
 #include <QProgressBar>
 #include <QPushButton>
 #include <QStackedLayout>
+#include "../../models/Facade.h"
+#include "../../models/MusicPlayer.h"
 
-class MusicPlayer;
-class Facade;
 
 class CenterView : public QWidget {
 private:

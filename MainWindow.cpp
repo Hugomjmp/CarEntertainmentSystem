@@ -11,7 +11,7 @@ MainWindow::MainWindow(Facade &facade,QWidget *parent) : facade(facade),QMainWin
 
     topView = new TopView(facade);
     bottomView = new BottomView(facade);
-    leftView = new LeftView();
+    leftView = new LeftView(facade);
     rightView = new RightView();
     centerView = new CenterView(facade);
     createViews();

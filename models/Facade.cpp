@@ -20,7 +20,7 @@ Facade::Facade() {
         this, &Facade::positionChanged);
     connect(music_Player, &MusicPlayer::durationChanged,
         this, &Facade::durationChanged);
-    setSourceType(INTERNET_RADIO);
+    setSourceType(LOCAL_MUSIC); //to remove later
 }
 
 Facade::~Facade() {

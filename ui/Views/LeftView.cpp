@@ -3,13 +3,10 @@
 //
 
 #include "LeftView.h"
-LeftView::LeftView(QWidget *parent) {
-
-
+LeftView::LeftView(Facade &facade, QWidget *parent) : facade(facade) {
     createViews();
     registerHandlers();
     update();
-
 }
 
 void LeftView::createViews() {
@@ -18,16 +15,11 @@ void LeftView::createViews() {
     layout->setSpacing(0);
     loadImages();
 
-    sourceIcon = new QLabel(this);
-    sourceIcon->setFixedSize(25,25);
+    sourceButton = new QPushButton(this);
+    sourceButton->setIcon(QIcon("resources/img/music-solid_W.png"));
+    sourceButton->setIconSize(QSize(25,25));
+    sourceButton->setStyleSheet("border: none;");
 
-    sourceIcon->setPixmap(
-    source.scaled(
-        sourceIcon->size(),
-        Qt::KeepAspectRatio,
-        Qt::SmoothTransformation
-    )
-);
     navigationIcon = new QLabel(this);
     navigationIcon->setFixedSize(25,25);
     navigationIcon->setPixmap(
@@ -48,7 +40,7 @@ void LeftView::createViews() {
         )
     );
 
-    layout->addWidget(sourceIcon);
+    layout->addWidget(sourceButton);
     layout->addWidget(navigationIcon);
     layout->addWidget(fanIcon);
 }
@@ -57,6 +49,16 @@ void LeftView::update() {
 }
 
 void LeftView::registerHandlers() {
+    QObject::connect(sourceButton, &QPushButton::clicked, this, &LeftView::handleSourceButtonClicked);
+}
+
+void LeftView::handleSourceButtonClicked() {
+    sourceView = new SourceView(facade);
+    sourceView->setFixedSize(300,350);
+    sourceView->setWindowFlags(Qt::WindowStaysOnTopHint | Qt::FramelessWindowHint);
+    sourceView->setWindowModality(Qt::ApplicationModal);
+    sourceView->show();
+
 }
 
 void LeftView::loadImages() {

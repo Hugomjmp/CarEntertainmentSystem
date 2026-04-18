@@ -7,17 +7,24 @@
 #include <QGridLayout>
 #include <qwidget.h>
 #include <QLabel>
+#include <QPushButton>
+
+#include "SourceView.h"
 
 class LeftView : public QWidget {
 private:
+    Facade &facade;
+    SourceView *sourceView;
     QPixmap source, navigation, fan;
-    QLabel *sourceIcon = nullptr, *navigationIcon = nullptr, *fanIcon = nullptr;
+    QPushButton *sourceButton = nullptr;
+    QLabel *navigationIcon = nullptr, *fanIcon = nullptr;
     QGridLayout *layout = nullptr;
     void createViews();
     void update();
     void registerHandlers();
+    void handleSourceButtonClicked();
 public:
-    LeftView(QWidget *parent = nullptr);
+    LeftView(Facade &facade, QWidget *parent = nullptr);
     ~LeftView() = default;
     void loadImages();
 };
