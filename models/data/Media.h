@@ -16,7 +16,7 @@ public:
     Media(Library &library) : library(library){}
     ~Media() = default;
     std::string getSongFromPlaylist() const;
-    Song* getSongData() const;
+    const Song* getSongData() const;
 
     void nextSong();
     void previousSong();

@@ -1,0 +1,16 @@
+//
+// Created by Hugo on 18/04/2026.
+//
+
+#ifndef CARENTERTAINMENTSYSTEM_SOURCEVIEW_H
+#define CARENTERTAINMENTSYSTEM_SOURCEVIEW_H
+
+
+
+class SourceView {
+
+};
+
+
+
+#endif //CARENTERTAINMENTSYSTEM_SOURCEVIEW_H

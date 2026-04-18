@@ -9,7 +9,6 @@
 #include <QMediaDevices>
 #include <QAudioDevice>
 
-
 int main(int argc, char *argv[]) {
 
     QLoggingCategory::setFilterRules(
@@ -47,13 +46,13 @@ int main(int argc, char *argv[]) {
     QAudioSource *source = new QAudioSource(btDevice, format, nullptr);
     QIODevice *io = source->start();*/
     /*------------------*/
+
     MainWindow w(facade);
     w.setFixedSize(1024,600);
     w.setWindowTitle("Car Media");
     w.setWindowFlags(Qt::WindowStaysOnTopHint);
     //w.showFullScreen();
     w.show();
-
     int result = app.exec();
     //gpioTerminate();
     return result;

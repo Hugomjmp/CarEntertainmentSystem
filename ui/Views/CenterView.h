@@ -18,7 +18,7 @@ class CenterView : public QWidget {
 private:
     Facade &facade;
     //QPixmap musicImage, previousSong, playSong, pauseSong, nextSong, repeat;
-    QLabel *songName = nullptr, *currentSongTime = nullptr, *finalSongTime = nullptr,
+    QLabel *mediaName = nullptr, *currentSongTime = nullptr, *finalSongTime = nullptr,
             *musicImage = nullptr;
     QPushButton *playButton = nullptr, *pauseButton = nullptr, *repeatButton = nullptr,
                 *nextButton = nullptr, *previousButton = nullptr;

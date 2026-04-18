@@ -8,6 +8,9 @@
 #include "MusicPlayer.h"
 #include "data/Library.h"
 #include "data/Media.h"
+#include "data/enums/SourceType.h"
+#include "data/radio/InternetRadio.h"
+#include "data/radio/OnlineRadioLibrary.h"
 #include "data/sensor/GPIO.h"
 
 
@@ -17,12 +20,17 @@ private:
     GPIO * gpio = nullptr;
     MakeFolder *make_Folder = nullptr;
     Library *library = nullptr;
+    OnlineRadioLibrary * onlineRadio = nullptr;
     MusicPlayer *music_Player = nullptr;
     Media *media = nullptr;
+    InternetRadio *internetRadio = nullptr;
     bool isPlaying = false;
+    SourceType sourceType;
 public:
     Facade();
     ~Facade();
+    void setSourceType(SourceType newSourceType);
+    const SourceType & getSourceType() const;
     void play();
     void pause();
     void nextSong();
@@ -30,6 +38,7 @@ public:
     double getVolume() const;
     void setVolume(double volume);
     const Song & getSong() const;
+    const Station & getStation() const;
     void setMute();
     std::string getSongDuration() const;
     std::string getSongCurrentTime() const;

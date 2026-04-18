@@ -40,34 +40,57 @@ void CenterView::createViews() {
 }
 
 void CenterView::update() {
-    songName->setText("");
-    std::string title = facade.getSong().getTitle()
-                        + " - " +
-                        facade.getSong().getArtist();
+    mediaName->setText("");
 
-    songName->setText(title.c_str());
+    switch (facade.getSourceType()) {
+        case LOCAL_MUSIC: {
+            std::string title = facade.getSong().getTitle()
+            + " - " +
+            facade.getSong().getArtist();
+            mediaName->setText(title.c_str());
 
-    progressBar->setHidden(false);
-    auto &data = facade.getSong().getImage();
-    if (data.size() == 0) {
-        musicImage->setPixmap(
-            QPixmap("resources/img/defaultMusic.png").scaled(
-                musicImage->size(),
-                Qt::KeepAspectRatio,
-                Qt::SmoothTransformation
-            )
-        );
-    } else {
-        image.loadFromData(data.data(), data.size());
-        image.loadFromData(facade.getSong().getImage());
-        musicImage->setPixmap(
-        QPixmap::fromImage(image).scaled(
-                musicImage->size(),
-                Qt::KeepAspectRatio,
-                Qt::SmoothTransformation
-            )
-        );
+            auto &data = facade.getSong().getImage();
+            if (data.size() == 0) {
+                musicImage->setPixmap(
+                    QPixmap("resources/img/defaultMusic.png").scaled(
+                        musicImage->size(),
+                        Qt::KeepAspectRatio,
+                        Qt::SmoothTransformation
+                    )
+                );
+            } else {
+                image.loadFromData(data.data(), data.size());
+                image.loadFromData(facade.getSong().getImage());
+                musicImage->setPixmap(
+                QPixmap::fromImage(image).scaled(
+                        musicImage->size(),
+                        Qt::KeepAspectRatio,
+                        Qt::SmoothTransformation
+                    )
+                );
+            }
+        }
+            break;
+        case INTERNET_RADIO: {
+            std::string title = facade.getStation().getName();
+            mediaName->setText(title.c_str());
+            
+            image.loadFromData(facade.getStation().getFavicon());
+            musicImage->setPixmap(
+            QPixmap::fromImage(image).scaled(
+                    musicImage->size(),
+                    Qt::KeepAspectRatio,
+                    Qt::SmoothTransformation
+                )
+            );
+
+        }
+            break;
     }
+
+
+
+
 }
 
 void CenterView::registerHandlers() {
@@ -199,8 +222,8 @@ void CenterView::leftVBoxConfig() {
     leftVBox->setSpacing(0);
     leftVBox->setAlignment(Qt::AlignCenter);
 
-    songName = new QLabel("", leftBoxWidget);
-    songName->setStyleSheet("color: white; "
+    mediaName = new QLabel("", leftBoxWidget);
+    mediaName->setStyleSheet("color: white; "
                             "font-weight: bold; "
                             "font-family: Arial; "
                             "font-size: 18px;"
@@ -223,7 +246,7 @@ void CenterView::leftVBoxConfig() {
     timeLapseBar();
     hboxSongButtons();
 
-    leftVBox->addWidget(songName,0,Qt::AlignCenter);
+    leftVBox->addWidget(mediaName,0,Qt::AlignCenter);
     leftVBox->addWidget(musicImage,0,Qt::AlignCenter);
     leftVBox->addWidget(HBoxSongTimeWidget,0,Qt::AlignCenter);
     leftVBox->addWidget(progressBar,0,Qt::AlignCenter);

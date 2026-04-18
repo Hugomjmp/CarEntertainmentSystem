@@ -58,10 +58,19 @@ add_executable(CarEntertainmentSystem main.cpp
         models/data/sensor/GPIO.h
         models/data/BluetoothMedia.cpp
         models/data/BluetoothMedia.h
+        models/data/radio/OnlineRadioLibrary.cpp
+        models/data/radio/OnlineRadioLibrary.h
+        models/data/radio/Station.cpp
+        models/data/radio/Station.h
+        ui/Views/SourceView.cpp
+        ui/Views/SourceView.h
+        models/data/radio/InternetRadio.cpp
+        models/data/radio/InternetRadio.h
+        models/data/enums/SourceType.h
 )
 
 #[[find_package(TagLib 2.0.0 REQUIRED)]]
-find_package(Qt6 REQUIRED COMPONENTS Widgets Multimedia #[[Bluetooth]])
+find_package(Qt6 REQUIRED COMPONENTS Widgets Multimedia #[[Bluetooth]] Network)
 
 set_target_properties(CarEntertainmentSystem PROPERTIES
         AUTOMOC ON
@@ -73,7 +82,7 @@ target_link_libraries(CarEntertainmentSystem
         #[[SFML::Audio]]
         Qt6::Widgets
         Qt6::Multimedia
-        #[[Qt6::Bluetooth]]
+        Qt6::Network
         Qt6::Core
         #[[pigpio]]
         pthread

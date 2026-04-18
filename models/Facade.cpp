@@ -10,51 +10,113 @@ Facade::Facade() {
     gpio = new GPIO();
     make_Folder = new MakeFolder();
     library = new Library();
+    onlineRadio = new OnlineRadioLibrary();
     music_Player = new MusicPlayer(/**library*/);
     make_Folder->checkFolder();
     media = new Media(*library);
+    internetRadio = new InternetRadio(*onlineRadio);
 
     connect(music_Player, &MusicPlayer::positionChanged,
         this, &Facade::positionChanged);
     connect(music_Player, &MusicPlayer::durationChanged,
         this, &Facade::durationChanged);
+    setSourceType(INTERNET_RADIO);
 }
 
 Facade::~Facade() {
     delete gpio;
     delete make_Folder;
     delete library;
+    delete onlineRadio;
     delete music_Player;
+    delete media;
+    delete internetRadio;
 }
 
 GPIO * Facade::getGPIO() const {
     return gpio;
 }
 
+void Facade::setSourceType(SourceType newSourceType) {
+    sourceType = newSourceType;
+}
+
+const SourceType & Facade::getSourceType() const {
+    return sourceType;
+}
+
 void Facade::play() {
-    music_Player->playSong(*media->getSongData());
-    isPlaying = true;
+    switch (sourceType) {
+        case LOCAL_MUSIC: {
+            music_Player->playSong(*media->getSongData());
+            isPlaying = true;
+        }
+            break;
+        case INTERNET_RADIO: {
+            music_Player->playRadio(*internetRadio->getStation());
+            isPlaying = true;
+        }
+            break;
+    }
+
 }
 
 void Facade::pause() {
-    music_Player->pauseSong();
-    isPlaying = false;
+    switch (sourceType) {
+        case LOCAL_MUSIC: {
+            music_Player->pauseSong();
+            isPlaying = false;
+        }
+            break;
+        case INTERNET_RADIO: {
+            music_Player->stopSong();
+            isPlaying = false;
+        }
+            break;
+    }
+
 }
 
 void Facade::nextSong() {
-    media->nextSong();
-    isPlaying = true;
-    music_Player->playSong(*media->getSongData());
+    switch (sourceType) {
+        case LOCAL_MUSIC: {
+            media->nextSong();
+            isPlaying = true;
+            music_Player->playSong(*media->getSongData());
+        }
+        case INTERNET_RADIO: {
+            internetRadio->nextStation();
+            isPlaying = true;
+            music_Player->playRadio(*internetRadio->getStation());
+        }
+            break;
+    }
 }
 
 void Facade::previousSong() {
-    media->previousSong();
-    isPlaying = true;
-    music_Player->playSong(*media->getSongData());
+    switch (sourceType) {
+        case LOCAL_MUSIC: {
+            media->previousSong();
+            isPlaying = true;
+            music_Player->playSong(*media->getSongData());
+        }
+            break;
+        case INTERNET_RADIO: {
+            internetRadio->previousStation();
+            isPlaying = true;
+            music_Player->playRadio(*internetRadio->getStation());
+        }
+            break;
+    }
+
 }
 
 const Song & Facade::getSong() const {
     return *media->getSongData();
+}
+
+const Station & Facade::getStation() const {
+    return *internetRadio->getStation();
 }
 
 double Facade::getVolume() const {

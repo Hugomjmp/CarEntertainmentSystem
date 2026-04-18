@@ -8,6 +8,8 @@
 #include <QtMultimedia/QMediaPlayer>
 #include <QtMultimedia/QAudioOutput>
 #include <qobject.h>
+
+#include "data/radio/Station.h"
 //#include "SFML/Audio/Music.hpp"
 
 /**
@@ -27,6 +29,7 @@ public:
     ~MusicPlayer();
 
     bool playSong(const Song &song);
+    bool playRadio(const Station &station);
     bool stopSong();
     void pauseSong();
     bool setVolume(float volume);

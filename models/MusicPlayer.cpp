@@ -45,6 +45,25 @@ bool MusicPlayer::playSong(const Song &song) {
     //music.play();
     return true;
 }
+
+/**
+ *
+ * @param station Object that represents the radio station.
+ * @return false if it can't play the station, true if it can.
+ */
+bool MusicPlayer::playRadio(const Station &station) {
+    if (player->playbackState() == QMediaPlayer::PlayingState)
+        player->stop();
+
+    player->setSource(QUrl::fromLocalFile(QString::fromStdString(station.getUrl())));
+
+    if (player->error() != QMediaPlayer::NoError)
+        return false;
+    player->play();
+
+    return true;
+}
+
 /**
  * Stopes the current music.
  * Returns true if it's currently playing a song.

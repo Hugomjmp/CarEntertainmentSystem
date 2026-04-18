@@ -11,7 +11,7 @@ std::string Media::getSongFromPlaylist() const {
     return nullptr;
 }
 
-Song * Media::getSongData() const {
+const Song * Media::getSongData() const {
     if (&library.getAllSongs().at(track) != nullptr) {
         return &library.getAllSongs().at(track);
     }
