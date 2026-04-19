@@ -12,6 +12,7 @@
 #include <QStackedLayout>
 #include "../../models/Facade.h"
 #include "../../models/MusicPlayer.h"
+#include "sidePanel/MusicListView.h"
 
 
 class CenterView : public QWidget {
@@ -31,6 +32,7 @@ private:
             *rightBoxWidget = nullptr, *stackContainer = nullptr,
             *HBoxSongTimeWidget = nullptr;
     QImage image;
+    MusicListView *musicListView = nullptr;
     void loadImages();
     void hboxSongButtons();
     void hboxSongTime();

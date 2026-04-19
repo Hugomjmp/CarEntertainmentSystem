@@ -17,10 +17,10 @@ public:
     ~Media() = default;
     std::string getSongFromPlaylist() const;
     const Song* getSongData() const;
-
+    void setTrack(int newTrackNumber);
     void nextSong();
     void previousSong();
-
+    const int& getTrack() const;
 
 };
 

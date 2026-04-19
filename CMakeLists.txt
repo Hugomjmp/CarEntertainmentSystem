@@ -67,6 +67,8 @@ add_executable(CarEntertainmentSystem main.cpp
         models/data/radio/InternetRadio.cpp
         models/data/radio/InternetRadio.h
         models/data/enums/SourceType.h
+        ui/Views/sidePanel/MusicListView.cpp
+        ui/Views/sidePanel/MusicListView.h
 )
 
 #[[find_package(TagLib 2.0.0 REQUIRED)]]

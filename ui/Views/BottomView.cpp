@@ -140,7 +140,6 @@ void BottomView::loadImages() {
 }
 
 void BottomView::volumeSliderValueChanged() {
-    std::cout << volumeSlider->value() / 100.0 << std::endl;
     facade.setVolume(volumeSlider->value() / 100.0);
     update();
 }

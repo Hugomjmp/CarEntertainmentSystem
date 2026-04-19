@@ -45,6 +45,8 @@ public:
     MusicPlayer * getMusicPlayer() const;
     GPIO * getGPIO() const;
     bool getPlayStatus() const;
+    const std::vector<Song> & getSongs() const;
+    void setTrack(int newTrackNumber);
 signals:
     void positionChanged(qint64  position);
     void durationChanged(qint64 duration);

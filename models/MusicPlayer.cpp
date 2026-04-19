@@ -37,12 +37,6 @@ bool MusicPlayer::playSong(const Song &song) {
 
     player->play();
 
-    /*if (music.getStatus() == sf::Music::Status::Playing)
-    music.stop();*/
-    /*if (!music.openFromFile(song.getLocation())) {
-    return false;
-    }*/
-    //music.play();
     return true;
 }
 
@@ -69,10 +63,6 @@ bool MusicPlayer::playRadio(const Station &station) {
  * Returns true if it's currently playing a song.
  */
 bool MusicPlayer::stopSong() {
-    /*if (music.getStatus() == sf::Music::Status::Playing) {
-        music.stop();
-        return true;
-    }*/
     if (player->playbackState() == QMediaPlayer::PlayingState) {
         player->stop();
         return true;
@@ -84,11 +74,6 @@ bool MusicPlayer::stopSong() {
  * Pauses the music if it's playing songs. Play's if it's paused.
  */
 void MusicPlayer::pauseSong() {
-    /*if (music.getStatus() == sf::Music::Status::Paused) {
-        music.play();
-    } else {
-        music.pause();
-    }*/
     if (player->playbackState() == QMediaPlayer::PausedState) {
         player->play();
     } else {
@@ -131,14 +116,6 @@ void MusicPlayer::setMute() {
         audio->setVolume(initialVolume);
         mute = false;
     }
-    /*float initialVolume = music.getVolume();
-    if (mute == false) {
-        music.setVolume(0.0f);
-        mute = true;
-    } else {
-        music.setVolume(initialVolume);
-        mute = false;
-    }*/
 }
 
 /**

@@ -147,3 +147,11 @@ std::string Facade::getSongCurrentTime() const {
 MusicPlayer * Facade::getMusicPlayer() const {
     return music_Player;
 }
+
+const std::vector<Song> & Facade::getSongs() const {
+    return library->getAllSongs();
+}
+
+void Facade::setTrack(int newTrackNumber) {
+    media->setTrack(newTrackNumber);
+}

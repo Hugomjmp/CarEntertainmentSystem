@@ -37,3 +37,11 @@ void Media::previousSong() {
     }
     track--;
 }
+
+void Media::setTrack(int newTrackNumber) {
+    track = newTrackNumber;
+}
+
+const int & Media::getTrack() const {
+    return track;
+}

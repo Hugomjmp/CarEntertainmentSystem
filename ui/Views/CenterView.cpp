@@ -19,20 +19,23 @@ CenterView::CenterView(Facade &facade, QWidget *parent) : facade(facade) {
 }
 
 void CenterView::createViews() {
+    musicListView = new MusicListView(facade);
     centerContainer = new QHBoxLayout(this);
     centerContainer->setContentsMargins(0,0,0,0);
     centerContainer->setSpacing(0);
 
     leftVBoxConfig();
 
-    rightBoxWidget = new QWidget; // to remove later
+    /*rightBoxWidget = new QWidget; // to remove later
+    rightBoxWidget->setContentsMargins(0,0,0,0);*/
+    rightBoxWidget = musicListView;
+
     rightBoxWidget->setContentsMargins(0,0,0,0);
 
 
 
-
-    centerContainer->addWidget(leftBoxWidget);
-    centerContainer->addWidget(rightBoxWidget);
+    centerContainer->addWidget(leftBoxWidget,1);
+    centerContainer->addWidget(rightBoxWidget,1);
 
 
     this->setLayout(centerContainer);
