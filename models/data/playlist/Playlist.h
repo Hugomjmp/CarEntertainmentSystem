@@ -6,7 +6,7 @@
 #define CARENTERTAINMENTSYSTEM_PLAYLIST_H
 #include <vector>
 
-#include "Song.h"
+#include "../local_music/Song.h"
 
 
 class Playlist {

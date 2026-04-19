@@ -6,8 +6,8 @@
 #define CARENTERTAINMENTSYSTEM_FACADE_H
 #include "MakeFolder.h"
 #include "MusicPlayer.h"
-#include "data/Library.h"
-#include "data/Media.h"
+#include "data/local_music/Library.h"
+#include "data/local_music/Media.h"
 #include "data/enums/SourceType.h"
 #include "data/radio/InternetRadio.h"
 #include "data/radio/OnlineRadioLibrary.h"
@@ -35,7 +35,7 @@ public:
     void pause();
     void nextSong();
     void previousSong();
-    double getVolume() const;
+    float getVolume() const;
     void setVolume(double volume);
     const Song & getSong() const;
     const Station & getStation() const;
@@ -44,9 +44,11 @@ public:
     std::string getSongCurrentTime() const;
     MusicPlayer * getMusicPlayer() const;
     GPIO * getGPIO() const;
+    bool getPlayStatus() const;
 signals:
     void positionChanged(qint64  position);
     void durationChanged(qint64 duration);
+    void sourceTypeChanged();
 };
 
 

@@ -4,7 +4,7 @@
 
 #ifndef CARENTERTAINMENTSYSTEM_MUSICPLAYER_H
 #define CARENTERTAINMENTSYSTEM_MUSICPLAYER_H
-#include "data/Library.h"
+#include "data/local_music/Library.h"
 #include <QtMultimedia/QMediaPlayer>
 #include <QtMultimedia/QAudioOutput>
 #include <qobject.h>

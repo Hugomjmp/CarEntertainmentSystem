@@ -3,7 +3,7 @@
 #define CARENTERTAINMENTSYSTEM_LIBRARY_H
 #include <vector>
 
-#include "Playlist.h"
+#include "../playlist/Playlist.h"
 #include "Song.h"
 //#include "taglib/fileref.h"
 

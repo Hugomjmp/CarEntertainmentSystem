@@ -45,6 +45,10 @@ const SourceType & Facade::getSourceType() const {
     return sourceType;
 }
 
+bool Facade::getPlayStatus() const {
+    return isPlaying;
+}
+
 void Facade::play() {
     switch (sourceType) {
         case LOCAL_MUSIC: {
@@ -58,7 +62,7 @@ void Facade::play() {
         }
             break;
     }
-
+    emit sourceTypeChanged();
 }
 
 void Facade::pause() {
@@ -84,6 +88,7 @@ void Facade::nextSong() {
             isPlaying = true;
             music_Player->playSong(*media->getSongData());
         }
+            break;
         case INTERNET_RADIO: {
             internetRadio->nextStation();
             isPlaying = true;
@@ -119,7 +124,7 @@ const Station & Facade::getStation() const {
     return *internetRadio->getStation();
 }
 
-double Facade::getVolume() const {
+float Facade::getVolume() const {
     return music_Player->getVolume();
 }
 

@@ -48,6 +48,11 @@ void CenterView::update() {
             + " - " +
             facade.getSong().getArtist();
             mediaName->setText(title.c_str());
+            progressBar->show();
+            if (facade.getPlayStatus())
+                stack->setCurrentIndex(1);
+            else
+                stack->setCurrentIndex(0);
 
             auto &data = facade.getSong().getImage();
             if (data.size() == 0) {
@@ -74,7 +79,12 @@ void CenterView::update() {
         case INTERNET_RADIO: {
             std::string title = facade.getStation().getName();
             mediaName->setText(title.c_str());
-            
+
+            if (facade.getPlayStatus())
+                stack->setCurrentIndex(1);
+            else
+                stack->setCurrentIndex(0);
+
             image.loadFromData(facade.getStation().getFavicon());
             musicImage->setPixmap(
             QPixmap::fromImage(image).scaled(
@@ -87,10 +97,6 @@ void CenterView::update() {
         }
             break;
     }
-
-
-
-
 }
 
 void CenterView::registerHandlers() {
@@ -101,6 +107,7 @@ void CenterView::registerHandlers() {
     QObject::connect(repeatButton, &QPushButton::clicked, this, &CenterView::handleRepeatClicked);
     QObject::connect(&facade, &Facade::positionChanged, this, &CenterView::handleUpdatePosition);
     QObject::connect(&facade, &Facade::durationChanged, this, &CenterView::handleUpdateDuration);
+    QObject::connect(&facade, &Facade::sourceTypeChanged, this, &CenterView::update);
 }
 
 QString CenterView::msToString(qint64 ms) {
@@ -114,13 +121,17 @@ QString CenterView::msToString(qint64 ms) {
 }
 
 void CenterView::handleUpdatePosition(qint64 position) {
-    currentSongTime->setText(msToString(position));
-    progressBar->setValue(position);
+    if (facade.getSourceType() == LOCAL_MUSIC) {
+        currentSongTime->setText(msToString(position));
+        progressBar->setValue(position);
+    }
 }
 
 void CenterView::handleUpdateDuration(qint64 duration) {
-    progressBar->setMaximum(duration);
-    finalSongTime->setText(msToString(duration));
+    if (facade.getSourceType() == LOCAL_MUSIC) {
+        progressBar->setMaximum(duration);
+        finalSongTime->setText(msToString(duration));
+    }
 }
 
 void CenterView::handlePlayClicked() {

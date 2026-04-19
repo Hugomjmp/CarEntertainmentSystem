@@ -16,18 +16,18 @@ FetchContent_Declare(SFML
 FetchContent_MakeAvailable(SFML)]]
 
 add_executable(CarEntertainmentSystem main.cpp
-        models/data/Song.cpp
-        models/data/Song.h
-        models/data/Playlist.cpp
-        models/data/Playlist.h
+        models/data/local_music/Song.cpp
+        models/data/local_music/Song.h
+        models/data/playlist/Playlist.cpp
+        models/data/playlist/Playlist.h
         ui/ConsoleUI.cpp
         ui/ConsoleUI.h
         models/MakeFolder.cpp
         models/MakeFolder.h
         Settings/Settings.h
         Settings/Folders.h
-        models/data/Library.cpp
-        models/data/Library.h
+        models/data/local_music/Library.cpp
+        models/data/local_music/Library.h
         models/MusicPlayer.cpp
         models/MusicPlayer.h
         models/data/sensor/DHT11.cpp
@@ -46,10 +46,10 @@ add_executable(CarEntertainmentSystem main.cpp
         ui/Views/RightView.h
         models/Facade.cpp
         models/Facade.h
-        models/data/MetaData.cpp
-        models/data/MetaData.h
-        models/data/Media.cpp
-        models/data/Media.h
+        models/data/local_music/MetaData.cpp
+        models/data/local_music/MetaData.h
+        models/data/local_music/Media.cpp
+        models/data/local_music/Media.h
         models/data/sensor/GPS.cpp
         models/data/sensor/GPS.h
         models/data/interfaces/ISensor.cpp

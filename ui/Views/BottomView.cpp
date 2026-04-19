@@ -56,7 +56,7 @@ void BottomView::createViews() {
     stack->setCurrentWidget(volumeHigh);
 
     volumeSlider = new QSlider(Qt::Horizontal);
-    volumeSlider->setValue(facade.getVolume());
+    volumeSlider->setValue(facade.getVolume() * 100);
     volumeSlider->setMaximumWidth(120);
     //volumeSlider->setFixedHeight(8);
     volumeSlider->setMinimum(0);
@@ -81,19 +81,20 @@ void BottomView::createViews() {
         "  width: 0px;"
         "}"
     );
+    volumeSlider->setRange(0,100);
     volumeSlider->setVisible(false);
     layout->addWidget(volumeWidget);
     layout->addWidget(volumeSlider);
 }
 
 void BottomView::update() {
-    if ((facade.getVolume() / 100) >= 0.66) {
+    if (facade.getVolume() >= 0.66) {
         stack->setCurrentIndex(0);
-    } else if ((facade.getVolume() / 100) >= 0.33 && (facade.getVolume() / 100) < 0.66) {
+    } else if (facade.getVolume() >= 0.33 && facade.getVolume() < 0.66) {
         stack->setCurrentIndex(1);
-    } else if ((facade.getVolume() / 100) > 0 && (facade.getVolume() / 100) < 0.33) {
+    } else if (facade.getVolume() > 0 && facade.getVolume() < 0.33) {
         stack->setCurrentIndex(2);
-    } else if ((facade.getVolume() / 100) == 0) {
+    } else if (facade.getVolume() == 0) {
         stack->setCurrentIndex(3);
     }
 
@@ -101,12 +102,13 @@ void BottomView::update() {
 
 void BottomView::registerHandlers() {
     QObject::connect(volumeSlider, &QSlider::valueChanged,this, &BottomView::volumeSliderValueChanged);
+    QObject::connect(volumeHigh, &QPushButton::clicked, this, &BottomView::enableSlider);
     QObject::connect(volumeMed, &QPushButton::clicked, this, &BottomView::enableSlider);
     QObject::connect(volumeLow, &QPushButton::clicked, this, &BottomView::enableSlider);
     QObject::connect(volumeNone, &QPushButton::clicked, this, &BottomView::enableSlider);
     QObject::connect(volumeMute, &QPushButton::clicked, this, &BottomView::enableSlider);
 
-    QObject::connect(volumeHigh, &QPushButton::pressed, this, [this]() {
+    /*QObject::connect(volumeHigh, &QPushButton::pressed, this, [this]() {
         longPressTriggered = false;
         pressTimer->start(200);
     });
@@ -116,7 +118,7 @@ void BottomView::registerHandlers() {
         if (!longPressTriggered) {
 
         }
-    });
+    });*/
 
 }
 
@@ -126,10 +128,10 @@ BottomView::BottomView(Facade & facade ,QWidget *parent) : facade(facade) {
     connect(pressTimer, &QTimer::timeout, this, [this]() {
     longPressTriggered = true;
     handleMute();
-});
+});*/
     createViews();
     registerHandlers();
-    update();*/
+    update();
 }
 
 
@@ -138,7 +140,8 @@ void BottomView::loadImages() {
 }
 
 void BottomView::volumeSliderValueChanged() {
-    facade.setVolume(volumeSlider->value());
+    std::cout << volumeSlider->value() / 100.0 << std::endl;
+    facade.setVolume(volumeSlider->value() / 100.0);
     update();
 }
 

@@ -14,11 +14,11 @@
 class SourceView : public QWidget{
 private:
     Facade &facade;
-    QWidget *tooBarWidget = nullptr, *option1Widget = nullptr, *option2Widget = nullptr;
+    QWidget *tooBarWidget = nullptr;
     QVBoxLayout *mainLayout;
-    QHBoxLayout *toolBar = nullptr, *option1 = nullptr, *option2 = nullptr;
+    QHBoxLayout *toolBar = nullptr;
     QPushButton *closeWindowbtn = nullptr, *option1btn = nullptr, *option2btn = nullptr;
-    QLabel *title = nullptr, *option1Label = nullptr, *option2Label = nullptr, *internetRadioImg = nullptr, *localMusicImg = nullptr;
+    QLabel *title = nullptr;
     void createViews();
     void update();
     void registerHandlers();

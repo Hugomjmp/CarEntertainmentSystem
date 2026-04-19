@@ -10,7 +10,7 @@
 #include <ranges>
 
 #include "MetaData.h"
-#include "../../Settings/Folders.h"
+#include "../../../Settings/Folders.h"
 
 Library::Library() {
     scanMusicFolder();
