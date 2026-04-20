@@ -39,6 +39,7 @@ public:
     void setVolume(double volume);
     const Song & getSong() const;
     const Station & getStation() const;
+    const std::vector<Station> & getStations() const;
     void setMute();
     std::string getSongDuration() const;
     std::string getSongCurrentTime() const;
@@ -47,6 +48,7 @@ public:
     bool getPlayStatus() const;
     const std::vector<Song> & getSongs() const;
     void setTrack(int newTrackNumber);
+    void setStation(int newStationNumber);
 signals:
     void positionChanged(qint64  position);
     void durationChanged(qint64 duration);

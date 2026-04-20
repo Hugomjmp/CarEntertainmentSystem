@@ -14,13 +14,18 @@ private:
     Facade& facade;
     QVBoxLayout* mainLayout;
     QListWidget* listWidget;
+    QImage img;
     void createViews();
     void update();
     void registerHandlers();
     void handleItemClicked(QListWidgetItem *item);
+    void createLocalMusicListView();
+    void createInternetRadioListView();
+    void sourceTypeChanged();
 public:
     MusicListView(Facade &facade, QWidget *parent = nullptr);
     ~MusicListView() = default;
+
 
 };
 

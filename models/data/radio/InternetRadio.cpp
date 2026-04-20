@@ -34,3 +34,7 @@ void InternetRadio::previousStation() {
     }
     stationNumber--;
 }
+
+void InternetRadio::setStationNumber(int newStationNumber) {
+    stationNumber = newStationNumber;
+}

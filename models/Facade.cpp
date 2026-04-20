@@ -124,6 +124,10 @@ const Station & Facade::getStation() const {
     return *internetRadio->getStation();
 }
 
+const std::vector<Station> & Facade::getStations() const {
+    return onlineRadio->getStationLibrary();
+}
+
 float Facade::getVolume() const {
     return music_Player->getVolume();
 }
@@ -154,4 +158,8 @@ const std::vector<Song> & Facade::getSongs() const {
 
 void Facade::setTrack(int newTrackNumber) {
     media->setTrack(newTrackNumber);
+}
+
+void Facade::setStation(int newStationNumber) {
+    internetRadio->setStationNumber(newStationNumber);
 }

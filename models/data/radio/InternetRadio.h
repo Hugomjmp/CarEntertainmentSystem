@@ -17,6 +17,7 @@ public:
     ~InternetRadio() = default;
     std::string getStationName() const;
     const Station* getStation() const;
+    void setStationNumber(int newStationNumber);
 
     void nextStation();
     void previousStation();
