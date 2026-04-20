@@ -44,9 +44,15 @@ void CenterView::createViews() {
 
 void CenterView::update() {
     mediaName->setText("");
+    progressBar->setValue(0);
+    progressBar->hide();
+    currentSongTime->hide();
+    finalSongTime->hide();
 
     switch (facade.getSourceType()) {
         case LOCAL_MUSIC: {
+            currentSongTime->show();
+            finalSongTime->show();
             std::string title = facade.getSong().getTitle()
             + " - " +
             facade.getSong().getArtist();

@@ -20,6 +20,10 @@ void MusicListView::createViews() {
     mainLayout->setContentsMargins(0,0,0,0);
 
     listWidget = new QListWidget();
+    listWidget->setVerticalScrollMode(QAbstractItemView::ScrollPerPixel);
+    listWidget->setLayoutMode(QListView::SinglePass);
+    listWidget->setResizeMode(QListView::Adjust);
+
     mainLayout->addWidget(listWidget);
     switch (facade.getSourceType()) {
         case LOCAL_MUSIC:
@@ -50,7 +54,7 @@ void MusicListView::createLocalMusicListView() {
                 )
             );
         } else {
-            img.loadFromData(song.getImage());
+            img.loadFromData(song.getImage().data(), song.getImage().size());
             image->setPixmap(
                 QPixmap::fromImage(img).scaled(
                     image->size(),
