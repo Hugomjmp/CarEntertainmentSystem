@@ -24,6 +24,9 @@ private:
     int currentSong = 0;
     bool playlistLoop = false;
     bool mute = false;
+    int currentSongTime = 0;
+    bool shouldRestorePosition = false;
+    void onMediaStatusChanged(QMediaPlayer::MediaStatus status);
 public:
     MusicPlayer();
     ~MusicPlayer();
@@ -36,6 +39,7 @@ public:
     float getVolume();
     void setMute();
     std::string getCurrentSongTime() const;
+    void setCurrentSongTime(std::string currentSongTime);
     std::string getSongDuration() const;
 signals:
     void positionChanged(qint64 position);

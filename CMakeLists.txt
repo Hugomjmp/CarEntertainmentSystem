@@ -56,8 +56,8 @@ add_executable(CarEntertainmentSystem main.cpp
         models/data/interfaces/ISensor.h
         models/data/sensor/GPIO.cpp
         models/data/sensor/GPIO.h
-        models/data/BluetoothMedia.cpp
-        models/data/BluetoothMedia.h
+        models/data/connections/BluetoothMedia.cpp
+        models/data/connections/BluetoothMedia.h
         models/data/radio/OnlineRadioLibrary.cpp
         models/data/radio/OnlineRadioLibrary.h
         models/data/radio/Station.cpp

@@ -15,6 +15,7 @@ Facade::Facade() {
     make_Folder->checkFolder();
     media = new Media(*library);
     media->setTrack(session.recoverTrackNumber());
+
     internetRadio = new InternetRadio(*onlineRadio);
     internetRadio->setStationNumber(session.recoverStationNumber());
 
@@ -22,7 +23,12 @@ Facade::Facade() {
         this, &Facade::positionChanged);
     connect(music_Player, &MusicPlayer::durationChanged,
         this, &Facade::durationChanged);
-    setSourceType(LOCAL_MUSIC); //to remove later
+    setSourceType(session.recoverSourceType());
+
+    music_Player->setCurrentSongTime(session.recoverCurrentSongTime());
+    play();
+
+
 }
 
 Facade::~Facade() {
@@ -31,7 +37,7 @@ Facade::~Facade() {
     delete library;
     delete onlineRadio;
     delete music_Player;
-    session.saveSessionState(media->getTrack(),internetRadio->getStationNumber());
+    session.saveSessionState(media->getTrack(),getSongCurrentTime(),internetRadio->getStationNumber(),getSourceType());
     delete media;
     delete internetRadio;
 }
@@ -53,6 +59,7 @@ bool Facade::getPlayStatus() const {
 }
 
 void Facade::play() {
+    //music_Player->setCurrentSongTime("0");
     switch (sourceType) {
         case LOCAL_MUSIC: {
             music_Player->playSong(*media->getSongData());
@@ -118,6 +125,10 @@ void Facade::previousSong() {
     }
 
 }
+/* TODO */
+void Facade::loopSong() {
+
+}
 
 const Song & Facade::getSong() const {
     return *media->getSongData();
@@ -147,8 +158,12 @@ std::string Facade::getSongDuration() const {
     return music_Player->getSongDuration();
 }
 
-std::string Facade::getSongCurrentTime() const {
-    return music_Player->getCurrentSongTime();
+const std::string Facade::getSongCurrentTime() {
+    if (sourceType == LOCAL_MUSIC) {
+        return music_Player->getCurrentSongTime();
+    }
+    return session.recoverCurrentSongTime();
+
 }
 
 MusicPlayer * Facade::getMusicPlayer() const {

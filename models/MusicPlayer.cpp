@@ -14,6 +14,7 @@ MusicPlayer::MusicPlayer() {
 
     QObject::connect(player, &QMediaPlayer::positionChanged, this, &MusicPlayer::positionChanged);
     QObject::connect(player, &QMediaPlayer::durationChanged, this, &MusicPlayer::durationChanged);
+    QObject::connect(player, &QMediaPlayer::mediaStatusChanged, this, &MusicPlayer::onMediaStatusChanged);
 }
 
 MusicPlayer::~MusicPlayer() {
@@ -128,8 +129,26 @@ std::string MusicPlayer::getCurrentSongTime() const{
 
 /**
  *
+ * @param currentSongTime The current position of the song to be played.
+ */
+void MusicPlayer::setCurrentSongTime(std::string currentSongTime) {
+    this->currentSongTime = std::stoi(currentSongTime);
+    shouldRestorePosition = true;
+}
+
+/**
+ *
  * @return The total song time.
  */
 std::string MusicPlayer::getSongDuration() const {
     return std::to_string(player->duration());
+}
+
+void MusicPlayer::onMediaStatusChanged(QMediaPlayer::MediaStatus status) {
+    if ((status == QMediaPlayer::LoadedMedia || status == QMediaPlayer::BufferedMedia) && shouldRestorePosition) {
+
+        player->setPosition(currentSongTime);
+        shouldRestorePosition = false;
+
+    }
 }

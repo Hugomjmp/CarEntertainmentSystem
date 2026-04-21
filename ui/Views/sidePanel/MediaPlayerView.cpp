@@ -282,6 +282,7 @@ void MediaPlayerView::handlePreviousClicked() {
 
 void MediaPlayerView::handleRepeatClicked() {
     std::cout<<"Loop clicked"<<std::endl;
+    facade.loopSong();
     update();
 }
 

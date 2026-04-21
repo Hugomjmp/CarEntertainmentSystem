@@ -37,6 +37,7 @@ public:
     void pause();
     void nextSong();
     void previousSong();
+    void loopSong();
     float getVolume() const;
     void setVolume(double volume);
     const Song & getSong() const;
@@ -44,7 +45,7 @@ public:
     const std::vector<Station> & getStations() const;
     void setMute();
     std::string getSongDuration() const;
-    std::string getSongCurrentTime() const;
+    const std::string getSongCurrentTime();
     MusicPlayer * getMusicPlayer() const;
     GPIO * getGPIO() const;
     bool getPlayStatus() const;
