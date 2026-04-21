@@ -11,44 +11,21 @@
 #include <QPushButton>
 #include <QStackedLayout>
 #include "../../models/Facade.h"
-#include "../../models/MusicPlayer.h"
+#include "sidePanel/MediaPlayerView.h"
 #include "sidePanel/MusicListView.h"
 
 
 class CenterView : public QWidget {
 private:
     Facade &facade;
-    //QPixmap musicImage, previousSong, playSong, pauseSong, nextSong, repeat;
-    QLabel *mediaName = nullptr, *currentSongTime = nullptr, *finalSongTime = nullptr,
-            *musicImage = nullptr;
-    QPushButton *playButton = nullptr, *pauseButton = nullptr, *repeatButton = nullptr,
-                *nextButton = nullptr, *previousButton = nullptr;
     QHBoxLayout *centerContainer = nullptr;
-    QHBoxLayout *HBoxButtons = nullptr, *centerLayout = nullptr, *HBoxSongTime = nullptr;
-    QVBoxLayout *leftVBox = nullptr, *rightVBox = nullptr;
-    QStackedLayout *stack = nullptr;
-    QProgressBar *progressBar = nullptr;
-    QWidget *HBoxButtonsWidget = nullptr, *leftBoxWidget = nullptr,
-            *rightBoxWidget = nullptr, *stackContainer = nullptr,
-            *HBoxSongTimeWidget = nullptr;
-    QImage image;
+    QHBoxLayout *centerLayout = nullptr;
+    QVBoxLayout *rightVBox = nullptr;
+    MediaPlayerView *mediaPlayerView = nullptr;
     MusicListView *musicListView = nullptr;
-    void loadImages();
-    void hboxSongButtons();
-    void hboxSongTime();
-    void timeLapseBar();
-    void leftVBoxConfig();
     void createViews();
-    void update();
     void registerHandlers();
-    void handlePlayClicked();
-    void handlePauseClicked();
-    void handleNextClicked();
-    void handlePreviousClicked();
-    void handleRepeatClicked();
-    void handleUpdatePosition(qint64 position);
-    void handleUpdateDuration(qint64 duration);
-    QString msToString(qint64 ms);
+    void update();
 public:
     CenterView(Facade &facade, QWidget *parent = nullptr);
     ~CenterView() = default;
