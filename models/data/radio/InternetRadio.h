@@ -18,7 +18,7 @@ public:
     std::string getStationName() const;
     const Station* getStation() const;
     void setStationNumber(int newStationNumber);
-
+    int getStationNumber() const;
     void nextStation();
     void previousStation();
 

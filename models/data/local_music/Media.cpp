@@ -4,6 +4,9 @@
 
 #include "Media.h"
 
+#include <iostream>
+
+
 std::string Media::getSongFromPlaylist() const {
     if (track >= 0 && track < getPlaylistSize()) {
         return library.getSong(track).getLocation();

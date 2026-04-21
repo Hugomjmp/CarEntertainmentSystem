@@ -14,7 +14,9 @@ Facade::Facade() {
     music_Player = new MusicPlayer(/**library*/);
     make_Folder->checkFolder();
     media = new Media(*library);
+    media->setTrack(session.recoverTrackNumber());
     internetRadio = new InternetRadio(*onlineRadio);
+    internetRadio->setStationNumber(session.recoverStationNumber());
 
     connect(music_Player, &MusicPlayer::positionChanged,
         this, &Facade::positionChanged);
@@ -29,6 +31,7 @@ Facade::~Facade() {
     delete library;
     delete onlineRadio;
     delete music_Player;
+    session.saveSessionState(media->getTrack(),internetRadio->getStationNumber());
     delete media;
     delete internetRadio;
 }

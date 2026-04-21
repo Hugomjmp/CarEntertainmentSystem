@@ -4,6 +4,8 @@
 
 #include "InternetRadio.h"
 
+#include <iostream>
+
 int InternetRadio::getRadioLibrarySize() const {
     return radio_library.getStationLibrary().size();
 }
@@ -37,4 +39,8 @@ void InternetRadio::previousStation() {
 
 void InternetRadio::setStationNumber(int newStationNumber) {
     stationNumber = newStationNumber;
+}
+
+int InternetRadio::getStationNumber() const {
+    return stationNumber;
 }

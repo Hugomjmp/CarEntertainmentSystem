@@ -6,6 +6,7 @@
 #define CARENTERTAINMENTSYSTEM_FACADE_H
 #include "MakeFolder.h"
 #include "MusicPlayer.h"
+#include "data/SessionState.h"
 #include "data/local_music/Library.h"
 #include "data/local_music/Media.h"
 #include "data/enums/SourceType.h"
@@ -17,6 +18,7 @@
 class Facade : public QObject {
     Q_OBJECT
 private:
+    SessionState session;
     GPIO * gpio = nullptr;
     MakeFolder *make_Folder = nullptr;
     Library *library = nullptr;

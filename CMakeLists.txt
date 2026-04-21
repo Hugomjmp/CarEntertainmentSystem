@@ -71,6 +71,8 @@ add_executable(CarEntertainmentSystem main.cpp
         ui/Views/sidePanel/MusicListView.h
         ui/Views/sidePanel/MediaPlayerView.cpp
         ui/Views/sidePanel/MediaPlayerView.h
+        models/data/SessionState.cpp
+        models/data/SessionState.h
 )
 
 #[[find_package(TagLib 2.0.0 REQUIRED)]]

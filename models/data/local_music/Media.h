@@ -5,7 +5,7 @@
 #ifndef CARENTERTAINMENTSYSTEM_MEDIA_H
 #define CARENTERTAINMENTSYSTEM_MEDIA_H
 #include "Library.h"
-
+#include <fstream>
 
 class Media {
 private:
@@ -21,7 +21,6 @@ public:
     void nextSong();
     void previousSong();
     const int& getTrack() const;
-
 };
 
 
