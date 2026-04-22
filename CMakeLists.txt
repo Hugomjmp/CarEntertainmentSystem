@@ -73,6 +73,12 @@ add_executable(CarEntertainmentSystem main.cpp
         ui/Views/sidePanel/MediaPlayerView.h
         models/data/SessionState.cpp
         models/data/SessionState.h
+        models/data/connections/WIFI.cpp
+        models/data/connections/WIFI.h
+        models/data/connections/K_Line.cpp
+        models/data/connections/K_Line.h
+        models/data/sensor/FMRadio.cpp
+        models/data/sensor/FMRadio.h
 )
 
 #[[find_package(TagLib 2.0.0 REQUIRED)]]

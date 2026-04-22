@@ -1,0 +1,16 @@
+//
+// Created by Hugo on 22/04/2026.
+//
+
+#ifndef CARENTERTAINMENTSYSTEM_K_LINE_H
+#define CARENTERTAINMENTSYSTEM_K_LINE_H
+
+
+
+class K_Line {
+
+};
+
+
+
+#endif //CARENTERTAINMENTSYSTEM_K_LINE_H
