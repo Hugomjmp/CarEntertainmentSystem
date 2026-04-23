@@ -23,6 +23,8 @@ Facade::Facade() {
         this, &Facade::positionChanged);
     connect(music_Player, &MusicPlayer::durationChanged,
         this, &Facade::durationChanged);
+    connect(music_Player, &MusicPlayer::mediaEnded,
+        this, &Facade::mediaEnded);
     setSourceType(session.recoverSourceType());
 
     music_Player->setCurrentSongTime(session.recoverCurrentSongTime());
@@ -125,9 +127,9 @@ void Facade::previousSong() {
     }
 
 }
-/* TODO */
-void Facade::loopSong() {
 
+void Facade::loopSong() const {
+    music_Player->setLoop();
 }
 
 const Song & Facade::getSong() const {
@@ -146,11 +148,11 @@ float Facade::getVolume() const {
     return music_Player->getVolume();
 }
 
-void Facade::setVolume(double volume) {
+void Facade::setVolume(const double volume) const {
     music_Player->setVolume(volume);
 }
 
-void Facade::setMute() {
+void Facade::setMute() const {
     music_Player->setMute();
 }
 
@@ -174,10 +176,18 @@ const std::vector<Song> & Facade::getSongs() const {
     return library->getAllSongs();
 }
 
-void Facade::setTrack(int newTrackNumber) {
+void Facade::setTrack(const int newTrackNumber) const {
     media->setTrack(newTrackNumber);
 }
 
-void Facade::setStation(int newStationNumber) {
+void Facade::setStation(const int newStationNumber) const {
     internetRadio->setStationNumber(newStationNumber);
+}
+
+void Facade::mediaEnded(QMediaPlayer::MediaStatus status) {
+    if (sourceType == LOCAL_MUSIC) {
+        if (status == QMediaPlayer::EndOfMedia && music_Player->isLooping() == 1) {
+            nextSong();
+        }
+    }
 }

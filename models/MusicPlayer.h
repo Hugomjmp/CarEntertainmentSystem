@@ -41,9 +41,12 @@ public:
     std::string getCurrentSongTime() const;
     void setCurrentSongTime(std::string currentSongTime);
     std::string getSongDuration() const;
+    void setLoop();
+    int isLooping() const;
 signals:
     void positionChanged(qint64 position);
     void durationChanged(qint64 duration);
+    void mediaEnded(QMediaPlayer::MediaStatus status);
 
 };
 

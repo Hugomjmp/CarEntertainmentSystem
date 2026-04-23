@@ -29,7 +29,7 @@ void CenterView::createViews() {
     //rightBoxWidget = musicListView;
 
     centerContainer->addWidget(mediaPlayerView,1);
-    //centerContainer->addWidget(musicListView,1);
+    centerContainer->addWidget(musicListView,1);
 
 
     this->setLayout(centerContainer);

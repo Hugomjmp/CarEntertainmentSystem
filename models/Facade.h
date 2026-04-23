@@ -37,25 +37,27 @@ public:
     void pause();
     void nextSong();
     void previousSong();
-    void loopSong();
+    void loopSong() const;
     float getVolume() const;
-    void setVolume(double volume);
+    void setVolume(double volume) const;
     const Song & getSong() const;
     const Station & getStation() const;
     const std::vector<Station> & getStations() const;
-    void setMute();
+    void setMute() const;
     std::string getSongDuration() const;
     const std::string getSongCurrentTime();
     MusicPlayer * getMusicPlayer() const;
     GPIO * getGPIO() const;
     bool getPlayStatus() const;
     const std::vector<Song> & getSongs() const;
-    void setTrack(int newTrackNumber);
-    void setStation(int newStationNumber);
+    void setTrack(int newTrackNumber) const;
+    void setStation(int newStationNumber) const;
 signals:
     void positionChanged(qint64  position);
     void durationChanged(qint64 duration);
     void sourceTypeChanged();
+private slots:
+    void mediaEnded(QMediaPlayer::MediaStatus status);
 };
 
 

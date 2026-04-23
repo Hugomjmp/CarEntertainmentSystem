@@ -27,6 +27,7 @@ void MediaPlayerView::update() {
         case LOCAL_MUSIC: {
             currentSongTime->show();
             finalSongTime->show();
+            repeatButton->show();
             std::string title = facade.getSong().getTitle()
             + " - " +
             facade.getSong().getArtist();
@@ -62,7 +63,7 @@ void MediaPlayerView::update() {
         case INTERNET_RADIO: {
             std::string title = facade.getStation().getName();
             mediaName->setText(title.c_str());
-
+            repeatButton->hide();
             if (facade.getPlayStatus())
                 stack->setCurrentIndex(1);
             else
@@ -281,7 +282,6 @@ void MediaPlayerView::handlePreviousClicked() {
 }
 
 void MediaPlayerView::handleRepeatClicked() {
-    std::cout<<"Loop clicked"<<std::endl;
     facade.loopSong();
     update();
 }

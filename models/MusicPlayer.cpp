@@ -15,6 +15,7 @@ MusicPlayer::MusicPlayer() {
     QObject::connect(player, &QMediaPlayer::positionChanged, this, &MusicPlayer::positionChanged);
     QObject::connect(player, &QMediaPlayer::durationChanged, this, &MusicPlayer::durationChanged);
     QObject::connect(player, &QMediaPlayer::mediaStatusChanged, this, &MusicPlayer::onMediaStatusChanged);
+    QObject::connect(player, &QMediaPlayer::mediaStatusChanged, this, &MusicPlayer::mediaEnded);
 }
 
 MusicPlayer::~MusicPlayer() {
@@ -142,6 +143,25 @@ void MusicPlayer::setCurrentSongTime(std::string currentSongTime) {
  */
 std::string MusicPlayer::getSongDuration() const {
     return std::to_string(player->duration());
+}
+
+/**
+ * Enable or disable the song loop
+ */
+void MusicPlayer::setLoop() {
+    if (player->loops()  == QMediaPlayer::Infinite) {
+        player->setLoops(1);
+    } else {
+        player->setLoops(QMediaPlayer::Infinite);
+    }
+}
+
+/**
+ *
+ * @return if the loop is enabled.
+ */
+int MusicPlayer::isLooping() const {
+    return player->loops();
 }
 
 void MusicPlayer::onMediaStatusChanged(QMediaPlayer::MediaStatus status) {
