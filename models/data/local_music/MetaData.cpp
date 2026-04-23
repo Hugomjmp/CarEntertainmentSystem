@@ -168,12 +168,13 @@ void MetaData::ID3v2_30(std::ifstream &ifs, const int& metaDataSize) {
             (unsigned char)frameHeader[7];
 
 
-        char* frameData = new char[metaDataSize];
+        //char* frameData = new char[metaDataSize];
+        char* frameData = new char[frameSize];
 
         ifs.read(frameData, frameSize);
 
         if (frameSize > 1) {
-            data.assign(frameData + 1,frameSize - 1);
+            data.assign(frameData + 1/*,frameSize - 1*/);
         }
 
         if (frameID == "TIT2") {
@@ -262,12 +263,13 @@ void MetaData::ID3v2_40(std::ifstream &ifs, const int& metaDataSize) {
             (frameHeader[7] & 0x7F);
 
 
-        char* frameData = new char[metaDataSize];
+        //char* frameData = new char[metaDataSize];
+        char* frameData = new char[frameSize];
 
         ifs.read(frameData, frameSize);
 
         if (frameSize > 1) {
-            data.assign(frameData + 1,frameSize - 1);
+            data.assign(frameData + 1/*,frameSize - 1*/);
         }
 
         if (frameID == "TIT2") {

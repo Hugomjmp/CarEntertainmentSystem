@@ -67,6 +67,8 @@ void MusicListView::createLocalMusicListView() {
             QString::fromStdString(song.getTitle() + " - " + song.getArtist())
         );
 
+        label->setStyleSheet("color: white;");
+
         layout->addWidget(image);
         layout->addWidget(label);
 
@@ -141,7 +143,7 @@ void MusicListView::createInternetRadioListView() {
         QLabel* label = new QLabel(
             QString::fromStdString(station.getName())
         );
-
+        label->setStyleSheet("color: white;");
         layout->addWidget(image);
         layout->addWidget(label);
 

@@ -6,6 +6,7 @@
 #define CARENTERTAINMENTSYSTEM_SESSIONSTATE_H
 #include "enums/SourceType.h"
 #include <fstream>
+#include <iostream>
 
 class SessionState {
 private:

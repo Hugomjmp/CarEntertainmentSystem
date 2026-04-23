@@ -29,9 +29,9 @@ void MediaPlayerView::update() {
             finalSongTime->show();
             repeatButton->show();
             std::string title = facade.getSong().getTitle()
-            + " - " +
-            facade.getSong().getArtist();
-            mediaName->setText(title.c_str());
+                                + " - " +
+                                facade.getSong().getArtist();
+            mediaName->setText(QString::fromStdString(title));
             progressBar->show();
             if (facade.getPlayStatus())
                 stack->setCurrentIndex(1);

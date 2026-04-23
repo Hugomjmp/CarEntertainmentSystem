@@ -7,7 +7,13 @@
 #include <vector>
 
 #include "Station.h"
-
+#include <QJsonDocument>
+#include <iostream>
+#include <qeventloop.h>
+#include <qurl.h>
+#include <QNetworkReply>
+#include <QJsonArray>
+#include <QJsonObject>
 
 class OnlineRadioLibrary {
 private:

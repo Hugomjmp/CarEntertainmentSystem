@@ -4,12 +4,7 @@
 
 #include "OnlineRadioLibrary.h"
 
-#include <iostream>
-#include <qeventloop.h>
-#include <qurl.h>
-#include <QNetworkReply>
-#include <QJsonArray>
-#include <QJsonObject>
+
 
 OnlineRadioLibrary::OnlineRadioLibrary() {
     loadStationLibrary();
