@@ -19,10 +19,6 @@ int main(int argc, char *argv[]) {
 );
     QApplication app(argc, argv);
     Facade facade;
-    /*gpioCfgPermissions(0);
-    if (gpioInitialise() < 0) {
-        std::cerr << "Erro pigpio" << std::endl;
-    }*/
 
     /*FOR TESTING PORPOSES*/
     /*const QList<QAudioDevice> devices = QMediaDevices::audioInputs();
@@ -54,6 +50,5 @@ int main(int argc, char *argv[]) {
     //w.showFullScreen();
     w.show();
     int result = app.exec();
-    //gpioTerminate();
     return result;
 }

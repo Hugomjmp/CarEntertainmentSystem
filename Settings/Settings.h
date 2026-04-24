@@ -9,6 +9,10 @@ public:
         public:
         static const int DHT_PIN = 4;
     };
+    class TEA5767Settings {
+        public:
+        static const uint8_t I2C_ADDRESS = 0x60;
+    };
 
 
 };

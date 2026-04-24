@@ -6,6 +6,8 @@
 
 #include <iostream>
 
+#include "data/fm_radio/FMRadio.h"
+
 Facade::Facade() {
     gpio = new GPIO();
     make_Folder = new MakeFolder();
@@ -29,8 +31,8 @@ Facade::Facade() {
 
     music_Player->setCurrentSongTime(session.recoverCurrentSongTime());
     play();
-
-
+    FMRadio fm_radio(*gpio);
+    fm_radio.playStation(gpio->getHandle(),90.0);
 }
 
 Facade::~Facade() {

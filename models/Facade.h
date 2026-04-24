@@ -28,6 +28,7 @@ private:
     InternetRadio *internetRadio = nullptr;
     bool isPlaying = false;
     SourceType sourceType;
+    int handle = 0;
 public:
     Facade();
     ~Facade();

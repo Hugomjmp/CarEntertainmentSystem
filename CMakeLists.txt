@@ -77,8 +77,10 @@ add_executable(CarEntertainmentSystem main.cpp
         models/data/connections/WIFI.h
         models/data/connections/K_Line.cpp
         models/data/connections/K_Line.h
-        models/data/sensor/FMRadio.cpp
-        models/data/sensor/FMRadio.h
+        models/data/fm_radio/FMRadio.cpp
+        models/data/fm_radio/FMRadio.h
+        ui/Views/sidePanel/FMPlayerView.cpp
+        ui/Views/sidePanel/FMPlayerView.h
 )
 
 #[[find_package(TagLib 2.0.0 REQUIRED)]]
@@ -97,6 +99,7 @@ target_link_libraries(CarEntertainmentSystem
         Qt6::Network
         Qt6::Core
         #[[pigpio]]
+        pigpiod_if2
         pthread
 )
 
