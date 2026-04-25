@@ -25,11 +25,12 @@ void CenterView::createViews() {
 
     mediaPlayerView = new MediaPlayerView(facade);
     musicListView = new MusicListView(facade);
+    fmPlayerView = new FMPlayerView(facade);
 
-    //rightBoxWidget = musicListView;
 
     centerContainer->addWidget(mediaPlayerView,1);
-    centerContainer->addWidget(musicListView,1);
+    centerContainer->addWidget(fmPlayerView,1);
+    //centerContainer->addWidget(musicListView,1);
 
 
     this->setLayout(centerContainer);

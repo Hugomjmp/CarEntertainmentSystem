@@ -11,15 +11,13 @@ GPIO::GPIO() {
     if (pi < 0) {
         std::cerr << "Error opening pigpio" << std::endl;
     }
-    openI2C(0x60,1);
+    //openI2C(0x60,1);
 }
 
 GPIO::~GPIO() {
     if (pi >= 0) {
         pigpio_stop(pi);
     }
-    closeI2C();
-
 }
 
 int GPIO::getPi() const {
@@ -42,19 +40,20 @@ void GPIO::delayMicroseconds(int microseconds) {
     time_sleep(microseconds/ 1000000.0);
 }
 
-void GPIO::openI2C(const uint8_t &address, const int &bus) {
-    I2C_TEA5767 = i2c_open(pi, bus,address,0);
+int GPIO::openI2C(const uint8_t &address, const int &bus) {
+    return i2c_open(pi, bus, address,0);
 }
 
-void GPIO::closeI2C() const {
-    i2c_close(pi, I2C_TEA5767);
+void GPIO::closeI2C(const int& handle) const {
+    i2c_close(pi, handle);
 }
 
-void GPIO::writeI2C(const int &pi, const int &handle, char *value) {
-    i2c_write_device(pi, handle,value, 5);
+int GPIO::writeI2C(const int &handle, const uint8_t *data, int size) const {
+    return i2c_write_device(pi,handle,(char*) data,size);
+
 }
 
-
-int GPIO::getHandle() const {
-    return I2C_TEA5767;
+int GPIO::readI2C(const int &handle, uint8_t *data, int size) const {
+    return i2c_read_device(pi, handle,(char*) data,size);
 }
+

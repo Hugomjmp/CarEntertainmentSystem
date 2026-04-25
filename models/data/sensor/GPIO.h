@@ -10,8 +10,7 @@
 class GPIO {
 private:
     int pi;
-    int I2C_TEA5767 = 0;
-    void openI2C(const uint8_t &address, const int &bus);
+
 public:
     GPIO();
     ~GPIO();
@@ -20,12 +19,10 @@ public:
     void write(int pin, int value);
     int read(int pin);
     void delayMicroseconds(int microseconds);
-
-
-    void closeI2C() const;
-    void writeI2C(const int &pi, const int &handle, char *value);
-
-    int getHandle() const;
+    int openI2C(const uint8_t &address, const int &bus);
+    void closeI2C(const int& handle) const;
+    int writeI2C(const int &handle, const uint8_t *data, int size) const;
+    int readI2C(const int &handle, uint8_t * data, int size) const;
 };
 
 

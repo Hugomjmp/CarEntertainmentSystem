@@ -22,17 +22,19 @@ Facade::Facade() {
     internetRadio->setStationNumber(session.recoverStationNumber());
 
     connect(music_Player, &MusicPlayer::positionChanged,
-        this, &Facade::positionChanged);
+            this, &Facade::positionChanged);
     connect(music_Player, &MusicPlayer::durationChanged,
-        this, &Facade::durationChanged);
+            this, &Facade::durationChanged);
     connect(music_Player, &MusicPlayer::mediaEnded,
-        this, &Facade::mediaEnded);
+            this, &Facade::mediaEnded);
     setSourceType(session.recoverSourceType());
 
     music_Player->setCurrentSongTime(session.recoverCurrentSongTime());
     play();
-    FMRadio fm_radio(*gpio);
-    fm_radio.playStation(gpio->getHandle(),90.0);
+    int handle = gpio->openI2C(0x60,1);
+    std::cout << "I2C handle: " << handle << std::endl;
+    II2C *i2c = new PigpioI2C(*gpio, handle);
+    fmRadio = new FMRadio(*i2c);
 }
 
 Facade::~Facade() {
@@ -193,3 +195,13 @@ void Facade::mediaEnded(QMediaPlayer::MediaStatus status) {
         }
     }
 }
+/* FOR TESTING */
+void Facade::nextFMStation() const {
+    std::cout << fmRadio->getFrequency() << std::endl;
+    fmRadio->setFrequency(fmRadio->getFrequency() + 0.1);
+}
+
+void Facade::previousFMStation() const {
+    fmRadio->setFrequency(fmRadio->getFrequency() - 0.1);
+}
+/*--------------*/

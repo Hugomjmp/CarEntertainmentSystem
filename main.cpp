@@ -10,7 +10,6 @@
 #include <QAudioDevice>
 
 int main(int argc, char *argv[]) {
-
     QLoggingCategory::setFilterRules(
     "*.debug=false\n"
     "*.info=false\n"

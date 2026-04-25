@@ -26,10 +26,12 @@ void SourceView::createViews() {
     createToolBar();
     createOption1();
     createOption2();
+    createOption3();
 
     mainLayout->addLayout(toolBar);
     mainLayout->addWidget(option1btn);
     mainLayout->addWidget(option2btn);
+    mainLayout->addWidget(option3btn);
 
 }
 
@@ -84,6 +86,20 @@ void SourceView::createOption2() {
     );
 }
 
+void SourceView::createOption3() {
+    option3btn->setIcon(QIcon("resources/img/radio-solid_W.png"));
+    option3btn->setIconSize(QSize(200,60));
+    option3btn->setStyleSheet(
+        "text-align: left;"
+        "color: white;"
+        "font-family: Arial;"
+        "font-weight: bold;"
+        "font-size: 18px;"
+        "border: none;"
+        "padding-left: 10px;"
+    );
+}
+
 void SourceView::handleInternetButton() {
     if (facade.getSourceType() != INTERNET_RADIO) {
         facade.setSourceType(INTERNET_RADIO);
@@ -100,6 +116,14 @@ void SourceView::handleLocalButton() {
     this->close();
 }
 
+void SourceView::handleFMButton() {
+    if (facade.getSourceType() != FM_RADIO) {
+        facade.setSourceType(FM_RADIO);
+        /* TODO */
+    }
+    this->close();
+}
+
 void SourceView::update() {
 }
 
@@ -107,6 +131,7 @@ void SourceView::registerHandlers() {
     QObject::connect(closeWindowbtn, &QPushButton::clicked,this, &SourceView::handleCloseButton);
     QObject::connect(option1btn, &QPushButton::clicked, this, &SourceView::handleInternetButton);
     QObject::connect(option2btn, &QPushButton::clicked, this, &SourceView::handleLocalButton);
+    QObject::connect(option3btn, &QPushButton::clicked, this, &SourceView::handleFMButton);
 }
 
 void SourceView::handleCloseButton() {

@@ -10,25 +10,30 @@
 #include "data/local_music/Library.h"
 #include "data/local_music/Media.h"
 #include "data/enums/SourceType.h"
+#include "data/fm_radio/FMRadio.h"
 #include "data/radio/InternetRadio.h"
 #include "data/radio/OnlineRadioLibrary.h"
 #include "data/sensor/GPIO.h"
+#include "data/sensor/PigpioI2C.h"
 
 
 class Facade : public QObject {
     Q_OBJECT
 private:
     SessionState session;
-    GPIO * gpio = nullptr;
     MakeFolder *make_Folder = nullptr;
     Library *library = nullptr;
     OnlineRadioLibrary * onlineRadio = nullptr;
     MusicPlayer *music_Player = nullptr;
     Media *media = nullptr;
     InternetRadio *internetRadio = nullptr;
+    /**-----------------*/
+    GPIO * gpio = nullptr;
+    FMRadio *fmRadio = nullptr;
+
+    /**-----------------*/
     bool isPlaying = false;
     SourceType sourceType;
-    int handle = 0;
 public:
     Facade();
     ~Facade();
@@ -53,6 +58,8 @@ public:
     const std::vector<Song> & getSongs() const;
     void setTrack(int newTrackNumber) const;
     void setStation(int newStationNumber) const;
+    void nextFMStation() const;
+    void previousFMStation() const;
 signals:
     void positionChanged(qint64  position);
     void durationChanged(qint64 duration);

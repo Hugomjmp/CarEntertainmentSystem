@@ -4,30 +4,43 @@
 
 #include "../fm_radio/FMRadio.h"
 
-FMRadio::FMRadio(GPIO &gpio) : gpio(gpio) {
+FMRadio::FMRadio(II2C &i2c) : i2c(i2c) {
+
+    data[2] = 0xB0; //3 byte
+    data[3] = 0x10; //4 byte
+    data[4] = 0x00; //5 byte
 
 }
 
-void FMRadio::setFrequency(const int &handle, const float &frequency) const{
+void FMRadio::setFrequency(const float &frequency){
     unsigned int pll = (4 * (frequency * 1000000 + 225000)) / 32768;
 
-    uint8_t buffer[5];
+    data[0] = pll >> 8;
+    data[1] = pll & 0xFF;
 
-    buffer[0] = pll >> 8;
-    buffer[1] = pll & 0xFF;
-
-    buffer[2] = 0xB0; // stereo ON, mute OFF, search OFF
-    buffer[3] = 0x10; // gain / band config
-    buffer[4] = 0x00; // deemphasis
-
-    i2c_write_device(gpio.getPi(), handle, (char*)buffer, 5);
+    i2c.write(data,5);
+    currentFrequency = frequency;
 }
 
 void FMRadio::scan() {
+
 }
 
 void FMRadio::mute() {
+    if (muted) {
+        muted = false;
+        data[2] = 0xB6;
+    } else {
+        muted = true;
+        data[2] = 0xB0;
+    }
+    i2c.write(data,5);
 }
 
 void FMRadio::readRSSI() {
+
+}
+
+const float & FMRadio::getFrequency() const {
+    return currentFrequency;
 }

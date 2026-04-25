@@ -11,6 +11,7 @@
 #include <QPushButton>
 #include <QStackedLayout>
 #include "../../models/Facade.h"
+#include "sidePanel/FMPlayerView.h"
 #include "sidePanel/MediaPlayerView.h"
 #include "sidePanel/MusicListView.h"
 
@@ -23,6 +24,7 @@ private:
     QVBoxLayout *rightVBox = nullptr;
     MediaPlayerView *mediaPlayerView = nullptr;
     MusicListView *musicListView = nullptr;
+    FMPlayerView *fmPlayerView = nullptr;
     void createViews();
     void registerHandlers();
     void update();

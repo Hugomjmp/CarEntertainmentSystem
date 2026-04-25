@@ -17,7 +17,7 @@ private:
     QWidget *tooBarWidget = nullptr;
     QVBoxLayout *mainLayout;
     QHBoxLayout *toolBar = nullptr;
-    QPushButton *closeWindowbtn = nullptr, *option1btn = nullptr, *option2btn = nullptr;
+    QPushButton *closeWindowbtn = nullptr, *option1btn = nullptr, *option2btn = nullptr, *option3btn = nullptr;
     QLabel *title = nullptr;
     void createViews();
     void update();
@@ -25,9 +25,11 @@ private:
     void createToolBar();
     void createOption1();
     void createOption2();
+    void createOption3();
     void handleCloseButton();
     void handleInternetButton();
     void handleLocalButton();
+    void handleFMButton();
 public:
     SourceView(Facade &facade, QWidget *parent = nullptr);
     ~SourceView() = default;

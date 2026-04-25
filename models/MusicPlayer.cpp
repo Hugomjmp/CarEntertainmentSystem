@@ -6,7 +6,7 @@
 
 #include <iostream>
 #include <QDebug>
-//#include "SFML/System/Sleep.hpp"
+
 MusicPlayer::MusicPlayer() {
     player = new QMediaPlayer;
     audio = new QAudioOutput;
