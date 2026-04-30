@@ -83,6 +83,14 @@ void MusicPlayer::pauseSong() {
     }
 }
 
+bool MusicPlayer::isPauseSong() const {
+    return player->playbackState() == QMediaPlayer::PausedState;
+}
+
+void MusicPlayer::resumeSong() const {
+    player->play();
+}
+
 /**
  *
  * @param volume Value to change the volume at

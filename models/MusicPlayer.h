@@ -35,6 +35,8 @@ public:
     bool playRadio(const Station &station);
     bool stopSong();
     void pauseSong();
+    bool isPauseSong() const;
+    void resumeSong() const;
     bool setVolume(float volume);
     float getVolume();
     void setMute();

@@ -68,7 +68,13 @@ void Facade::play() {
     //music_Player->setCurrentSongTime("0");
     switch (sourceType) {
         case LOCAL_MUSIC: {
-            music_Player->playSong(*media->getSongData());
+            if (isPlaying) return;
+            
+            if (music_Player->isPauseSong()) {
+                music_Player->resumeSong();
+            } else {
+                music_Player->playSong(*media->getSongData());
+            }
             isPlaying = true;
         }
             break;
