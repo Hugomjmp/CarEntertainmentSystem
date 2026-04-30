@@ -201,9 +201,11 @@ void Facade::mediaEnded(QMediaPlayer::MediaStatus status) {
 void Facade::nextFMStation() const {
     std::cout << fmRadio->getFrequency() << std::endl;
     fmRadio->setFrequency(fmRadio->getFrequency() + 0.1);
+    std::cout << fmRadio->readRSSI() << std::endl;
 }
 
 void Facade::previousFMStation() const {
     fmRadio->setFrequency(fmRadio->getFrequency() - 0.1);
+    std::cout << fmRadio->readRSSI() << std::endl;
 }
 /*--------------*/

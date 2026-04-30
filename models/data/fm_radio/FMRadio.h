@@ -23,7 +23,7 @@ public:
     void setFrequency(const float &frequency);
     void scan();
     void mute();
-    void readRSSI();
+    int readRSSI();
     const float& getFrequency() const;
 };
 

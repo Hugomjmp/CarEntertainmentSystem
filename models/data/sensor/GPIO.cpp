@@ -5,6 +5,7 @@
 #include "GPIO.h"
 
 #include <iostream>
+#include <pigpiod_if2.h>
 
 GPIO::GPIO() {
     pi = pigpio_start(nullptr, nullptr);

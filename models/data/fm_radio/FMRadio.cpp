@@ -37,7 +37,13 @@ void FMRadio::mute() {
     i2c.write(data,5);
 }
 
-void FMRadio::readRSSI() {
+int FMRadio::readRSSI() {
+    
+    i2c.read(data,5);
+
+    int rssi = data[3] & 0x0F;
+
+    return rssi;
 
 }
 
