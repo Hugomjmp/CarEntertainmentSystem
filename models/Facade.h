@@ -45,7 +45,7 @@ public:
     void previousSong();
     void loopSong() const;
     float getVolume() const;
-    void setVolume(double volume) const;
+    void setVolume(const float& volume) const;
     const Song & getSong() const;
     const Station & getStation() const;
     const std::vector<Station> & getStations() const;

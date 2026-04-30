@@ -86,6 +86,8 @@ add_executable(CarEntertainmentSystem main.cpp
         models/data/sensor/II2C.h
         models/data/sensor/PigpioI2C.cpp
         models/data/sensor/PigpioI2C.h
+        models/data/fm_radio/FMLibrary.cpp
+        models/data/fm_radio/FMLibrary.h
 )
 
 #[[find_package(TagLib 2.0.0 REQUIRED)]]

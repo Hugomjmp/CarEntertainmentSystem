@@ -152,7 +152,7 @@ float Facade::getVolume() const {
     return music_Player->getVolume();
 }
 
-void Facade::setVolume(const double volume) const {
+void Facade::setVolume(const float& volume) const {
     music_Player->setVolume(volume);
 }
 
@@ -195,6 +195,8 @@ void Facade::mediaEnded(QMediaPlayer::MediaStatus status) {
         }
     }
 }
+
+
 /* FOR TESTING */
 void Facade::nextFMStation() const {
     std::cout << fmRadio->getFrequency() << std::endl;
