@@ -54,6 +54,8 @@ GPIO * Facade::getGPIO() const {
 
 void Facade::setSourceType(SourceType newSourceType) {
     sourceType = newSourceType;
+    std::cout << "Facade::setSourceType: " << sourceType << std::endl;
+    emit sourceTypeChanged();
 }
 
 const SourceType & Facade::getSourceType() const {
@@ -84,7 +86,6 @@ void Facade::play() {
         }
             break;
     }
-    emit sourceTypeChanged();
 }
 
 void Facade::pause() {
@@ -95,6 +96,11 @@ void Facade::pause() {
         }
             break;
         case INTERNET_RADIO: {
+            music_Player->stopSong();
+            isPlaying = false;
+        }
+            break;
+        case FM_RADIO: {
             music_Player->stopSong();
             isPlaying = false;
         }

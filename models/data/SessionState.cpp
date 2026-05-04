@@ -131,8 +131,11 @@ SourceType SessionState::recoverSourceType() {
                 if (std::stoi(line) == 0) {
                     sourceType = LOCAL_MUSIC;
                     break;
-                }else if (std::stoi(line) == 1) {
+                } else if (std::stoi(line) == 1) {
                     sourceType = INTERNET_RADIO;
+                    break;
+                } else if (std::stoi(line) == 2) {
+                    sourceType = FM_RADIO;
                     break;
                 }
             }

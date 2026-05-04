@@ -69,7 +69,7 @@ void MediaPlayerView::update() {
             else
                 stack->setCurrentIndex(0);
 
-            image.loadFromData(facade.getStation().getFavicon());
+           // image.loadFromData(facade.getStation().getFavicon()); //remove comment later
             musicImage->setPixmap(
             QPixmap::fromImage(image).scaled(
                     musicImage->size(),

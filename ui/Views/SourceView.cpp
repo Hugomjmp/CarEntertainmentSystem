@@ -117,10 +117,14 @@ void SourceView::handleLocalButton() {
     this->close();
 }
 
+/* TODO
+ * Later I need to change the audio output from the fm to the other sources...
+ * For now stay's like this to move the development....
+ */
 void SourceView::handleFMButton() {
     if (facade.getSourceType() != FM_RADIO) {
         facade.setSourceType(FM_RADIO);
-        /* TODO */
+        facade.pause();
     }
     this->close();
 }

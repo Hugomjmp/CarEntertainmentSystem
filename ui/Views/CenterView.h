@@ -20,11 +20,11 @@ class CenterView : public QWidget {
 private:
     Facade &facade;
     QHBoxLayout *centerContainer = nullptr;
-    QHBoxLayout *centerLayout = nullptr;
-    QVBoxLayout *rightVBox = nullptr;
+    QStackedLayout *stackedLeftLayout = nullptr, *stackedRightLayout = nullptr;
     MediaPlayerView *mediaPlayerView = nullptr;
     MusicListView *musicListView = nullptr;
     FMPlayerView *fmPlayerView = nullptr;
+
     void createViews();
     void registerHandlers();
     void update();
