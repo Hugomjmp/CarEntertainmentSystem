@@ -69,7 +69,7 @@ void Facade::play() {
     switch (sourceType) {
         case LOCAL_MUSIC: {
             if (isPlaying) return;
-            
+
             if (music_Player->isPauseSong()) {
                 music_Player->resumeSong();
             } else {

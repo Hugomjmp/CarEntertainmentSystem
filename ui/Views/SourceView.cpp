@@ -87,6 +87,7 @@ void SourceView::createOption2() {
 }
 
 void SourceView::createOption3() {
+    option3btn = new QPushButton("FM Radio");
     option3btn->setIcon(QIcon("resources/img/radio-solid_W.png"));
     option3btn->setIconSize(QSize(200,60));
     option3btn->setStyleSheet(

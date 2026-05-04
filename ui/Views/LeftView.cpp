@@ -58,7 +58,6 @@ void LeftView::handleSourceButtonClicked() {
     sourceView->setWindowFlags(Qt::WindowStaysOnTopHint | Qt::FramelessWindowHint);
     sourceView->setWindowModality(Qt::ApplicationModal);
     sourceView->show();
-
 }
 
 void LeftView::loadImages() {
