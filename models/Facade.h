@@ -64,6 +64,8 @@ signals:
     void positionChanged(qint64  position);
     void durationChanged(qint64 duration);
     void sourceTypeChanged();
+    void playingChanged();
+    void mediaChanged();
 private slots:
     void mediaEnded(QMediaPlayer::MediaStatus status);
 };

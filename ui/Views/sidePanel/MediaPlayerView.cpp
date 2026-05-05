@@ -70,12 +70,19 @@ void MediaPlayerView::update() {
                 stack->setCurrentIndex(0);
 
            // image.loadFromData(facade.getStation().getFavicon()); //remove comment later
-            musicImage->setPixmap(
+            /*musicImage->setPixmap(
             QPixmap::fromImage(image).scaled(
                     musicImage->size(),
                     Qt::KeepAspectRatio,
                     Qt::SmoothTransformation
                 )
+            );*/
+            musicImage->setPixmap(
+                    QPixmap("resources/img/defaultMusic.png").scaled(
+                        musicImage->size(),
+                        Qt::KeepAspectRatio,
+                        Qt::SmoothTransformation
+                    )
             );
 
         }
@@ -92,6 +99,8 @@ void MediaPlayerView::registerHandlers() {
     QObject::connect(&facade, &Facade::positionChanged, this, &MediaPlayerView::handleUpdatePosition);
     QObject::connect(&facade, &Facade::durationChanged, this, &MediaPlayerView::handleUpdateDuration);
     QObject::connect(&facade, &Facade::sourceTypeChanged, this, &MediaPlayerView::update);
+    QObject::connect(&facade, &Facade::playingChanged, this, &MediaPlayerView::update);
+    QObject::connect(&facade, &Facade::mediaChanged, this, &MediaPlayerView::update);
 }
 
 void MediaPlayerView::VBoxConfig() {

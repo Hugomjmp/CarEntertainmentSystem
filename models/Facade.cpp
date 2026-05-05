@@ -87,6 +87,7 @@ void Facade::play() {
         }
             break;
     }
+    emit mediaChanged();
 }
 
 void Facade::pause() {
@@ -205,6 +206,7 @@ void Facade::mediaEnded(QMediaPlayer::MediaStatus status) {
     if (sourceType == LOCAL_MUSIC) {
         if (status == QMediaPlayer::EndOfMedia && music_Player->isLooping() == 1) {
             nextSong();
+            emit playingChanged();
         }
     }
 }
