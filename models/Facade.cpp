@@ -56,6 +56,7 @@ void Facade::setSourceType(SourceType newSourceType) {
     sourceType = newSourceType;
     std::cout << "Facade::setSourceType: " << sourceType << std::endl;
     emit sourceTypeChanged();
+    //isPlaying = false;
 }
 
 const SourceType & Facade::getSourceType() const {
@@ -70,7 +71,7 @@ void Facade::play() {
     //music_Player->setCurrentSongTime("0");
     switch (sourceType) {
         case LOCAL_MUSIC: {
-            if (isPlaying) return;
+            //if (isPlaying) return;
 
             if (music_Player->isPauseSong()) {
                 music_Player->resumeSong();

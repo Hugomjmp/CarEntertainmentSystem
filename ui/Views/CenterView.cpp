@@ -30,36 +30,31 @@ void CenterView::createViews() {
     stackedRightLayout->setContentsMargins(0,0,0,0);
     stackedRightLayout->setSpacing(0);
 
+    leftWidget = new QWidget();
+    leftWidget->setLayout(stackedLeftLayout);
+
+    rightWidget = new QWidget();
+    rightWidget->setLayout(stackedRightLayout);
+
+    emptyWidget = new QWidget();
+
     mediaPlayerView = new MediaPlayerView(facade);
     musicListView = new MusicListView(facade);
     fmPlayerView = new FMPlayerView(facade);
 
-    centerContainer->addLayout(stackedLeftLayout);
-    centerContainer->addLayout(stackedRightLayout);
 
     stackedLeftLayout->addWidget(mediaPlayerView);
     stackedLeftLayout->addWidget(fmPlayerView);
 
     stackedRightLayout->addWidget(musicListView);
+    stackedRightLayout->addWidget(emptyWidget);
 
-    switch (facade.getSourceType())
-    {
-        case LOCAL_MUSIC: {
-            stackedLeftLayout->setCurrentIndex(0);
-            stackedRightLayout->setCurrentIndex(0);
-        }
-            break;
-        case INTERNET_RADIO: {
-            stackedLeftLayout->setCurrentIndex(0);
-            stackedRightLayout->setCurrentIndex(0);
-        }
-            break;
-        case FM_RADIO: {
-            stackedLeftLayout->setCurrentIndex(1);
+    centerContainer->addWidget(leftWidget,1);
+    centerContainer->addWidget(rightWidget,1);
 
-        }
-            break;
-    }
+
+
+
     //centerContainer->addWidget(mediaPlayerView,1);
     //centerContainer->addWidget(fmPlayerView,1);
     //centerContainer->addWidget(musicListView,1);
@@ -73,16 +68,18 @@ void CenterView::update() {
         case LOCAL_MUSIC: {
             stackedLeftLayout->setCurrentIndex(0);
             stackedRightLayout->setCurrentIndex(0);
+
         }
             break;
         case INTERNET_RADIO: {
             stackedLeftLayout->setCurrentIndex(0);
             stackedRightLayout->setCurrentIndex(0);
+
         }
             break;
         case FM_RADIO: {
             stackedLeftLayout->setCurrentIndex(1);
-            stackedRightLayout->setCurrentIndex(-1);
+            stackedRightLayout->setCurrentIndex(1);
         }
             break;
     }

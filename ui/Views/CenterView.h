@@ -21,9 +21,11 @@ private:
     Facade &facade;
     QHBoxLayout *centerContainer = nullptr;
     QStackedLayout *stackedLeftLayout = nullptr, *stackedRightLayout = nullptr;
+    QWidget *leftWidget = nullptr, *rightWidget = nullptr, *emptyWidget = nullptr;
     MediaPlayerView *mediaPlayerView = nullptr;
     MusicListView *musicListView = nullptr;
     FMPlayerView *fmPlayerView = nullptr;
+
 
     void createViews();
     void registerHandlers();
